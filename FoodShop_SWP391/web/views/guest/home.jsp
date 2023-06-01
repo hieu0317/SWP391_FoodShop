@@ -17,7 +17,7 @@
         <header>
             <div class="navbar">
                 <button class="sidebar-button">&#9776; Menu</button>
-                <h1 class="logo">Fast Food Restaurant</h1>
+                <h1 class="logo"><a href="home">Fast Food Restaurant</a></h1>
                 <nav class="header-link">
                     <ul class="navigation">
                         <li><a href="#">Combo</a></li>
@@ -26,7 +26,7 @@
                         <li><a href="#">About Us</a></li>
                     </ul>
                     
-                    <a href="#" class="cart-button">Cart(${requestScope.total})</a>
+                    <a href="home/cart" class="cart-button">Cart(${requestScope.total})</a>
                     <div class="login">
                         <a href="#" class="login-link">My Account</a>
                     </div>

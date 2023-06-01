@@ -14,9 +14,11 @@ body {
   }
   
   .navbar {
+    border: 0;
     position: relative;
     display: flex;
-     justify-content: space-between; 
+    justify-content: space-between;
+    margin-right: 10px;
     align-items: center;
   }
   
@@ -35,6 +37,11 @@ body {
     margin: 0;*/
     margin-left: 30%;
     font-size: 24px;
+  }
+  
+    .logo a, .logo a:hover{
+      color: black;
+      text-decoration: none;
   }
 
   .cart-detail{
@@ -168,18 +175,15 @@ body {
   margin: 0;
 }
 
-.input-wrapper {
-    margin-left: 120px;
-
-    display: flex;
-    align-items: center;
-  }
-  
-  #number-input {
+.number-input {
+    position: absolute;
+    top:57px;
+    left:65%;
     width: 80px;
     height: 40px;
     text-align: center;
-  }
+    align-items: center;
+}
   
   button {
     width: 40px;
@@ -195,25 +199,25 @@ body {
   }
 
   .cart-content {
+    position: relative;
     box-shadow: 0 5px 4px rgba(0, 0, 0, 0.2);
-    margin-bottom: 15px;
     display: flex;
     background-color: #f1f1f1;
-    width: 75%;
+    padding-right: 30px;
+    width: 78%;
     margin: auto;
+    margin-bottom: 20px;
     height: 150px;
   }
 
   .cart-name {
-    margin: 60px 100px 0 130px;
+    margin-left: 150px;
+    margin-top: 60px;
+
   }
 
-  .cart-price {
-    margin: 60px 0 0 200px;
-  }
-
-  .buyNow {
-    margin-left: 90%;
+  .buy {
+    margin-left: 83%;
     margin-top: 20px;
     height: 50px;
     width: 100px;
@@ -230,9 +234,11 @@ body {
 }
 
 .delete-button{
-    margin-top: 60px;
-    margin-left: 170px;
+    position: absolute;
+    top:60px;
+    right:5%;
 }
+
 
 
 
