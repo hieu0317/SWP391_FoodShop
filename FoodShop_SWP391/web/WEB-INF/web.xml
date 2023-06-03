@@ -19,6 +19,22 @@
         <servlet-name>CartController</servlet-name>
         <url-pattern>/home/cart</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>Login</servlet-name>
+        <servlet-class>controller.guestController.Login</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Verification</servlet-name>
+        <servlet-class>controller.guestController.Verification</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Verification</servlet-name>
+        <url-pattern>/verification</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
