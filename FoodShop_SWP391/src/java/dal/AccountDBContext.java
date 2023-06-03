@@ -9,7 +9,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import models.Account;
+import models.Role;
 
 /**
  *
@@ -21,14 +24,26 @@ public class AccountDBContext extends DBContext<Account> {
         PreparedStatement stm = null;
         ResultSet rs = null;
         try {
-            String sql = "SELECT * FROM [dbo].[account]\n"
+            String sql = "SELECT accountID, email, password, roleID, fullname,phonenum, address, status \n"
+                    + "FROM [dbo].[account] \n"
                     + "WHERE [email] = ? and [password] = ?";
             stm = connection.prepareStatement(sql);           
             stm.setString(1, email);
             stm.setString(2, password);
             rs = stm.executeQuery();
             while (rs.next()) {
-                return new Account();
+                Account a = new Account();
+                a.setAccountID(rs.getInt("accountID"));
+                a.setEmail(rs.getString("email"));
+                a.setPassword(rs.getString("password"));
+                Role role = new Role();
+                role.setRoleID(rs.getInt("roleID"));
+                a.setRole(role);
+                a.setFullName(rs.getString("fullname"));
+                a.setPhoneNumber("phonenum");
+                a.setAddress("address");
+                a.setStatus(rs.getBoolean("status"));
+                return a;
             }
         } catch (SQLException e) {
         }
@@ -37,19 +52,27 @@ public class AccountDBContext extends DBContext<Account> {
 
     public void checkSignup(String email, String password, String fullname, String phone, String address) {
         PreparedStatement stm = null;
-        ResultSet rs = null;
         try {
-            String sql = "INSERT [dbo].[account]([email],[password],[roleID],[fullname],[phonenum],[address],[status]) VALUES (?,?,1,?,?,?,0)";
+             String sql = "INSERT INTO [dbo].[account]([email],[password],[roleID],"
+                    + "[fullname],[phonenum],[address],[status])\n" +
+                    "VALUES(?,?,1,?,?,?,0)";
             stm = connection.prepareStatement(sql);
-            rs = stm.executeQuery();
             stm.setString(1, email);
             stm.setString(2, password);
             stm.setString(3, fullname);
             stm.setString(4, phone);
             stm.setString(5, address);
             stm.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e);
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally {
+            try {
+                stm.close();
+                connection.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 

@@ -53,7 +53,7 @@
                         <img src="../${cds.p.productImage.url}">
                         <h2 class="cart-name" name="productID" value="${cds.p.productID}">${cds.p.productName}</h2>
                         <input  class="number-input" value="${cds.quantity}">
-                        <a class="delete-button" href="../delete?pid=${cds.p.productID}&aid=4"><img src="../images/icon/delete.png"></a>
+                        <a class="delete-button" href="../delete?pid=${cds.p.productID}"><img src="../images/icon/delete.png"></a>
                     </div>
             </c:forEach>
             <button class="buy" type="submit">Buy now</button>

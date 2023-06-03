@@ -9,6 +9,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import models.Account;
 import models.CartDetail;
@@ -27,10 +28,11 @@ public class DeleteCartController extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        Account acc = (Account) session.getAttribute("acc");
         int pID = Integer.parseInt(req.getParameter("pid"));
-        int aID = Integer.parseInt(req.getParameter("aid"));
         Account a = new Account();
-        a.setAccountID(aID);
+        a.setAccountID(acc.getAccountID());
         Product p = new Product();
         p.setProductID(pID);
         CartDetail cd = new CartDetail();
