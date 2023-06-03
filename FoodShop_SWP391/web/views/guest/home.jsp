@@ -28,7 +28,7 @@
                     
                     <a href="home/cart" class="cart-button">My Cart</a>
                     <div class="login">
-                        <a href="#" class="login-link">My Account</a>
+                        <a href="login" class="login-link">My Account</a>
                     </div>
                 </nav>
             </div>
