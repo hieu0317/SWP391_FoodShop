@@ -21,7 +21,7 @@
                 <nav class="header-link">
                     <ul class="navigation">
                         <li><a href="#">Combo</a></li>
-                        <li><a href="#">Blog</a></li>
+                        <li><a href="BlogController">Blog</a></li>
                         <li><a href="#">Contact</a></li>
                         <li><a href="#">About Us</a></li>
                     </ul>

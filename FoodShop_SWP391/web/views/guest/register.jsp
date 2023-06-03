@@ -14,7 +14,6 @@
     <div class="title">Registration</div>
     <br>
     <div style="color: red">${error}</div>
-    <div style="color: red">${errorPass}</div>
     <div class="content">
         <form action="register" method="post">
         <div class="user-details">
