@@ -109,11 +109,6 @@ public class AccountDBContext extends DBContext<Account> {
         return null;
     }
 
-    public static void main(String[] args) {
-        AccountDBContext acc = new AccountDBContext();
-        acc.checkLogin("ngxson2411@gmail.com", "123465");
-        System.out.println(acc);
-    }
  
 
     @Override

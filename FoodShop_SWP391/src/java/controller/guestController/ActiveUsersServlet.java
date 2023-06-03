@@ -83,7 +83,7 @@ public class ActiveUsersServlet extends HttpServlet {
             uDao.checkSignup(email, pass, name, phoneNumber, address);
             response.sendRedirect("login");
         } else {
-            request.setAttribute("mess", "Your verification code is wrong");
+            request.setAttribute("mess", "Your verification code is wrong!");
             request.getRequestDispatcher("views/guest/registerCodeMail.jsp").forward(request, response);
         }
     }

@@ -80,7 +80,8 @@ public class RegisterServlet extends HttpServlet {
             String phoneNumber = request.getParameter("phone");
             String address = request.getParameter("address");
             if (!pass.equals(repass)) {
-                response.sendRedirect("client/register.jsp");
+                request.setAttribute("errorPass", "Password doesn't match Confirm Password");
+                request.getRequestDispatcher("views/guest/register.jsp").forward(request, response);
             } else {
                 
                 if (uDao.checkAccountExit(email) == null) {
