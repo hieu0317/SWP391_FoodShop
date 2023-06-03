@@ -49,10 +49,6 @@ public class HomeController extends HttpServlet{
         ArrayList<Category> categories = cDb.all();
         req.setAttribute("categories", categories);
         
-        CartDBContext cartDb = new CartDBContext();
-        int total = cartDb.getTotalCartByID(4);
-        req.setAttribute("total", total);
-        
         ProductDBContext pDb = new ProductDBContext();
         ArrayList<Product> recProduct = pDb.getRecProduct();
         req.setAttribute("recProduct", recProduct);

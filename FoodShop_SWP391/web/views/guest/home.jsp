@@ -26,7 +26,7 @@
                         <li><a href="#">About Us</a></li>
                     </ul>
                     
-                    <a href="home/cart" class="cart-button">Cart(${requestScope.total})</a>
+                    <a href="home/cart" class="cart-button">My Cart</a>
                     <div class="login">
                         <a href="#" class="login-link">My Account</a>
                     </div>
