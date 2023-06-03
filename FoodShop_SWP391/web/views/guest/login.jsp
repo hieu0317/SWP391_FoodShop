@@ -9,7 +9,7 @@
         <!---<title> Responsive Registration Form | CodingLab </title>--->
         <link rel="stylesheet" href="css/login.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="js/register.js"></script>
+        <script src="javascript/register.js"></script>
     </head>
 
     <body>

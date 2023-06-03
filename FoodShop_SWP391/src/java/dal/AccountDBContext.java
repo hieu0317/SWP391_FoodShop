@@ -4,9 +4,10 @@
  */
 package dal;
 
-import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import models.Account;
 
@@ -22,16 +23,14 @@ public class AccountDBContext extends DBContext<Account> {
         try {
             String sql = "SELECT * FROM [dbo].[account]\n"
                     + "WHERE [email] = ? and [password] = ?";
-            stm = connection.prepareStatement(sql);
-            rs = stm.executeQuery();
+            stm = connection.prepareStatement(sql);           
             stm.setString(1, email);
             stm.setString(2, password);
             rs = stm.executeQuery();
             while (rs.next()) {
                 return new Account();
-
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
         }
         return null;
     }
@@ -49,7 +48,7 @@ public class AccountDBContext extends DBContext<Account> {
             stm.setString(4, phone);
             stm.setString(5, address);
             stm.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e);
         }
     }
@@ -60,7 +59,7 @@ public class AccountDBContext extends DBContext<Account> {
         try {
             String sql = "SELECT * from [dbo].[Account] where [roleID] = '1'";
             stm = connection.prepareStatement(sql);
-        } catch (Exception e) {
+        } catch (SQLException e) {
 
         }
         return null;
@@ -72,7 +71,7 @@ public class AccountDBContext extends DBContext<Account> {
         try {
             String sql = "SELECT * from [dbo].[Account] where [roleID] = '2'";
             stm = connection.prepareStatement(sql);
-        } catch (Exception e) {
+        } catch (SQLException e) {
 
         }
         return null;
@@ -84,7 +83,7 @@ public class AccountDBContext extends DBContext<Account> {
         try {
             String sql = "SELECT * from [dbo].[Account] where [roleID] = '3'";
             stm = connection.prepareStatement(sql);
-        } catch (Exception e) {
+        } catch (SQLException e) {
 
         }
         return null;
@@ -104,12 +103,17 @@ public class AccountDBContext extends DBContext<Account> {
                 a.setPassword(rs.getString("password"));
                 return a;
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e);
         }
         return null;
     }
 
+    public static void main(String[] args) {
+        AccountDBContext acc = new AccountDBContext();
+        acc.checkLogin("ngxson2411@gmail.com", "123465");
+        System.out.println(acc);
+    }
  
 
     @Override

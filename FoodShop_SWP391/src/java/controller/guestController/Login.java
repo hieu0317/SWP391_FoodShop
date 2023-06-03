@@ -77,9 +77,6 @@ public class Login extends HttpServlet {
         String password = request.getParameter("password");
         AccountDBContext acc = new AccountDBContext();
         Account cus = acc.checkLogin(email, password);
-        Account admin = acc.checkLoginAdmin(email, password);
-        Account sale = acc.checkLoginSale(email, password);
-        Account mkt = acc.checkLoginMKT(email, password);
         if (cus == null) {
             request.setAttribute("error", "Wrong username or password!");
             request.getRequestDispatcher("views/guest/login.jsp").forward(request, response);
