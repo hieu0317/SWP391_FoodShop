@@ -30,9 +30,7 @@
                         </div>
                     </div>
 
-                    <div class="button">
-                        <input type="submit" value="Login">
-                    </div>
+                    
                     <div>
                         <p>Don't have account ? <a href="register">Register</a> 
                                 <a href="home"><button type="button" class="color-button">Cancel</button> </a></p>
