@@ -22,6 +22,7 @@ public abstract class DBContext<T> {
 
     public DBContext() {
         try {
+
             String url = "jdbc:sqlserver://MSI:1433;databaseName=FoodShop_SWP391";
             String username = "hieuvm";
             String password = "123";

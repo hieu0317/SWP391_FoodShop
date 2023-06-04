@@ -34,7 +34,11 @@
     <servlet>
         <servlet-name>BlogSettings</servlet-name>
         <servlet-class>MainController.BlogSettings</servlet-class>
-    </servlet>    
+
+    </servlet>
+
+  
+
     <servlet>
         <servlet-name>ActiveUsersServlet</servlet-name>
         <servlet-class>controller.guestController.ActiveUsersServlet</servlet-class>
