@@ -17,7 +17,6 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author Asus
  */
-@WebServlet(name = "ActiveUsersServlet", urlPatterns = {"/active"})
 public class ActiveUsersServlet extends HttpServlet {
 
     /**

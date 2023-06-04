@@ -33,9 +33,16 @@
                     </ul>
 
                     <a href="home/cart" class="cart-button">My Cart</a>
-                    <div class="login">
-                        <a href="login" class="login-link">My Account</a>
-                    </div>
+                    <c:if test="${not empty acc.accountID}">
+                        <div class="login">
+                            <a href="" class="login-link">My Account</a>
+                        </div>
+                    </c:if>
+                     <c:if test="${empty acc.accountID}">
+                        <div class="login">
+                            <a href="login" class="login-link">Sign in</a>
+                        </div>
+                    </c:if>
                 </nav>
             </div>
         </header>

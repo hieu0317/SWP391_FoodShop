@@ -11,6 +11,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import models.Account;
@@ -26,14 +27,15 @@ public class HomeController extends HttpServlet{
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int accountID = 4;
+        HttpSession session = req.getSession();
+        Account acc = (Account) session.getAttribute("acc");
         int productID = Integer.parseInt(req.getParameter("productID"));
         int quantity = 1;        
         CartDBContext cDb = new CartDBContext();
         CartDetail cd = new CartDetail();
         Account a = new Account();
         Product p = new Product();
-        a.setAccountID(accountID);
+        a.setAccountID(acc.getAccountID());
         cd.setAccount(a);
         cd.setQuantity(quantity);
         p.setProductID(productID);

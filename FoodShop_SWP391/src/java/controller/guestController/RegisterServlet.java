@@ -20,7 +20,6 @@ import utils.SendMail;
  *
  * @author Asus
  */
-@WebServlet(name = "RegisterServlet", urlPatterns = {"/register"})
 public class RegisterServlet extends HttpServlet {
 
     /**
@@ -93,6 +92,7 @@ public class RegisterServlet extends HttpServlet {
                     session.setAttribute("email", email);                   
                     session.setAttribute("code", randomCode);
                     session.setAttribute("pass", pass);
+                    session.setAttribute("address", address);
                     session.setAttribute("phone", phoneNumber);
                     session.setMaxInactiveInterval(300);
                     
