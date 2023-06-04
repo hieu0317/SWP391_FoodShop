@@ -18,16 +18,26 @@
     <body>
         
         <form action="getProfile" method="get">
+
+         
+
+
             <c:forEach items="${requestScope.accounts}" var="c">           
 <%--truy cap vao thuoc tinh accounts duoc truyen tu servelet sang / c = ten de phan biet. --%>
+
                 <section style="background-color: #eee;">
                     <div class="container py-5">
                         <div class="row">
                             <div class="col">
                                 <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
                                     <ol class="breadcrumb mb-0">
+
+                                        <li class="breadcrumb-item"><a href="home">Home</a></li>
+                                        <li class="breadcrumb-item"><a href="#">User</a></li>
+
                                         <li class="breadcrumb-item"><a href="#">Home</a></li>
                                         
+
                                         <li class="breadcrumb-item active" aria-current="page">User Profile</li>
                                     </ol>
                                 </nav>
@@ -40,8 +50,13 @@
                                     <div class="card-body text-center">
                                         <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
                                              class="rounded-circle img-fluid" style="width: 150px;">
+
+                                        <h5 class="my-3">${requestScope.accounts.getFullName()}</h5>
+                                        <p class="text-muted mb-1">${requestScope.accounts.getFullName()}</p>
+
                                         <h5 class="my-3">${c.getFullName()}</h5> 
                                         <p class="text-muted mb-1">${c.getFullName()}</p>
+
                                         <p class="text-muted mb-4"></p>
                                         <div class="d-flex justify-content-center mb-2" >
                                         
@@ -61,7 +76,7 @@
                                                 <p class="mb-0">Full Name</p>
                                             </div>
                                             <div class="col-sm-9">
-                                                <p class="text-muted mb-0">${c.getFullName()}</p>
+                                                <p class="text-muted mb-0">${requestScope.accounts.getFullName()}</p>
                                             </div>
                                         </div>
                                         <hr>
@@ -70,7 +85,7 @@
                                                 <p class="mb-0">Email</p>
                                             </div>
                                             <div class="col-sm-9">
-                                                <p class="text-muted mb-0">${c.getEmail()}</p>
+                                                <p class="text-muted mb-0">${requestScope.accounts.getEmail()}</p>
                                             </div>
                                         </div>
                                         <hr>
@@ -79,7 +94,7 @@
                                                 <p class="mb-0">Phone</p>
                                             </div>
                                             <div class="col-sm-9">
-                                                <p class="text-muted mb-0">${c.getPhoneNumber()}</p>
+                                                <p class="text-muted mb-0">${requestScope.accounts.getPhoneNumber()}</p>
                                             </div>
                                         </div>
                                         
@@ -90,7 +105,7 @@
                                                 <p class="mb-0">Address</p>
                                             </div>
                                             <div class="col-sm-9">
-                                                <p class="text-muted mb-0">${c.getAddress()}</p>
+                                                <p class="text-muted mb-0">${requestScope.accounts.getAddress()}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -103,7 +118,6 @@
                 </section>
 
 
-            </c:forEach>
         </form>
 
     </body>

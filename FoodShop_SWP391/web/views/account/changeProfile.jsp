@@ -19,7 +19,11 @@
         <h1>Change Profile </h1>
         <form action="changeProfile" method="post">
 
+                  
+
+
             <c:forEach items="${requestScope.accounts}" var="c">           
+
                 <h1></h1>
                 <section style="background-color: #eee;">
                     <div class="container py-5">
@@ -29,8 +33,13 @@
                                     <ol class="breadcrumb mb-0">
                                         <li class="breadcrumb-item"><a href="home">Home</a></li>
 
+                                        <li class="breadcrumb-item"><a href="#">User</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">User Profile</li>
+
+
                                         <li class="breadcrumb-item"><a href="profile">User Profile</a></li>
                                         <li class="breadcrumb-item active" aria-current="page">Change Profile</li>
+
 
                                     </ol>
                                 </nav>
@@ -43,8 +52,8 @@
                                     <div class="card-body text-center">
                                         <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
                                              class="rounded-circle img-fluid" style="width: 150px;">
-                                        <h5 class="my-3">${c.getFullName()}</h5>
-                                        <p class="text-muted mb-1">${c.getFullName()}</p>
+                                        <h5 class="my-3">${requestScope.accounts.getFullName()}</h5>
+                                        <p class="text-muted mb-1">${requestScope.accounts.getFullName()}</p>
                                         <p class="text-muted mb-4"></p>
                                         <div class="d-flex justify-content-center mb-2">
 
@@ -63,6 +72,12 @@
                                                 <p class="mb-0">Full Name</p>
                                             </div>
                                             <div class="col-sm-9">
+
+                                                <p class="text-muted mb-0"> <input name="fullname" value="${requestScope.accounts.getFullName()}" ></p>
+                                            </div>
+                                        </div>
+                                    
+
                                                 <p class="text-muted mb-0"> <input name="fullname" value="${c.getFullName()}" ></p>
                                             </div>
                                         </div>
@@ -75,16 +90,21 @@
                                                                                         <p class="text-muted mb-0"><input name="email" value="${c.getEmail()}" ></p>
                                                                                     </div>
                                                                                 </div>-->
+
                                         <hr>
                                         <div class="row">
                                             <div class="col-sm-3">
                                                 <p class="mb-0">Phone Number</p>
                                             </div>
                                             <div class="col-sm-9">
-                                                <p class="text-muted mb-0"><input name="phone" value="${c.getPhoneNumber()}" ></p>
+                                                <p class="text-muted mb-0"><input name="phone" value="${requestScope.accounts.getPhoneNumber()}" ></p>
                                             </div>
                                         </div>
+
+                                        
                                         <hr>
+
+                                        
 
 
                                         <div class="row">
@@ -92,7 +112,7 @@
                                                 <p class="mb-0">Address</p>
                                             </div>
                                             <div class="col-sm-9">
-                                                <p class="text-muted mb-0"><input name="address" value="${c.getAddress()}" ></p>
+                                                <p class="text-muted mb-0"><input name="address" value="${requestScope.accounts.getAddress()}" ></p>
                                             </div>
                                         </div>
                                         <br>
@@ -111,7 +131,6 @@
                 </section>
 
 
-            </c:forEach>
         </form>
 
 

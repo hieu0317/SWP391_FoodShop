@@ -40,13 +40,3 @@
             </c:forEach>
     </ul>
 </div>
-<div class="slider-wrapper">
-    <div class="slider">
-        <div class="slide">
-            <a href=""><img src="images/slider/buatruavuive.jpg" alt="Slide 1"></a>
-        </div>
-        <div class="slide">
-            <a href=""><img src="images/slider/gahoangkim.jpg" alt="Slide 2"></a>
-        </div>
-    </div>
-</div>

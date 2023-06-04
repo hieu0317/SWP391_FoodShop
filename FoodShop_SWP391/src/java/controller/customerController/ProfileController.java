@@ -63,14 +63,11 @@ public class ProfileController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        HttpSession session = request.getSession();
-//        int accountID = (int) session.getAttribute("accountID");
+         HttpSession session = request.getSession();
+        Account acc = (Account) session.getAttribute("acc");
         System.out.println("Bat dau lay thong tin ");
-        AccountDBContext accountDBContext = new AccountDBContext() {};
-        ArrayList<Account> accounts = accountDBContext.getAllAccounts(2);
-        for (Account account : accounts) {
-            System.out.println("Account ID: " + account.getAccountID());
-        }
+        AccountDBContext accountDBContext = new AccountDBContext();
+        Account accounts = accountDBContext.getAccountByID(acc.getAccountID());
         request.setAttribute("accounts", accounts);
         request.getRequestDispatcher("/views/account/profile.jsp").forward(request, response);
     }

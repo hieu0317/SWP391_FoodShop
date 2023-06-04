@@ -12,7 +12,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import models.Account;
 import models.CartDetail;
-import models.Category;
 import models.Product;
 import models.ProductImage;
 
@@ -21,7 +20,6 @@ import models.ProductImage;
  * @author admin
  */
 public class CartDBContext extends DBContext<CartDetail>{
-    
     
     public ArrayList<CartDetail> getCartByID(int id){
          ArrayList<CartDetail> cds = new ArrayList<>();

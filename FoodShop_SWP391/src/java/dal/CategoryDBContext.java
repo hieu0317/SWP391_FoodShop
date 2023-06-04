@@ -62,7 +62,6 @@ public class CategoryDBContext extends DBContext<Category> {
             try {
                 rs.close();
                 stm.close();
-                connection.close();
             } catch (SQLException ex) {
                 Logger.getLogger(CategoryDBContext.class.getName()).log(Level.SEVERE, null, ex);
             }
