@@ -7,7 +7,7 @@
 <div class="footer">
     <h2>2023 Fast Food Company. All rights reserved.</h2>
     <div class="links">
-        <a href="">
+        <a href="views/AboutUsPage.jsp">
             <h2>About Us</h2>
         </a>
         <a href="">

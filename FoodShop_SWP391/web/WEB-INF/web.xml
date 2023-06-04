@@ -12,6 +12,14 @@
         <servlet-class>controller.customerController.CartController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>ChangeProfile</servlet-name>
+        <servlet-class>controller.customerController.ChangeProfile</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProfileController</servlet-name>
+        <servlet-class>controller.customerController.ProfileController</servlet-class>
+     </servlet>
+    <servlet>
         <servlet-name>CartDeleteController</servlet-name>
         <servlet-class>controller.customerController.DeleteCartController</servlet-class>
     </servlet>
@@ -26,7 +34,11 @@
     <servlet>
         <servlet-name>BlogSettings</servlet-name>
         <servlet-class>MainController.BlogSettings</servlet-class>
+
     </servlet>
+
+  
+
     <servlet>
         <servlet-name>ActiveUsersServlet</servlet-name>
         <servlet-class>controller.guestController.ActiveUsersServlet</servlet-class>
@@ -42,6 +54,14 @@
     <servlet-mapping>
         <servlet-name>CartController</servlet-name>
         <url-pattern>/home/cart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeProfile</servlet-name>
+        <url-pattern>/changeProfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProfileController</servlet-name>
+        <url-pattern>/profile</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>Login</servlet-name>
