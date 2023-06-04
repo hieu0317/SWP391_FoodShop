@@ -18,7 +18,12 @@
     <body>
         
         <form action="getProfile" method="get">
+
          
+
+
+            <c:forEach items="${requestScope.accounts}" var="c">           
+<%--truy cap vao thuoc tinh accounts duoc truyen tu servelet sang / c = ten de phan biet. --%>
 
                 <section style="background-color: #eee;">
                     <div class="container py-5">
@@ -26,8 +31,13 @@
                             <div class="col">
                                 <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
                                     <ol class="breadcrumb mb-0">
+
                                         <li class="breadcrumb-item"><a href="home">Home</a></li>
                                         <li class="breadcrumb-item"><a href="#">User</a></li>
+
+                                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                        
+
                                         <li class="breadcrumb-item active" aria-current="page">User Profile</li>
                                     </ol>
                                 </nav>
@@ -40,8 +50,13 @@
                                     <div class="card-body text-center">
                                         <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
                                              class="rounded-circle img-fluid" style="width: 150px;">
+
                                         <h5 class="my-3">${requestScope.accounts.getFullName()}</h5>
                                         <p class="text-muted mb-1">${requestScope.accounts.getFullName()}</p>
+
+                                        <h5 class="my-3">${c.getFullName()}</h5> 
+                                        <p class="text-muted mb-1">${c.getFullName()}</p>
+
                                         <p class="text-muted mb-4"></p>
                                         <div class="d-flex justify-content-center mb-2" >
                                         
