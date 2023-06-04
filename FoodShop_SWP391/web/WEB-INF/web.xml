@@ -23,6 +23,10 @@
         <servlet-name>BlogDetail</servlet-name>
         <servlet-class>MainController.BlogDetail</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BlogSettings</servlet-name>
+        <servlet-class>MainController.BlogSettings</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>home</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -58,6 +62,10 @@
     <servlet-mapping>
         <servlet-name>BlogDetail</servlet-name>
         <url-pattern>/BlogDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlogSettings</servlet-name>
+        <url-pattern>/BlogSettings</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

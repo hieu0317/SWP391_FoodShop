@@ -50,25 +50,28 @@
                     </div>
 
                     <c:forEach items="${sessionScope.blogs}" var="b">
-                        <div class="row gx-5">
-                            <div class="col-md-6 mb-4">
-                                <div class="bg-image hover-overlay ripple shadow-2-strong rounded-5" data-mdb-ripple-color="light">
-                                    <img src="./images/blogimage/${b.getBlogImage().getUrl()}" class="img-fluid" />
-                                    <a href="#!">
-                                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                                    </a>
+                        <c:if test="${b.isStatus()}">
+                            <div class="row gx-5">
+                                <div class="col-md-6 mb-4">
+                                    <div class="bg-image hover-overlay ripple shadow-2-strong rounded-5" data-mdb-ripple-color="light">
+                                        <img src="./images/blogimage/${b.getBlogImage().getUrl()}" class="img-fluid" />
+                                        <a href="#!">
+                                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-md-6 mb-4">
-                                <span class="badge bg-danger px-2 py-1 shadow-1-strong mb-3">News of the day</span>
-                                <h4><strong>${b.getBlogTitle()}</strong></h4>
-                                <p class="text-muted">
-                                    ${b.getDate()}
-                                </p>
-                                <a href="BlogDetail?id=${b.getBlogID()}"><button type="button" class="btn btn-primary">Read more</button></a>
-                            </div>
-                        </div> 
+                                <div class="col-md-6 mb-4">
+                                    <span class="badge bg-danger px-2 py-1 shadow-1-strong mb-3">News of the day</span>
+                                    <h4><strong>${b.getBlogTitle()}</strong></h4>
+                                    <p class="text-muted">
+                                        ${b.getDate()}
+                                    </p>
+                                    <a href="BlogDetail?id=${b.getBlogID()}&del=1"><button type="button" class="btn btn-primary">Read more</button></a>
+                                </div>
+                            </div> 
+                        </c:if>
+
                     </c:forEach>
 
 

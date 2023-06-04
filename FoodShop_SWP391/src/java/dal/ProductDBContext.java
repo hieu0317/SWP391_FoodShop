@@ -17,9 +17,9 @@ import models.ProductImage;
  *
  * @author admin
  */
-public class ProductDBContext extends DBContext<Product>{
-    
-    public ArrayList<Product> getRecProduct(){
+public class ProductDBContext extends DBContext<Product> {
+
+    public ArrayList<Product> getRecProduct() {
         ArrayList<Product> products = new ArrayList<>();
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -31,16 +31,16 @@ public class ProductDBContext extends DBContext<Product>{
             stm = connection.prepareStatement(sql);
             rs = stm.executeQuery();
             while (rs.next()) {
-               Product p = new Product();
-               p.setProductID(rs.getInt("productID"));
-               p.setProductName(rs.getString("productName"));
-               p.setPrice(rs.getInt("price"));
-               p.setStatus(rs.getBoolean("status"));
-               ProductImage pImg = new ProductImage();
-               pImg.setImageID(rs.getInt("imageID"));
-               pImg.setUrl(rs.getString("url"));
-               p.setProductImage(pImg);
-               products.add(p);
+                Product p = new Product();
+                p.setProductID(rs.getInt("productID"));
+                p.setProductName(rs.getString("productName"));
+                p.setPrice(rs.getInt("price"));
+                p.setStatus(rs.getBoolean("status"));
+                ProductImage pImg = new ProductImage();
+                pImg.setImageID(rs.getInt("imageID"));
+                pImg.setUrl(rs.getString("url"));
+                p.setProductImage(pImg);
+                products.add(p);
             }
 
         } catch (SQLException ex) {
@@ -79,7 +79,32 @@ public class ProductDBContext extends DBContext<Product>{
 
     @Override
     public ArrayList<Product> all() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ArrayList<Product> products = new ArrayList<>();
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            String sql = "select p.productID, p.productName, p.price, p.status, "
+                    + "img.imageID, img.url from product p inner join productImage img\n"
+                    + "on p.productID = img.productID";
+            stm = connection.prepareStatement(sql);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                Product p = new Product();
+                p.setProductID(rs.getInt("productID"));
+                p.setProductName(rs.getString("productName"));
+                p.setPrice(rs.getInt("price"));
+                p.setStatus(rs.getBoolean("status"));
+                ProductImage pImg = new ProductImage();
+                pImg.setImageID(rs.getInt("imageID"));
+                pImg.setUrl(rs.getString("url"));
+                p.setProductImage(pImg);
+                products.add(p);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        return products;
     }
-    
+
 }

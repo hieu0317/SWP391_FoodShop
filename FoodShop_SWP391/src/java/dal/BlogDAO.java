@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import models.Blog;
@@ -19,7 +20,57 @@ import models.BlogImage;
  */
 public class BlogDAO extends DBContext<Blog> {
 
-    public BlogImage getBlogImageByid(int id){
+    public void addBlogImg(String part) {
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            String sql = "insert into blogImage(blogID,url) values(?,?)";
+            stm = connection.prepareStatement(sql);
+            stm.setInt(1, getNewestBlog());
+            stm.setString(2, part);
+            stm.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void addBlog(String title, String detail, int accid) {
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            String sql = "insert into blog(accountID,blogTitle,blogDetail,date,status) values(?,?,?,?,?)";
+            stm = connection.prepareStatement(sql);
+            stm.setInt(1, accid);
+            stm.setNString(2, title);
+            stm.setNString(3, detail);
+            stm.setDate(4, new java.sql.Date(new Date().getTime()));
+            stm.setBoolean(5, true);
+            stm.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public int getNewestBlog() {
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            String sql = "select top 1 blogID from [dbo].[blog] order by blogID desc";
+            stm = connection.prepareStatement(sql);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    public BlogImage getBlogImageByid(int id) {
         PreparedStatement stm = null;
         ResultSet rs = null;
         try {
@@ -32,12 +83,12 @@ public class BlogDAO extends DBContext<Blog> {
                 b.setBlogID(id);
                 b.setImageID(rs.getInt(2));
                 b.setUrl(rs.getString(3));
-                return(b);
+                return (b);
             }
 
         } catch (SQLException ex) {
             Logger.getLogger(CategoryDBContext.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        }
 //        finally {
 //            try {
 //                rs.close();
@@ -49,7 +100,21 @@ public class BlogDAO extends DBContext<Blog> {
 //        }
         return null;
     }
-    
+
+    public void delBlogById(int id) {
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            String sql = "update [dbo].[blog] set status = 0 where blogID = ?";
+            stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            stm.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     @Override
     public void insert(Blog model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -83,7 +148,7 @@ public class BlogDAO extends DBContext<Blog> {
                 b.setDate(rs.getDate(5));
                 b.setStatus(rs.getBoolean(6));
                 b.setBlogImage(getBlogImageByid(id));
-                return(b);
+                return (b);
             }
 
         } catch (SQLException ex) {
@@ -97,7 +162,7 @@ public class BlogDAO extends DBContext<Blog> {
                 Logger.getLogger(CategoryDBContext.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        return null;    
+        return null;
     }
 
     @Override
@@ -123,7 +188,7 @@ public class BlogDAO extends DBContext<Blog> {
 
         } catch (SQLException ex) {
             Logger.getLogger(CategoryDBContext.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        }
 //        finally {
 //            try {
 //                rs.close();

@@ -3,6 +3,7 @@
     Created on : Jun 3, 2023, 10:16:45?PM
     Author     : toden
 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <header>
     <div class="navbar">
@@ -11,9 +12,15 @@
         <nav class="header-link">
             <ul class="navigation">
                 <li><a href="#">Combo</a></li>
-                <li><a href="#">Blog</a></li>
+                <li><a href="BlogController">Blog</a></li>
                 <li><a href="#">Contact</a></li>
                 <li><a href="#">About Us</a></li>
+                    <c:if test="${sessionScope.acc.getRole().getRoleID()==4}">
+                    <li><a href="BlogSettings">Blog Settings</a></li>
+                    </c:if>
+                    <c:if test="${sessionScope.acc.getRole().getRoleID()==3}">
+                    <li><a href="ProductSettings">Product Settings</a></li>
+                    </c:if>
             </ul>
 
             <a href="home/cart" class="cart-button">My Cart</a>
@@ -28,9 +35,9 @@
     <button class="close-button">&times;</button>
     <h2>Category</h2>
     <ul>
-        <c:forEach items="${requestScope.categories}" var="c">
+        <c:forEach items="${sessionScope.categories}" var="c">
             <li><a href=""><h3>${c.categoryName} ></h3></a></li>
-        </c:forEach>
+            </c:forEach>
     </ul>
 </div>
 <div class="slider-wrapper">

@@ -30,7 +30,15 @@ public class AccountDBContext extends DBContext<Account> {
             stm.setString(2, password);
             rs = stm.executeQuery();
             while (rs.next()) {
-                return new Account();
+                Account a = new Account();
+                a.setEmail(email);
+                a.setPassword(password);
+                a.setAccountID(rs.getInt(1));
+                a.setRole(new RoleDBContext().get(rs.getInt(4)));
+                a.setFullName(rs.getNString(5));
+                a.setPhoneNumber(rs.getString(6));
+                a.setStatus(rs.getBoolean(7));
+                return a;
             }
         } catch (SQLException e) {
         }
