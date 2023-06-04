@@ -35,7 +35,7 @@
                     <a href="home/cart" class="cart-button">My Cart</a>
                     <c:if test="${not empty acc.accountID}">
                         <div class="login">
-                            <a href="" class="login-link">My Account</a>
+                            <a href="profile" class="login-link">My Account</a>
                         </div>
                     </c:if>
                      <c:if test="${empty acc.accountID}">
@@ -51,9 +51,9 @@
             <button class="close-button">&times;</button>
             <h2>Category</h2>
             <ul>
-                <c:forEach items="${sessionScope.categories}" var="c">
+                <c:forEach items="${requestScope.categories}" var="c">
                     <li><a href=""><h3>${c.categoryName} ></h3></a></li>
-                    </c:forEach>
+                </c:forEach>
             </ul>
         </div>
         <div class="slider-wrapper">
@@ -71,7 +71,7 @@
             <div class="line"></div>
         </div>
         <div class="category-content">
-            <c:forEach items="${sessionScope.categories}" var="c">
+            <c:forEach items="${requestScope.categories}" var="c">
                 <div class="col-md-3">
                     <input type="hidden" name="categoryID" value="${c.categoryID}"/>
                     <a href=""><img src="${c.catImage}"></a>
@@ -84,7 +84,7 @@
             <div class="line"></div>
         </div>
         <div class="recFood-content">
-            <c:forEach items="${sessionScope.recProduct}" var="rd">
+            <c:forEach items="${requestScope.recProduct}" var="rd">
                 <form id="myForm" action="home" method="POST">
                     <div class="col-md-3">
                         <input type="hidden" name="productID" value="${rd.productID}"/>
@@ -99,7 +99,7 @@
         <div class="footer">
             <h2>2023 Fast Food Company. All rights reserved.</h2>
             <div class="links">
-                <a href="">
+                <a href="views/AboutUsPage.jsp">
                     <h2>About Us</h2>
                 </a>
                 <a href="">

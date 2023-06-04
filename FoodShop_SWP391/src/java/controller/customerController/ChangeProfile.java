@@ -9,6 +9,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -59,12 +60,11 @@ public class ChangeProfile extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+          HttpSession session = request.getSession();
+        Account acc = (Account) session.getAttribute("acc");
         System.out.println("Bat dau lay thong tin de thay doi ");
         AccountDBContext accountDBContext = new AccountDBContext() {};
-        ArrayList<Account> accounts = accountDBContext.getAllAccounts(2);
-        for (Account account : accounts) {
-            System.out.println("Account ID: " + account.getAccountID());
-        }
+        Account accounts = accountDBContext.getAccountByID(acc.getAccountID());
         request.setAttribute("accounts", accounts);
             request.getRequestDispatcher("/views/account/changeProfile.jsp").forward(request, response);
     }
@@ -80,16 +80,15 @@ public class ChangeProfile extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        Account acc = (Account) session.getAttribute("acc");
         String fullname = request.getParameter("fullname");
-        String password = "12345678";
-        String email = request.getParameter("email");
         String phone = request.getParameter("phone");
         String address = request.getParameter("address");
-        System.out.println("sua thong tin :"+email +fullname + phone + address);
         AccountDBContext accountDBContext = new AccountDBContext() {};
         String account =request.getParameter("account");
         System.out.println(account);
-        accountDBContext.updateProfile(2,email, password, fullname, phone, address);
+        accountDBContext.updateProfile(acc.getAccountID(),acc.getEmail(),acc.getPassword(), fullname, phone, address);
         response.sendRedirect(request.getContextPath() + "/profile");
     }
 

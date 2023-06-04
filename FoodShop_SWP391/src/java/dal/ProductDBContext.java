@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import models.Category;
 import models.Product;
 import models.ProductImage;
 
@@ -24,9 +25,12 @@ public class ProductDBContext extends DBContext<Product> {
         PreparedStatement stm = null;
         ResultSet rs = null;
         try {
-            String sql = "select p.productID, p.productName, p.price, p.status, "
-                    + "img.imageID, img.url from product p inner join productImage img\n"
+            String sql = "select p.productID,p.productName,c.categoryID,c.categoryName,p.price,"
+                    + " p.status,p.details,img.imageID, img.url from product p \n"
+                    + "inner join productImage img\n"
                     + "on p.productID = img.productID \n"
+                    + "inner join category c\n"
+                    + "on c.categoryID = p.categoryID\n"
                     + "where p.productID in (1,4,16,28)";
             stm = connection.prepareStatement(sql);
             rs = stm.executeQuery();
@@ -35,11 +39,16 @@ public class ProductDBContext extends DBContext<Product> {
                 p.setProductID(rs.getInt("productID"));
                 p.setProductName(rs.getString("productName"));
                 p.setPrice(rs.getInt("price"));
+                p.setDetails(rs.getString("details"));
                 p.setStatus(rs.getBoolean("status"));
+                Category c = new Category();
+                c.setCategoryID(rs.getInt("categoryID"));
+                c.setCategoryName(rs.getString("categoryName"));
                 ProductImage pImg = new ProductImage();
                 pImg.setImageID(rs.getInt("imageID"));
                 pImg.setUrl(rs.getString("url"));
                 p.setProductImage(pImg);
+                p.setCategory(c);
                 products.add(p);
             }
 

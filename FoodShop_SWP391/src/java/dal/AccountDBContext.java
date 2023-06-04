@@ -26,10 +26,9 @@ import models.Role;
 
  * @author asus
  */
-public abstract class AccountDBContext extends DBContext<Account> {
+public class AccountDBContext extends DBContext<Account> {
 
-    public ArrayList<Account> getAllAccounts(int accountID) {
-    ArrayList<Account> accounts = new ArrayList<>();
+    public Account getAccountByID(int accountID) {
     PreparedStatement stm = null;
     ResultSet rs = null;
        
@@ -58,8 +57,8 @@ public abstract class AccountDBContext extends DBContext<Account> {
             role.setRoleName(rs.getString("roleName"));
 
             account.setRole(role);
-            accounts.add(account);
             System.out.println("Lay thong tin profile thanh cong "+ accountID);
+            return account;
         }
     } catch (SQLException ex) {
         Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
@@ -67,12 +66,11 @@ public abstract class AccountDBContext extends DBContext<Account> {
         try {
             rs.close();
             stm.close();
-            connection.close();
         } catch (SQLException ex) {
             Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    return accounts;
+    return null;
 }
     
    public void updateProfile(int accountID, String email, String password, String fullname, String phonenum, String address) {
@@ -102,16 +100,12 @@ public abstract class AccountDBContext extends DBContext<Account> {
     } finally {
         try {
             stm.close();
-            connection.close();
         } catch (SQLException ex) {
             Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
 
- * @author ngxso
- */
-public class AccountDBContext extends DBContext<Account> {
 
     public Account checkLogin(String email, String password) {
         PreparedStatement stm = null;
@@ -161,7 +155,6 @@ public class AccountDBContext extends DBContext<Account> {
         finally {
             try {
                 stm.close();
-                connection.close();
             } catch (SQLException ex) {
                 Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -223,14 +216,7 @@ public class AccountDBContext extends DBContext<Account> {
         }
         return null;
     }
-
-    public static void main(String[] args) {
-        AccountDBContext acc = new AccountDBContext();
-        acc.checkLogin("ngxson2411@gmail.com", "123465");
-        System.out.println(acc);
-    }
  
-
 
     @Override
     public void insert(Account model) {
@@ -249,9 +235,6 @@ public class AccountDBContext extends DBContext<Account> {
 
     @Override
     public Account get(int id) {
-
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-
         PreparedStatement stm = null;
         ResultSet rs = null;
         try {
@@ -273,17 +256,16 @@ public class AccountDBContext extends DBContext<Account> {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(CategoryDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
         } 
-//        finally {
-//            try {
-//                rs.close();
-//                stm.close();
-//                connection.close();
-//            } catch (SQLException ex) {
-//                Logger.getLogger(CategoryDBContext.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        }
+        finally {
+            try {
+                rs.close();
+                stm.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         return null;
 
     }
