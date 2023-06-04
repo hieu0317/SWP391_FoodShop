@@ -56,6 +56,69 @@ public class ProductDBContext extends DBContext<Product> {
         }
         return products;
     }
+    
+        public void deleteById(int id) {
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            String sql = "update product set status = 0 where productID = ?";
+            stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+    }
+    
+    public void addProductImg(String part) {
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            String sql = "insert into productImage(productID,url) values(?,?)";
+            stm = connection.prepareStatement(sql);
+            stm.setInt(1, getNewestProduct());
+            stm.setString(2, part);
+            stm.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void addProduct(int categoryID, String name, String detail, int price) {
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            String sql = "insert into product values(?,?,?,?,?)";
+            stm = connection.prepareStatement(sql);
+            stm.setInt(1, categoryID);
+            stm.setNString(2, name);
+            stm.setNString(3, detail);
+            stm.setInt(4, price);
+            stm.setBoolean(5, true);
+            stm.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public int getNewestProduct() {
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            String sql = "select top 1 productID from [dbo].[product] order by productID desc";
+            stm = connection.prepareStatement(sql);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
 
     @Override
     public void insert(Product model) {

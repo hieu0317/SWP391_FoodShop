@@ -16,7 +16,6 @@
         <servlet-class>controller.customerController.DeleteCartController</servlet-class>
     </servlet>
     <servlet>
-
         <servlet-name>BlogController</servlet-name>
         <servlet-class>MainController.BlogController</servlet-class>
     </servlet>
@@ -27,7 +26,8 @@
     <servlet>
         <servlet-name>BlogSettings</servlet-name>
         <servlet-class>MainController.BlogSettings</servlet-class>
-
+    </servlet>
+    <servlet>
         <servlet-name>ActiveUsersServlet</servlet-name>
         <servlet-class>controller.guestController.ActiveUsersServlet</servlet-class>
     </servlet>
@@ -64,7 +64,6 @@
         <url-pattern>/delete</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-
         <servlet-name>BlogController</servlet-name>
         <url-pattern>/BlogController</url-pattern>
     </servlet-mapping>
@@ -75,14 +74,14 @@
     <servlet-mapping>
         <servlet-name>BlogSettings</servlet-name>
         <url-pattern>/BlogSettings</url-pattern>
-
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>ActiveUsersServlet</servlet-name>
         <url-pattern>/active</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
-
     </servlet-mapping>
     <session-config>
         <session-timeout>
