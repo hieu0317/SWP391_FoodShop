@@ -9,15 +9,15 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="../../css/cart.css">
-        <link rel="stylesheet" href="../../css/bootstrap.css">
-        <link rel="stylesheet" href="../../css/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/cart.css">
+        <link rel="stylesheet" href="../css/bootstrap.css">
+        <link rel="stylesheet" href="../css/bootstrap.min.css">
     </head>
     <body>
         <header>
             <div class="navbar">
                 <button class="sidebar-button">&#9776; Menu</button>
-                <h1 class="logo">Fast Food Restaurant</h1>
+                <h1 class="logo"><a href="../">Fast Food Restaurant</a></h1>
                 <nav class="header-link">
                     <ul class="navigation">
                         <li><a href="#">Combo</a></li>
@@ -25,7 +25,7 @@
                         <li><a href="#">Contact</a></li>
                         <li><a href="#">About Us</a></li>
                     </ul>
-                    <a href="#" class="cart-button">Cart( )</a>
+                    <a href="#" class="cart-button">My Cart</a>
                     <div class="login">
                         <a href="#" class="login-link">My Account</a>
                     </div>
@@ -48,20 +48,15 @@
             <div class="line"></div>
         </div>
         <form>
-            <c:forEach items="cds" var="cds">
+            <c:forEach items="${requestScope.cds}" var="cds">
                     <div class="cart-content">
-                        <img src="../${cds.Product.ProductImage.url}">
-                        <h2 class="cart-name" name="productID" value="1">${cds.product.productName}</h2>
-                        <div class="input-wrapper">
-                            <button id="decrease-btn">-</button>
-                            <input  id="number-input" value="${cds.quantity}">
-                            <button id="increase-btn">+</button>
-                        </div>
-                        <a class="delete-button" href=""><img src="../../images/icon/delete.png"></a>
+                        <img src="../${cds.p.productImage.url}">
+                        <h2 class="cart-name" name="productID" value="${cds.p.productID}">${cds.p.productName}</h2>
+                        <input  class="number-input" value="${cds.quantity}">
+                        <a class="delete-button" href="../delete?pid=${cds.p.productID}"><img src="../images/icon/delete.png"></a>
                     </div>
-
             </c:forEach>
-            <button class="buyNow" type="submit">Buy now</button>
+            <button class="buy" type="submit">Buy now</button>
         </form> 
                 
         <div class="footer">
@@ -81,7 +76,7 @@
                 Date of issue: Oct 29 1998 by Ha Noi Tax Department
             </p>
         </div>
-        <script src="../../javascript/cart.js"></script>
-         <script src="../../javascript/home.js"></script>
+        <script src="../javascript/cart.js"></script>
+         <script src="../javascript/home.js"></script>
     </body>
 </html>

@@ -12,12 +12,37 @@
         <servlet-class>controller.customerController.CartController</servlet-class>
     </servlet>
     <servlet>
+
         <servlet-name>ChangeProfile</servlet-name>
         <servlet-class>controller.customerController.ChangeProfile</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ProfileController</servlet-name>
         <servlet-class>controller.customerController.ProfileController</servlet-class>
+
+        <servlet-name>CartDeleteController</servlet-name>
+        <servlet-class>controller.customerController.DeleteCartController</servlet-class>
+    </servlet>
+    <servlet>
+
+        <servlet-name>BlogController</servlet-name>
+        <servlet-class>MainController.BlogController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BlogDetail</servlet-name>
+        <servlet-class>MainController.BlogDetail</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BlogSettings</servlet-name>
+        <servlet-class>MainController.BlogSettings</servlet-class>
+
+        <servlet-name>ActiveUsersServlet</servlet-name>
+        <servlet-class>controller.guestController.ActiveUsersServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RegisterServlet</servlet-name>
+        <servlet-class>controller.guestController.RegisterServlet</servlet-class>
+
     </servlet>
     <servlet-mapping>
         <servlet-name>home</servlet-name>
@@ -27,6 +52,7 @@
         <servlet-name>CartController</servlet-name>
         <url-pattern>/home/cart</url-pattern>
     </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>ChangeProfile</servlet-name>
         <url-pattern>/changeProfile</url-pattern>
@@ -34,6 +60,48 @@
     <servlet-mapping>
         <servlet-name>ProfileController</servlet-name>
         <url-pattern>/profile</url-pattern>
+
+    <servlet>
+        <servlet-name>Login</servlet-name>
+        <servlet-class>controller.guestController.Login</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Verification</servlet-name>
+        <servlet-class>controller.guestController.Verification</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Verification</servlet-name>
+        <url-pattern>/verification</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CartDeleteController</servlet-name>
+        <url-pattern>/delete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+
+        <servlet-name>BlogController</servlet-name>
+        <url-pattern>/BlogController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlogDetail</servlet-name>
+        <url-pattern>/BlogDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlogSettings</servlet-name>
+        <url-pattern>/BlogSettings</url-pattern>
+
+        <servlet-name>ActiveUsersServlet</servlet-name>
+        <url-pattern>/active</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegisterServlet</servlet-name>
+        <url-pattern>/register</url-pattern>
+
+
     </servlet-mapping>
     <session-config>
         <session-timeout>
