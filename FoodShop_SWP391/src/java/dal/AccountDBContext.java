@@ -33,16 +33,15 @@ public class AccountDBContext extends DBContext<Account> {
             rs = stm.executeQuery();
             while (rs.next()) {
                 Account a = new Account();
-                a.setAccountID(rs.getInt("accountID"));
-                a.setEmail(rs.getString("email"));
-                a.setPassword(rs.getString("password"));
-                Role role = new Role();
-                role.setRoleID(rs.getInt("roleID"));
-                a.setRole(role);
-                a.setFullName(rs.getString("fullname"));
-                a.setPhoneNumber("phonenum");
-                a.setAddress("address");
-                a.setStatus(rs.getBoolean("status"));
+
+                a.setEmail(email);
+                a.setPassword(password);
+                a.setAccountID(rs.getInt(1));
+                a.setRole(new RoleDBContext().get(rs.getInt(4)));
+                a.setFullName(rs.getNString(5));
+                a.setPhoneNumber(rs.getString(6));
+                a.setStatus(rs.getBoolean(7));
+                
                 return a;
             }
         } catch (SQLException e) {
@@ -156,7 +155,39 @@ public class AccountDBContext extends DBContext<Account> {
 
     @Override
     public Account get(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            String sql = "select * from account where accountID = ?";
+            stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                Account a = new Account();
+                a.setAccountID(id);
+                a.setEmail(rs.getString(2));
+                a.setPassword(rs.getString(3));
+                a.setRole(new RoleDBContext().get(rs.getInt(4)));
+                a.setFullName(rs.getString(5));
+                a.setPhoneNumber(rs.getString(6));
+                a.setAddress(rs.getString(7));
+                a.setStatus(rs.getBoolean(8));
+                return a;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+//        finally {
+//            try {
+//                rs.close();
+//                stm.close();
+//                connection.close();
+//            } catch (SQLException ex) {
+//                Logger.getLogger(CategoryDBContext.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
+        return null;
     }
 
     @Override
