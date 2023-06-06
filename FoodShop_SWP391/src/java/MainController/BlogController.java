@@ -12,6 +12,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
+import models.Blog;
 
 /**
  *
@@ -60,7 +62,8 @@ public class BlogController extends HttpServlet {
         //processRequest(request, response);
         HttpSession session = request.getSession();
         BlogDAO blogdao = new BlogDAO();
-        session.setAttribute("blogs", blogdao.all());
+        ArrayList<Blog> blogs = blogdao.all();
+        session.setAttribute("blogs", blogs);
         request.getRequestDispatcher("views/BlogList.jsp").forward(request, response);
     }
 

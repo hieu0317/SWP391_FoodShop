@@ -66,17 +66,6 @@ public class ChangeProfile extends HttpServlet {
         System.out.println("Bat dau lay thong tin de thay doi ");
         AccountDBContext accountDBContext = new AccountDBContext() {};
         Account accounts = accountDBContext.getAccountByID(acc.getAccountID());
-
-        HttpSession session = request.getSession(); //goi bien session
-        int accountID = (int) session.getAttribute("accountID"); 
-//session la bien cuc bo => luu bien|tai nguyen co han
-        System.out.println("Bat dau lay thong tin");
-        AccountDBContext accountDBContext = new AccountDBContext(){};
-        ArrayList<Account> accounts = accountDBContext.getAllAccounts(accountID);//2 = accID
-        for (Account account : accounts) {
-            System.out.println("Account ID: " + account.getAccountID());
-        }
-
         request.setAttribute("accounts", accounts);
             request.getRequestDispatcher("/views/account/changeProfile.jsp").forward(request, response);
     }
@@ -98,8 +87,6 @@ public class ChangeProfile extends HttpServlet {
         String phone = request.getParameter("phone");
         String address = request.getParameter("address");
         AccountDBContext accountDBContext = new AccountDBContext() {};
-        String account =request.getParameter("account");
-        System.out.println(account);
         accountDBContext.updateProfile(acc.getAccountID(),acc.getEmail(),acc.getPassword(), fullname, phone, address);
         response.sendRedirect(request.getContextPath() + "/profile");
     }

@@ -54,7 +54,7 @@
                             <div class="row gx-5">
                                 <div class="col-md-6 mb-4">
                                     <div class="bg-image hover-overlay ripple shadow-2-strong rounded-5" data-mdb-ripple-color="light">
-                                        <img src="./images/blogimage/${b.getBlogImage().getUrl()}" class="img-fluid" />
+                                        <img src="images/chicken/fried-chicken/${b.getBlogImage().getUrl()}" class="img-fluid" />
                                         <a href="#!">
                                             <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
                                         </a>

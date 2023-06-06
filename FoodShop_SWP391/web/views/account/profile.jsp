@@ -19,11 +19,7 @@
         
         <form action="getProfile" method="get">
 
-         
-
-
-            <c:forEach items="${requestScope.accounts}" var="c">           
-<%--truy cap vao thuoc tinh accounts duoc truyen tu servelet sang / c = ten de phan biet. --%>
+   
 
                 <section style="background-color: #eee;">
                     <div class="container py-5">
@@ -32,12 +28,7 @@
                                 <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
                                     <ol class="breadcrumb mb-0">
 
-                                        <li class="breadcrumb-item"><a href="home">Home</a></li>
-                                        <li class="breadcrumb-item"><a href="#">User</a></li>
-
-                                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                        
-
+                                        <li class="breadcrumb-item"><a href="home">Home</a></li>                                        
                                         <li class="breadcrumb-item active" aria-current="page">User Profile</li>
                                     </ol>
                                 </nav>

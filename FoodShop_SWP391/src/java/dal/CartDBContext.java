@@ -31,13 +31,12 @@ public class CartDBContext extends DBContext<CartDetail>{
 //                    + "		inner join Product p on ca.productID = p.productID\n"
 //                    + "         inner join ProductImage pImg on pImg.productID = p.productID\n"
 //                    + "         where ca.accountID = ?";
-            String sql = "SELECT c.productID, p.productName, pi.url, SUM(c.quantity) AS quantity\n"
-                    + "FROM cartDetail c\n"
-                    + "JOIN productImage pi ON c.productID = pi.productID\n"
-                    + "JOIN product p ON c.productID = p.productID\n"
-                    + "WHERE c.accountID = ? AND c.status = 1\n"
-                    + "GROUP BY c.productID, p.productName, pi.url\n"
-                    + "ORDER BY quantity DESC;";
+            String sql = "SELECT c.productID, p.productName, P.price,pi.url, SUM(c.quantity) AS quantity FROM cartDetail c\n"
+                    + "         INNER JOIN productImage pi ON c.productID = pi.productID\n"
+                    + "         INNER JOIN product p ON c.productID = p.productID\n"
+                    + "         WHERE c.accountID = ? AND c.status = 1\n"
+                    + "         GROUP BY c.productID, p.productName, P.price,pi.url\n"
+                    + "         ORDER BY quantity DESC;";
             stm = connection.prepareStatement(sql);
             stm.setInt(1, id);
             rs = stm.executeQuery();
@@ -47,6 +46,7 @@ public class CartDBContext extends DBContext<CartDetail>{
                 a.setAccountID(id);
                 p.setProductID(rs.getInt("productID"));
                 p.setProductName(rs.getString("productName"));
+                p.setPrice(rs.getInt("price"));
                 ProductImage pImg = new ProductImage();
                 pImg.setUrl(rs.getString("url"));
                 p.setProductImage(pImg);
