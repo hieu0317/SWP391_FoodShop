@@ -155,9 +155,12 @@ public class ProductDBContext extends DBContext<Product> {
         PreparedStatement stm = null;
         ResultSet rs = null;
         try {
-            String sql = "select p.productID, p.productName, p.price, p.status, "
-                    + "img.imageID, img.url from product p inner join productImage img\n"
-                    + "on p.productID = img.productID";
+            String sql = "select p.productID, p.productName,c.categoryID,c.categoryName,"
+                    + " p.price, p.status, img.imageID, img.url from product p \n"
+                    + "inner join productImage img\n"
+                    + "on p.productID = img.productID\n"
+                    + "inner join category c\n"
+                    + "on c.categoryID = p.productID";
             stm = connection.prepareStatement(sql);
             rs = stm.executeQuery();
             while (rs.next()) {
@@ -169,6 +172,10 @@ public class ProductDBContext extends DBContext<Product> {
                 ProductImage pImg = new ProductImage();
                 pImg.setImageID(rs.getInt("imageID"));
                 pImg.setUrl(rs.getString("url"));
+                Category c = new Category();
+                c.setCategoryID(rs.getInt("categoryID"));
+                c.setCategoryName(rs.getString("categoryName"));
+                p.setCategory(c);
                 p.setProductImage(pImg);
                 products.add(p);
             }

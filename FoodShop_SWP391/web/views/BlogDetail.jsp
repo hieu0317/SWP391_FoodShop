@@ -33,7 +33,7 @@
 
 
                         <div class="image-block">
-                            <img width="800px" src="./images/blogimage/${requestScope.blog.getBlogImage().getUrl()}" class="img-responsive" >
+                            <img width="800px" src="images/chicken/fried-chicken/${requestScope.blog.getBlogImage().getUrl()}" class="img-responsive" >
                         </div>
 
                         <p>${requestScope.blog.getBlogDetail()}

@@ -31,14 +31,14 @@
                             <li><a href="ProductSettings">Product Settings</a></li>
                             </c:if>
                     </ul>
-
-                    <a href="home/cart" class="cart-button">My Cart</a>
                     <c:if test="${not empty acc.accountID}">
+                         <a href="home/cart" class="cart-button">My Cart</a>
                         <div class="login">
                             <a href="profile" class="login-link">My Account</a>
                         </div>
                     </c:if>
                      <c:if test="${empty acc.accountID}">
+                         <a href="login" class="cart-button">My Cart</a>
                         <div class="login">
                             <a href="login" class="login-link">Sign in</a>
                         </div>

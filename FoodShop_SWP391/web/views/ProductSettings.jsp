@@ -18,7 +18,7 @@
         <%@include file="../component/navbar.jsp" %>
         <div style="margin-top: 120px" class="container">
             <br>
-            <a href="ProductAdd.jsp"><button class="btn btn-primary">Add Product</button></a>
+            <a href="views/ProductAdd.jsp"><button class="btn btn-primary">Add Product</button></a>
             <table  class="table table-dark table-striped">
 
                 <thead>
@@ -38,7 +38,7 @@
                                 <td>${p.getProductID()}</td>
                                 <td>${p.getProductName()}</td>
                                 <td>${p.getPrice()}</td>
-                                <td>${p.getCategory().getCategoryName()}%</td>
+                                <td>${p.getCategory().getCategoryName()}</td>
                                 <td>${p.getDetails()}</td>
                                 <td><a href=""><button style="margin: 1px" class="btn btn-primary">Update</button></a>
                                     <a href="ProductSetting?id=${p.getProductID()}"><button style="margin: 1px" class="btn btn-danger">Delete</button></a></td>

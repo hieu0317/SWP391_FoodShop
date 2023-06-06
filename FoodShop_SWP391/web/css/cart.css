@@ -178,11 +178,17 @@ body {
 .number-input {
     position: absolute;
     top:57px;
-    left:65%;
+    left:55%;
     width: 80px;
     height: 40px;
     text-align: center;
     align-items: center;
+}
+
+.price {
+    position: absolute;
+    top:40px;
+    left:67%;
 }
   
   button {
@@ -237,6 +243,35 @@ body {
     position: absolute;
     top:60px;
     right:5%;
+}
+
+.cart-titles {
+    position: relative;
+    box-shadow: 0 5px 4px rgba(0, 0, 0, 0.2);
+    display: flex;
+    background-color: #f1f1f1;
+    padding-right: 30px;
+    width: 78%;
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+.cart-titles h2{
+    color: red;
+}
+
+.cart-titles h2:first-child {
+    margin-left: 32%
+}
+
+.cart-titles h2:nth-child(2) {
+    position: absolute;
+    left: 54%;
+}
+
+.cart-titles h2:last-child{
+    position: absolute;
+    left: 70%;
 }
 
 

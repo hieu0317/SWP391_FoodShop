@@ -47,12 +47,19 @@
             <h1>CART DETAIL</h1>
             <div class="line"></div>
         </div>
+        <div class="cart-titles">
+            <h2>Name</h2>
+            <h2>Quantity</h2>
+            <h2>Price</h2>
+        </div>
         <form>
             <c:forEach items="${requestScope.cds}" var="cds">
                     <div class="cart-content">
                         <img src="../${cds.p.productImage.url}">
                         <h2 class="cart-name" name="productID" value="${cds.p.productID}">${cds.p.productName}</h2>
                         <input  class="number-input" value="${cds.quantity}">
+                        <c:set var="total" value="${cds.quantity * cds.p.price}" />
+                        <h2 class="price" name="price" value="${total}">${total} VND</h2>
                         <a class="delete-button" href="../delete?pid=${cds.p.productID}"><img src="../images/icon/delete.png"></a>
                     </div>
             </c:forEach>
