@@ -21,6 +21,25 @@ import models.ProductImage;
  */
 public class CartDBContext extends DBContext<CartDetail>{
     
+    public void deleteCartByAccountID(int id){
+        PreparedStatement stm = null;
+        try {
+            String sql = "DELETE FROM cartDetail WHERE accountID = ?";
+            stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CartDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                stm.close();
+//                connection.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(CartDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
     public ArrayList<CartDetail> getCartByID(int id){
          ArrayList<CartDetail> cds = new ArrayList<>();
         PreparedStatement stm = null;
@@ -64,7 +83,7 @@ public class CartDBContext extends DBContext<CartDetail>{
             try {
                 rs.close();
                 stm.close();
-                connection.close();
+//                connection.close();
             } catch (SQLException ex) {
                 Logger.getLogger(CartDBContext.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -115,7 +134,7 @@ public class CartDBContext extends DBContext<CartDetail>{
         } finally {
             try {
                 stm.close();
-                connection.close();
+//                connection.close();
             } catch (SQLException ex) {
                 Logger.getLogger(CartDBContext.class.getName()).log(Level.SEVERE, null, ex);
             }

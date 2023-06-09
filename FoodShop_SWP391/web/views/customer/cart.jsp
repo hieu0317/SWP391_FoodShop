@@ -48,22 +48,31 @@
             <div class="line"></div>
         </div>
         <div class="cart-titles">
+            <h2>Product</h2>
             <h2>Name</h2>
             <h2>Quantity</h2>
             <h2>Price</h2>
         </div>
-        <form>
-            <c:forEach items="${requestScope.cds}" var="cds">
+        <form action="cart" method="post">
+            <c:forEach items="${requestScope.cds}" var="cds">        
                     <div class="cart-content">
                         <img src="../${cds.p.productImage.url}">
-                        <h2 class="cart-name" name="productID" value="${cds.p.productID}">${cds.p.productName}</h2>
-                        <input  class="number-input" value="${cds.quantity}">
-                        <c:set var="total" value="${cds.quantity * cds.p.price}" />
-                        <h2 class="price" name="price" value="${total}">${total} VND</h2>
-                        <a class="delete-button" href="../delete?pid=${cds.p.productID}"><img src="../images/icon/delete.png"></a>
+                        <input type="hidden" name="productID" value="${cds.p.productID}">
+                        <h2 class="cart-name">${cds.p.productName}</h2>
+                        <input  type="number" class="number-input" min="1" name="quantity" value="${cds.quantity}" onchange="updatePrice()">
+                        <h2 class="price" name="price" value="${cds.p.price}">${cds.p.price} VND</h2>
+                        <a class="delete-button" onchange="updatecart()" href="../delete?pid=${cds.p.productID}"><img src="../images/icon/delete.png"></a>
+                         <c:set var="cartTotal" value="${cartTotal + cdsp.p.price * cds.quantity}" />
                     </div>
             </c:forEach>
-            <button class="buy" type="submit">Buy now</button>
+             <div class="cart-total" name="total">
+                            <strong class="cart-total-title">Total:</strong>
+                            <span class="cart-total-price"></span>
+            </div>
+            <div class="button">
+                <a href="../">Cancle</a>
+                <button class="buy" type="submit">Buy now</button>
+            </div>
         </form> 
                 
         <div class="footer">

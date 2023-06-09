@@ -17,6 +17,18 @@ public class CartDetail {
     private int quantity;
     private boolean status;
 
+    public CartDetail( Account account, Product p, int quantity, boolean status) {
+        this.account = account;
+        this.p = p;
+        this.quantity = quantity;
+        this.status = status;
+    }
+
+    public CartDetail() {
+    }
+
+    
+    
     public int getCartID() {
         return cartID;
     }

@@ -5,9 +5,12 @@ body {
   }
   
   header {
+/*    margin-left:10px;*/
     position: sticky;
     top: 0;
     background-color: #f8f8f8;
+    width: 100%;
+    height:60px;
     padding: 1px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     z-index: 1;
@@ -16,7 +19,7 @@ body {
   .navbar {
     position: relative;
     display: flex;
-     justify-content: space-between; 
+    justify-content: space-between; 
     align-items: center;
   }
   
@@ -33,13 +36,9 @@ body {
   }
   
   .logo {
-/*     position: absolute;
-    top: 4px;
-    left: 43%; 
-    margin: 0;*/
     color: black;
     text-decoration: none;
-    margin-left: 36%;
+    margin-left: 38%;
     font-size: 24px;
   }
   
@@ -96,7 +95,7 @@ body {
 }
 
 .header-link {
-  margin-left: 15%;
+  margin-left: 10%;
   display: flex;
 }
 
@@ -156,7 +155,6 @@ body {
 .slide img {
   width: 100%;
   height: 100%;
-
 }
 
 .slide:nth-child(1) {
@@ -201,11 +199,7 @@ body {
 }
 
 .footer {
-/*   position: fixed;
-  bottom: 0;
-  right:0;
-  left:0; */
- margin-top: 380px;
+  margin-top: 380px;
   background-color: #f8f8f8;
   display: flex;
   flex-direction: row;
@@ -233,14 +227,12 @@ body {
 }
 
 
-
 .category-content div , .recFood-content div{
     padding: 0 0 30px 0;
     margin-bottom: 50px;
     margin-left: 30px;
     height: 300px;
-    width: 350px;
-/*    border: 10px solid rgba(170, 165, 165,0.5);*/
+    width: 330px;
     background-color: #fff;
     box-shadow: 0 5px 4px rgba(0, 0, 0, 0.2);
 }
@@ -268,11 +260,6 @@ a h2{
     color: black;
     text-decoration: none; 
 }
-
-/*a h2:hover {
-  color: black;
-  text-decoration: none; 
-}*/
 
 .sidebar ul li a{
     color: black;
