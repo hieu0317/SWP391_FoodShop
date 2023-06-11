@@ -26,9 +26,9 @@
                         <li><a href="#">Contact</a></li>
                         <li><a href="#">About Us</a></li>
                     </ul>
-                    <a href="#" class="cart-button">My Cart</a>
+                    <a href="../cart" class="cart-button">My Cart</a>
                     <div class="login">
-                        <a href="#" class="login-link">My Account</a>
+                        <a href="../../profile" class="login-link">Hello-${acc.getFullName()}</a>
                     </div>
                 </nav>
             </div>
@@ -49,38 +49,50 @@
                 <h1>Payment</h1>
                 <div class="line"></div>
             </div>
-            <form>
+            <form id="myForm" action="cartContact" method="post">
                 <div class="payment-content">
                     <div class="information">
                         <h2> Enter your information</h2>
-                        <div>
-                            <p>Name<span>*</span></p> 
-                            <input class="name" name="name" type="text"> 
+                        <div class="input-group">
+                            <label>Name<span>*</span></label> 
+                            <input class="name" name="name" type="text" value="${acc.getFullName()}" required> 
+                            <i class="fas fa-check-circle"></i>
+                            <i class="fas fa-exclamation-circle"></i>
+                            <p>Error Message</p>
                         </div> 
 
-                        <div>
-                            <p>Email<span>*</span></p> 
-                            <input class="email" name="email" type="text"> 
+                        <div class="input-group">
+                            <label>Email<span>*</span></label> 
+                            <input class="email" name="email" type="text" value="${acc.getEmail()}" required> 
+                            <i class="fas fa-check-circle"></i>
+                            <i class="fas fa-exclamation-circle"></i>
+                            <p>Error Message</p>
                         </div> 
 
-                        <div>
-                            <p>Phone number<span>*</span></p> 
-                            <input class="phonenum" name="phonenum" type="text">
+                        <div class="input-group">
+                            <label>Phone number<span>*</span></label> 
+                            <input class="phonenum" name="phonenum" type="text" value="${acc.getPhoneNumber()}" required>
+                            <i class="fas fa-check-circle"></i>
+                            <i class="fas fa-exclamation-circle"></i>
+                            <p>Error Message</p>
                         </div>
 
-                        <div>
-                            <p>Address<span>*</span></p> 
-                            <input class="address" name="address" type="text"> 
+                        <div class="input-group">
+                            <label>Address<span>*</span></label> 
+                            <input class="address" name="address" type="text" value="${acc.getAddress()}" required>
+                            <i class="fas fa-check-circle"></i>
+                            <i class="fas fa-exclamation-circle"></i>
+                            <p>Error Message</p>
                         </div>
 
                         <div>
                             <h3>Payment method<span>*</span></h3>
-                            Cash on delivery <input type="radio" name="method" value="COD"/>
+                            Cash on delivery <input type="radio" name="method" value="COD" required>
                         </div>
 
                         <div>
-                            <p>Note</p>
-                            <textarea name="note"></textarea>
+                            <h3>Note</h3>
+                            <textarea name="note" ></textarea>
                         </div>
                     </div>
                     <div class="review-order">
@@ -108,6 +120,7 @@
                                 </c:forEach>
                             </tbody>
                         </table>
+                        <input type="hidden" name="total" value="${orderTotal}">
                         <h4>Total: ${orderTotal} VNĐ</h4>
                     </div>
                 </div>
@@ -136,5 +149,6 @@
             </p>
         </div>
         <script src="../../javascript/home.js"></script>
+        <script src="../../javascript/cartContact.js"></script>
     </body>
 </html>

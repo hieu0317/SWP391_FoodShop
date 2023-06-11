@@ -15,11 +15,51 @@ public class Order {
     private Account account;
     private OrderInfo orderInfo;
     private OrderStatus orderStatus;
+    private String customerName;
+    private String phoneNumber;
+    private String emaill;
     private int total;
     private Date date;
     private String address;
     private String note;
+    private String paymentMethod;
 
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+    
+    
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getEmaill() {
+        return emaill;
+    }
+
+    public void setEmaill(String emaill) {
+        this.emaill = emaill;
+    }
+    
+    
+    
     public Account getAccount() {
         return account;
     }

@@ -120,7 +120,7 @@ public class AccountDBContext extends DBContext<Account> {
                 a.setFullName(rs.getNString(5));
                 a.setPhoneNumber(rs.getString(6));
                 a.setStatus(rs.getBoolean(7));
-
+                a.setAddress(rs.getString("address"));
                 return a;
             }
         } catch (SQLException e) {

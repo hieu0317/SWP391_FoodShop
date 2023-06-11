@@ -13,16 +13,16 @@ import java.util.ArrayList;
 public class OrderInfo {
     
     private int orderID;
-    private ArrayList<Product> products;
+    private Product product;
     private int price;
-    private int quantiy;
+    private int quantity;
 
-    public int getQuantiy() {
-        return quantiy;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setQuantiy(int quantiy) {
-        this.quantiy = quantiy;
+    public void setQuantity(int quantiy) {
+        this.quantity = quantiy;
     }
 
     public int getOrderID() {
@@ -33,14 +33,15 @@ public class OrderInfo {
         this.orderID = orderID;
     }
 
-    public ArrayList<Product> getProducts() {
-        return products;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProducts(ArrayList<Product> products) {
-        this.products = products;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
+    
     public int getPrice() {
         return price;
     }
