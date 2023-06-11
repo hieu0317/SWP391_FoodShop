@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.guestController;
+package controller.customerController;
 
 import dal.AccountDBContext;
 import java.io.IOException;
@@ -11,12 +11,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import models.Account;
 
 /**
  *
- * @author Asus
+ * @author ngxso
  */
-public class ActiveUsersServlet extends HttpServlet {
+public class ResetPass extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -27,21 +28,10 @@ public class ActiveUsersServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected boolean processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        AccountDBContext uDao = new AccountDBContext();
-        HttpSession session = request.getSession();
-        String email = (String) session.getAttribute("email");
-        String code = (String) session.getAttribute("code");
 
-        String trueCode = request.getParameter("validateCode");
-
-        if (trueCode.equals(code)) {
-            return true;
-
-        }
-        return false;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -56,7 +46,8 @@ public class ActiveUsersServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        request.getRequestDispatcher("views/customer/resetPass.jsp").forward(request, response);
+
     }
 
     /**
@@ -70,19 +61,20 @@ public class ActiveUsersServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if (processRequest(request, response)) {
-            AccountDBContext uDao = new AccountDBContext();
+        String email = request.getParameter("email");
+        String pass = request.getParameter("pass");
+        String repass = request.getParameter("repass");
+        if (!pass.equals(repass)) {
+            request.setAttribute("error", "New pass and Re-pass is not match!!");
+            request.getRequestDispatcher("resetPass.jsp").forward(request, response);
+        } else {      
             HttpSession session = request.getSession();
-            String email = (String) session.getAttribute("email");
-            String pass = (String) session.getAttribute("pass");
-            String name = (String) session.getAttribute("fullname");
-            String address = (String) session.getAttribute("address");
-            String phoneNumber = (String) session.getAttribute("phone");
-            uDao.checkSignup(email, pass, name, phoneNumber, address);
-            response.sendRedirect("login");
-        } else {
-            request.setAttribute("error", "Your verification code is wrong!");
-            request.getRequestDispatcher("views/guest/registerCodeMail.jsp").forward(request, response);
+            String myemail = (String) session.getAttribute("email");
+            AccountDBContext acc = new AccountDBContext();
+            acc.updateUserPass(myemail, pass);
+
+            request.setAttribute("mess", "Reset Password successful. Please login again");
+            request.getRequestDispatcher("views/guest/login.jsp").forward(request, response);
         }
     }
 

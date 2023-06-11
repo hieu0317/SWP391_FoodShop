@@ -52,6 +52,14 @@
         <servlet-class>controller.guestController.Logout</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>ForgotPass</servlet-name>
+        <servlet-class>controller.customerController.ForgotPass</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ResetPass</servlet-name>
+        <servlet-class>controller.customerController.ResetPass</servlet-class>
+</servlet>
+      <servlet>
         <servlet-name>cartContact</servlet-name>
         <servlet-class>controller.customerController.CartContactController</servlet-class>
     </servlet>
@@ -120,6 +128,14 @@
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>ForgotPass</servlet-name>
+        <url-pattern>/forgotpass</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResetPass</servlet-name>
+        <url-pattern>/repass</url-pattern>
+ </servlet-mapping>
+  <servlet-mapping>
         <servlet-name>cartContact</servlet-name>
         <url-pattern>/home/cart/cartContact</url-pattern>
     </servlet-mapping>
