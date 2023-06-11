@@ -18,9 +18,12 @@ import jakarta.servlet.http.HttpServletRequest;
      *
      * @param request servlet request
      * @param field request parameter name
-     * @param label Label
+     * @param placeholder
+     * @param REGEX
+     * @param errorMatches
      * @param min minimum length
      * @param max maximum length
+     * @param defaultValue
      * @return Valid string
      */
     public static String getStringParam(HttpServletRequest request, String field, String placeholder,final String REGEX,String errorMatches, int min, int max,
@@ -59,9 +62,10 @@ import jakarta.servlet.http.HttpServletRequest;
      *
      * @param request servlet request
      * @param field request parameter name
-     * @param label Label
+     * @param placeholder
      * @param min minimum number
      * @param max maximum number
+     * @param defaultValue
      * @return Valid integer
      */
     public static Integer getIntParams(HttpServletRequest request, String field, String placeholder, int min, int max,
@@ -104,9 +108,10 @@ import jakarta.servlet.http.HttpServletRequest;
      *
      * @param request servlet request
      * @param field request parameter name
-     * @param label Label
+     * @param placeholder
      * @param min minimum number
      * @param max maximum number
+     * @param defaultValue
      * @return Valid float
      */
     public static Float getFloatParams(HttpServletRequest request, String field, String placeholder, float min, float max,

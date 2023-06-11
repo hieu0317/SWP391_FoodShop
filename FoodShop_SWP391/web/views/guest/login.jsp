@@ -5,7 +5,7 @@
 
     <head>
         <meta charset="UTF-8">
-        <title>Login</title>
+        <title>Login Page</title>
         <!---<title> Responsive Registration Form | CodingLab </title>--->
         <link rel="stylesheet" href="css/login.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,31 +17,46 @@
             <div class="title">Login</div>
             <br>
             <div style="color: red;">${error}</div>
+            <div style="color: green;">${mess}</div>
             <div class="content">
-                <form action="login" method="post">
+                <form id="form-1" action="login" method="post">
                     <div class="user-details">
                         <div class="input-box">
-                            <span class="details">Username</span>
-                            <input type="text" name="email" placeholder="Enter your email" required>
+                            <span class="details">Email<span style="color: red"> *</span></span>
+                            <input id="email" type="text" name="email" placeholder="Enter your email" class="form-control"required>
+                            <span class="form-message"></span>
                         </div>
                         <div class="input-box">
-                            <span class="details">Password</span>
-                            <input type="password" name="password" placeholder="Enter your password" required>
+                            <span class="details">Password<span style="color: red"> *</span></span>
+                            <input id="pass" type="password" name="password" placeholder="Enter your password" class="form-control"required>
+                            <span class="form-message"></span>
                         </div>
                     </div>
 
                     <div class="button">
                         <input type="submit" value="Login">
                     </div>
+
                     <div>
+                        <a href="forgotpass" style="color:#0000ee;">Forgot Your Password?</a>
                         <p>Don't have account ? <a href="register">Register</a> 
-                                <a href="home"><button type="button" class="color-button">Cancel</button> </a></p>
+                            <a href="home"><button type="button" class="color-button">Cancel</button> </a></p>
                     </div>
                 </form>
             </div>
         </div>
-    </form>
+            <script src="../../javascript/validate.js"></script>
+        <script>
+            Validator({
+                form: "#form-1",
+                errrorSelector: ".form-message",
+                rule: [
+                    Validator.isEmail("#email"),
+                    Validator.isPassword('#pass')
+                ]
+            });
+        </script>
 
-</body>
+    </body>
 
 </html>
