@@ -45,11 +45,6 @@ public class CartDBContext extends DBContext<CartDetail>{
         PreparedStatement stm = null;
         ResultSet rs = null;
         try {
-//            String sql = "select ca.cartID, ca.accountID, p.productID, p.productName, ca.quantity,\n"
-//                    + "   p.price, pImg.url, pImg.imageID, ca.status from cartDetail ca \n"
-//                    + "		inner join Product p on ca.productID = p.productID\n"
-//                    + "         inner join ProductImage pImg on pImg.productID = p.productID\n"
-//                    + "         where ca.accountID = ?";
             String sql = "SELECT c.productID, p.productName, P.price,pi.url, SUM(c.quantity) AS quantity FROM cartDetail c\n"
                     + "         INNER JOIN productImage pi ON c.productID = pi.productID\n"
                     + "         INNER JOIN product p ON c.productID = p.productID\n"

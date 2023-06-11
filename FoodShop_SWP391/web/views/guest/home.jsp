@@ -34,7 +34,7 @@
                     <c:if test="${not empty acc.accountID}">
                          <a href="home/cart" class="cart-button">My Cart</a>
                         <div class="login">
-                            <a href="profile" class="login-link">My Account</a>
+                            <a href="profile" class="login-link">Hello-${acc.getFullName()}</a>
                         </div>
                     </c:if>
                      <c:if test="${empty acc.accountID}">

@@ -12,9 +12,9 @@
     margin-bottom: 0px;
 }
 
-.information div{
+/*.information div{
     margin-bottom: 10px;
-}
+}*/
 
 .review-order{
     padding: 20px 50px;
@@ -91,7 +91,7 @@ span {
 .address,
 .email,
 textarea{
-    width:95%;
+    width:100%;
 }
 
 .continue input{
@@ -106,3 +106,48 @@ textarea{
     border: none;
     cursor: pointer;
 }
+
+.input-group {
+    width:95%;
+}
+
+.error input {
+    border:3px red solid;
+}
+
+.success input {
+    border:3px green solid;
+}
+
+/*.input-group i {
+     position:absolute;
+     right:10px;
+     top:35px;
+     visibility: hidden;
+ }*/
+
+
+ .success i.fa-check-circle{
+     visibility: visible;
+     color:green;
+ }
+
+ .error i.fa-exclamation-circle {
+    visibility: visible;
+    color:red;
+}
+
+
+ .input-group p {
+     font-size: 15px;
+     color:red;
+     visibility: hidden;
+ }
+/* 
+ .input-group {
+    position:relative;
+}*/
+ 
+ .error p {
+     visibility: visible;
+ }
