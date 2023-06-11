@@ -14,34 +14,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import models.Account;
 import models.CartDetail;
-import models.Product;
 
 /**
  *
  * @author admin
  */
-public class CartController extends HttpServlet{
+public class CartContactController extends HttpServlet{
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-        Account acc = (Account) session.getAttribute("acc");
-        String[] productID = req.getParameterValues("productID");
-        String[] quantity = req.getParameterValues("quantity");
-        ArrayList<CartDetail> cds = new ArrayList<>();
-        for (int i = 0; i < productID.length; i++) {
-            int pID = Integer.parseInt(productID[i]);
-            Product p = new Product();
-            p.setProductID(pID);
-            int num = Integer.parseInt(quantity[i]);
-            cds.add(new CartDetail(acc,p,num,true));
-        }
-        CartDBContext cdb = new CartDBContext();
-        cdb.deleteCartByAccountID(acc.getAccountID());
-        for (CartDetail cd : cds) {
-            cdb.insert(cd);
-        }
-        resp.sendRedirect("cart/cartContact");
+        super.doPost(req, resp); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
 
     @Override
@@ -51,7 +33,8 @@ public class CartController extends HttpServlet{
         CartDBContext cDb = new CartDBContext();
         ArrayList<CartDetail> cds = cDb.getCartByID(acc.getAccountID());
         req.setAttribute("cds", cds);
-        req.getRequestDispatcher("../views/customer/cart.jsp").forward(req, resp);
+        req.getRequestDispatcher("../../views/customer/cartContact.jsp").forward(req, resp);
     }
+    
     
 }

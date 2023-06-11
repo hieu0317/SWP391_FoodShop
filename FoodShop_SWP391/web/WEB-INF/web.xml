@@ -58,6 +58,10 @@
     <servlet>
         <servlet-name>ResetPass</servlet-name>
         <servlet-class>controller.customerController.ResetPass</servlet-class>
+</servlet>
+      <servlet>
+        <servlet-name>cartContact</servlet-name>
+        <servlet-class>controller.customerController.CartContactController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>home</servlet-name>
@@ -130,6 +134,10 @@
     <servlet-mapping>
         <servlet-name>ResetPass</servlet-name>
         <url-pattern>/repass</url-pattern>
+ </servlet-mapping>
+  <servlet-mapping>
+        <servlet-name>cartContact</servlet-name>
+        <url-pattern>/home/cart/cartContact</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
