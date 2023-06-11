@@ -292,5 +292,49 @@ public class AccountDBContext extends DBContext<Account> {
     public ArrayList<Account> editAccount(String account) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    public ArrayList<Account> getListCustomer() {
+        ArrayList<Account> accList = new ArrayList<>();
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        
+        try {
+            String sql = "SELECT a.accountID, a.email, a.password, a.roleID, a.fullname, a.phonenum, a.address, a.status, r.roleName FROM Account a "
+                        + "INNER JOIN Role r ON a.roleID = r.roleID WHERE a.roleID = ?";
+            stm = connection.prepareStatement(sql);
+            stm.setInt(1, 1); // Loc theo roleID = 1
+            rs = stm.executeQuery();
+            
+            while(rs.next()){
+                Account acc = new Account();
+                acc.setAccountID(rs.getInt("accountID"));
+                acc.setEmail(rs.getString("email"));
+                acc.setPassword(rs.getString("password"));
+                
+                Role rl = new Role();
+                rl.setRoleID(rs.getInt("roleID"));
+                rl.setRoleName(rs.getString("roleName"));
+                
+                acc.setRole(rl);
+                acc.setFullName(rs.getString("fullName"));
+                acc.setAddress(rs.getString("address"));
+                acc.setStatus(rs.getBoolean("status"));
+                accList.add(acc);
+           }
+            System.out.println("Get all accounts success");
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if(stm != null){
+                    stm.close();
+                }
+            }  catch (SQLException ex) {
+            Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return accList;
+        }
 }
