@@ -2,11 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.guestController;
+package controller.customerController;
 
 import dal.AccountDBContext;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -14,9 +15,10 @@ import jakarta.servlet.http.HttpSession;
 
 /**
  *
- * @author Asus
+ * @author ngxso
  */
-public class ActiveUsersServlet extends HttpServlet {
+@WebServlet(name = "ActiveForgot", urlPatterns = {"/activeforgot"})
+public class ActiveForgot extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -24,6 +26,7 @@ public class ActiveUsersServlet extends HttpServlet {
      *
      * @param request servlet request
      * @param response servlet response
+     * @return 
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
@@ -71,18 +74,11 @@ public class ActiveUsersServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         if (processRequest(request, response)) {
-            AccountDBContext uDao = new AccountDBContext();
-            HttpSession session = request.getSession();
-            String email = (String) session.getAttribute("email");
-            String pass = (String) session.getAttribute("pass");
-            String name = (String) session.getAttribute("fullname");
-            String address = (String) session.getAttribute("address");
-            String phoneNumber = (String) session.getAttribute("phone");
-            uDao.checkSignup(email, pass, name, phoneNumber, address);
-            response.sendRedirect("login");
+            
+           response.sendRedirect("repass");
         } else {
             request.setAttribute("error", "Your verification code is wrong!");
-            request.getRequestDispatcher("views/guest/registerCodeMail.jsp").forward(request, response);
+            request.getRequestDispatcher("views/customer/forgotCodeMail.jsp").forward(request, response);
         }
     }
 

@@ -115,7 +115,7 @@ form .input-box span.details{
    letter-spacing: 1px;
    cursor: pointer;
    transition: all 0.3s ease;
-   background: linear-gradient(135deg, #c33764  , #1d2671);;
+   background: linear-gradient(135deg, #c33764  , #1d2671);
  }
  form .button input:hover{
   /* transform: scale(0.99); */
@@ -164,4 +164,10 @@ form .user-details .input-box{
 
 .color-button.active {
   background-color: green;
+}
+.input-box.invalid .form-message {
+    color: #f33a58;
+}
+.input-box.invalid .form-control {
+    color: #f33a58;
 }
