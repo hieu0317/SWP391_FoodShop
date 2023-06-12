@@ -17,19 +17,32 @@
         <header>
             <div class="navbar">
                 <button class="sidebar-button">&#9776; Menu</button>
-                <h1 class="logo">Fast Food Restaurant</h1>
+                <h1 class="logo"><a href="home">Fast Food Restaurant</a></h1>
                 <nav class="header-link">
                     <ul class="navigation">
                         <li><a href="#">Combo</a></li>
-                        <li><a href="#">Blog</a></li>
+                        <li><a href="BlogController">Blog</a></li>
                         <li><a href="#">Contact</a></li>
                         <li><a href="#">About Us</a></li>
+                            <c:if test="${sessionScope.acc.getRole().getRoleID()==4}">
+                            <li><a href="BlogSettings">Blog Settings</a></li>
+                            </c:if>
+                            <c:if test="${sessionScope.acc.getRole().getRoleID()==3}">
+                            <li><a href="ProductSettings">Product Settings</a></li>
+                            </c:if>
                     </ul>
-                    
-                    <a href="#" class="cart-button">Cart(${requestScope.total})</a>
-                    <div class="login">
-                        <a href="#" class="login-link">My Account</a>
-                    </div>
+                    <c:if test="${not empty acc.accountID}">
+                         <a href="home/cart" class="cart-button">My Cart</a>
+                        <div class="login">
+                            <a href="profile" class="login-link">My Account</a>
+                        </div>
+                    </c:if>
+                     <c:if test="${empty acc.accountID}">
+                         <a href="login" class="cart-button">My Cart</a>
+                        <div class="login">
+                            <a href="login" class="login-link">Sign in</a>
+                        </div>
+                    </c:if>
                 </nav>
             </div>
         </header>
@@ -86,7 +99,7 @@
         <div class="footer">
             <h2>2023 Fast Food Company. All rights reserved.</h2>
             <div class="links">
-                <a href="">
+                <a href="views/AboutUsPage.jsp">
                     <h2>About Us</h2>
                 </a>
                 <a href="">

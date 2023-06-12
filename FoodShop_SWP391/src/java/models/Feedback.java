@@ -11,10 +11,20 @@ import java.sql.Date;
  * @author admin
  */
 public class Feedback {
+
+    private int feedbackID;
     private Account account;
     private Product product;
     private String fcontent;
     private Date date;
+
+    public int getFeedbackID() {
+        return feedbackID;
+    }
+
+    public void setFeedbackID(int feedbackID) {
+        this.feedbackID = feedbackID;
+    }
 
     public Account getAccount() {
         return account;
@@ -47,6 +57,4 @@ public class Feedback {
     public void setDate(Date date) {
         this.date = date;
     }
-    
-    
 }
