@@ -29,15 +29,13 @@ function isFormValid(){
 
 function validateForm() {
     //USERNAME
-    if(usernameInput.value.trim().length <1 || usernameInput.value.trim().length > 15){
-        setError(usernameInput, 'Name must be min 5 and max 15 charecters');
+    if(usernameInput.value.trim().length < 2 || usernameInput.value.trim().length > 20){
+        setError(usernameInput, 'Name must be min 2 and max 20 charecters');
     }else {
         setSuccess(usernameInput);
     }
     //EMAIL
-    if(emailInput.value.trim()===''){
-        setError(emailInput, 'Provide email address');
-    }else if(isEmailValid(emailInput.value)){
+    if(isEmailValid(emailInput.value)){
         setSuccess(emailInput);
     }else{
         setError(emailInput, 'Provide valid email address');
@@ -50,7 +48,7 @@ function validateForm() {
     }
     //CONFIRM PASSWORD
     if(addressInput.value.length < 10 ){
-        setError(addressInput, 'Please input detailed address');
+        setError(addressInput, 'Please input detailed address like this: số 18 Lạc Long Quân, Hồ Tây, Hà Nội');
     }else {
         setSuccess(addressInput);
     }
