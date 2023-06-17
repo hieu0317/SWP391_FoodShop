@@ -85,6 +85,28 @@ public class CartContactController extends HttpServlet{
                 + "    <p>Thank you for using my service and if there is anything unsatisfying about the food, "
                 + "     please let us know.</p>\n"
                 + "    <p>Bon appetit " + cusName + " and have a good day!</p>\n"
+                + "    <p>Your Order:</p>\n"
+                + "    <table style=\"border=1px; border-collapse: collapse;\">\n"
+                + "         <thead style=\"background-color: burlywood\">\n"
+                + "             <tr>\n"
+                + "                <th style=\"text-align: center; border: none; padding: 8px;\">Name</th>\n"
+                + "                <th style=\"text-align: center; border: none; padding: 8px;\">Unit Price</th>\n"
+                + "                <th style=\"text-align: center; border: none; padding: 8px;\">Quantity</th>\n"
+                + "                <th style=\"text-align: center; border: none; padding: 8px;\">Into Money</th>\n"
+                + "             </tr>\n"
+                + "         </thead>\n"
+                + "         <tbody>\n";
+                for(CartDetail cd : cds) {
+                    message+= "  <tr>\n"
+                + "                 <td style=\"text-align: center; border: none; padding: 8px;\">" + cd.getP().getProductName() + "</td>\n"
+                + "                 <td style=\"text-align: center; border: none; padding: 8px;\">" + cd.getP().getPrice() + " VNĐ</td>\n"
+                + "                 <td style=\"text-align: center; border: none; padding: 8px;\">" + cd.getQuantity()+ "</td>\n"
+                + "                 <td style=\"text-align: center; border: none; padding: 8px;\">" + (cd.getP().getPrice() * cd.getQuantity())+ "VNĐ</td>\n"
+                + "             </tr>\n";
+                }
+                message += "         </tbody>\n"
+                + "    </table>"
+                + "    <h4>Total:" + order.getTotal() + "VNĐ</h4>"
                 + "    <h2 style=\"background: #00466a;margin: 0 auto;width: max-content;padding: 0 10px;color: #fff;border-radius: 4px;\"></h2>\n"
                 + "    <p style=\"font-size:0.9em;\">Regards,<br />FoodShop</p>\n"
                 + "    <hr style=\"border:none;border-top:1px solid #eee\" />\n"

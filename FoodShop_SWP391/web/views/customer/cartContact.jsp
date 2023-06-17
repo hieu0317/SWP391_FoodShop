@@ -79,7 +79,7 @@
 
                             <div class="input-group">
                                 <label>Address<span>*</span></label> 
-                                <input class="address" name="address" type="text" value="${acc.getAddress()}" required>
+                                <textarea class="address" name="address" type="text" value="${acc.getAddress()}" required></textarea>
                                 <i class="fas fa-check-circle"></i>
                                 <i class="fas fa-exclamation-circle"></i>
                                 <p>Error Message</p>
