@@ -4,7 +4,7 @@
     Author     : toden
 --%>
 
-<div class="footer">
+<footer>
     <h2>2023 Fast Food Company. All rights reserved.</h2>
     <div class="links">
         <a href="views/AboutUsPage.jsp">
@@ -20,4 +20,4 @@
         Tax code: 0100773885 </br>
         Date of issue: Oct 29 1998 by Ha Noi Tax Department
     </p>
-</div>
+</footer>

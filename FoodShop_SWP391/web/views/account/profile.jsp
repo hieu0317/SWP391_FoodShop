@@ -18,9 +18,6 @@
     <body>
         
         <form action="getProfile" method="get">
-
-   
-
                 <section style="background-color: #eee;">
                     <div class="container py-5">
                         <div class="row">
@@ -51,7 +48,7 @@
                                         <p class="text-muted mb-4"></p>
                                         <div class="d-flex justify-content-center mb-2" >
                                         
-                                            <a type="button" class="btn btn-outline-primary ms-1 " href="logout" >Logout</a>
+                                            <a type="button" class="btn btn-outline-primary ms-1 " href="" >My Order</a>
                                             
                                             
                                         </div>
@@ -107,15 +104,11 @@
                                         </div>
                                     </div>
                                 </div>
-
+                                <a type="button" class="btn btn-outline-primary ms-1 " href="logout">Logout</a>                
                             </div>
                         </div>
                     </div>
-
                 </section>
-
-
         </form>
-
     </body>
 </html>

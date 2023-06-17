@@ -28,7 +28,7 @@
                     </ul>
                     <a href="../cart" class="cart-button">My Cart</a>
                     <div class="login">
-                        <a href="../../profile" class="login-link">Hello-${acc.getFullName()}</a>
+                        <a href="../profile" class="login-link">Hello-${acc.getFullName()}</a>
                     </div>
                 </nav>
             </div>
@@ -70,9 +70,9 @@
             </tbody>
         </table>
         <h3>Total: ${requestScope.order.total} VNĐ</h3>
-        <div class="footer">
-            <h2>2023 Fast Food Company. All rights reserved.</h2>
-            <div class="links">
+        <footer>
+            <h2 class="col-md-5">2023 Fast Food Company. All rights reserved.</h2>
+            <div class="col-md-3 links">
                 <a href="">
                     <h2>About Us</h2>
                 </a>
@@ -80,13 +80,13 @@
                     <h2>Contact Us</h2>
                 </a>
             </div>
-            <p> 292 Ba Trieu St., Le Dai Hanh Ward, Hai Ba Trung Dist., Ha Noi City.</br>
+            <p class="col-md-4"> 292 Ba Trieu St., Le Dai Hanh Ward, Hai Ba Trung Dist., Ha Noi City.</br>
                 Tel: (028) 38489828 </br>
                 Email: lienhe@kfcvietnam.com.vn </br>
                 Tax code: 0100773885 </br>
                 Date of issue: Oct 29 1998 by Ha Noi Tax Department
             </p>
-        </div>
+        </footer>
         <script src="../../javascript/home.js"></script>
     </body>
 </html>
