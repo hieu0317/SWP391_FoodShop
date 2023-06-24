@@ -11,49 +11,59 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import models.Category;
+import models.Combo;
 
 /**
  *
- * @author admin
+ * @author ngxso
  */
-public class CategoryDBContext extends DBContext<Category> {
+public class ComboDBContext extends DBContext<Combo> {
 
     @Override
-    public void insert(Category model) {
+    public void insert(Combo model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void update(Category model) {
+    public void update(Combo model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void delete(Category model) {
+    public void delete(Combo model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public Category get(int id) {
+    public Combo get(int id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public ArrayList<Category> all() {
-        ArrayList<Category> categories = new ArrayList<>();
+    public ArrayList<Combo> all() {
+        ArrayList<Combo> combo = new ArrayList<>();
         PreparedStatement stm = null;
         ResultSet rs = null;
         try {
-            String sql = "select categoryID, categoryName, describe, catImage from category";
+            String sql = "SELECT [comboID]\n"
+                    + "      ,[comboName]\n"
+                    + "      ,[price]\n"
+                    + "      ,[status]\n"
+                    + "      ,[describe]\n"
+                    + "      ,[image]\n"
+                    + "  FROM [combo]";
             stm = connection.prepareStatement(sql);
             rs = stm.executeQuery();
             while (rs.next()) {
-                Category ca = new Category();
-                ca.setCategoryID(rs.getInt("categoryID"));
-                ca.setCategoryName(rs.getString("categoryName"));
-                ca.setDescribe(rs.getString("describe"));
-                ca.setCatImage(rs.getString("catImage"));
-                categories.add(ca);
+                Combo co = new Combo();
+                co.setComboID(rs.getInt("comboId"));
+                co.setComboName(rs.getString("comboName"));
+                co.setPrice(rs.getInt("price"));
+                co.setStatus(rs.getBoolean("status"));
+                co.setDescribe(rs.getString("describe"));
+                co.setImage(rs.getString("image"));
+                combo.add(co);
+
             }
 
         } catch (SQLException ex) {
@@ -66,7 +76,7 @@ public class CategoryDBContext extends DBContext<Category> {
                 Logger.getLogger(CategoryDBContext.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        return categories;
+        return combo;
     }
 
 }

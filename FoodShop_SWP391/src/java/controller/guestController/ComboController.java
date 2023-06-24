@@ -2,23 +2,27 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.customerController;
+package controller.guestController;
 
-import dal.AccountDBContext;
+import dal.CategoryDBContext;
+import dal.ComboDBContext;
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
 import models.Account;
-import utils.GetParam;
+import models.Category;
+import models.Combo;
 
 /**
  *
  * @author ngxso
  */
-public class ResetPass extends HttpServlet {
+public class ComboController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -26,22 +30,24 @@ public class ResetPass extends HttpServlet {
      *
      * @param request servlet request
      * @param response servlet response
-     * @return 
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected boolean processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
-        String pass = GetParam.getStringParam(request, "pass", "Enter your password",
-                "^(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()])[A-Za-z\\d!@#$%^&*()]{8,}$",
-                "Password must have at least 8 characters, first letter capitalized and at least 1 special character.", 8, 50, null);
-        if (pass == null) {
-            return false;
+        try ( PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet ComboController</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet ComboController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
-        return true;
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -56,8 +62,14 @@ public class ResetPass extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("views/customer/resetPass.jsp").forward(request, response);
+        CategoryDBContext cDb = new CategoryDBContext();
+        ArrayList<Category> categories = cDb.all();
+        request.setAttribute("categories", categories);
 
+        ComboDBContext cbDB = new ComboDBContext();
+        ArrayList<Combo> combos = cbDB.all();
+        request.setAttribute("combo", combos);
+        request.getRequestDispatcher("views/guest/combo.jsp").forward(request, response);
     }
 
     /**
@@ -71,21 +83,11 @@ public class ResetPass extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String email = request.getParameter("email");
-        String pass = request.getParameter("pass");
-        String repass = request.getParameter("repass");
-        if (!pass.equals(repass)) {
-            request.setAttribute("error", "New pass and Re-pass is not match!!");
-            request.getRequestDispatcher("resetPass.jsp").forward(request, response);
-        } else {
-            HttpSession session = request.getSession();
-            String myemail = (String) session.getAttribute("email");
-            AccountDBContext acc = new AccountDBContext();
-            acc.updateUserPass(myemail, pass);
+        HttpSession session = request.getSession();
+        Account acc = (Account) session.getAttribute("acc");
+        int comboID = Integer.parseInt(request.getParameter("comboID"));
+        response.sendRedirect("combo");
 
-            request.setAttribute("mess", "Reset Password successful. Please login again");
-            request.getRequestDispatcher("views/guest/login.jsp").forward(request, response);
-        }
     }
 
     /**

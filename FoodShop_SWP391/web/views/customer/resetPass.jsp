@@ -27,11 +27,7 @@
                             <input id="pass" type="password" name="pass" placeholder="Enter your new password" class="form-control"required>
                             <span class="form-message"></span>
                         </div>
-                        <div class="input-box">
-                            <span class="details">Confirm Password<span style="color: red"> *</span></span>
-                            <input id="repass" type="password" name="repass" placeholder="Confirm your password"class="form-control" required>
-                            <span class="form-message"></span>
-                        </div>
+
                     </div>
                     <ul class="tds-s-list" style="color:#01175e;
                         display:list-item;
