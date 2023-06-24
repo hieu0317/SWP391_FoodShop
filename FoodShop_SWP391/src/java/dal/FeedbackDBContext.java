@@ -62,5 +62,45 @@ public class FeedbackDBContext extends DBContext<Feedback> {
         }
         return feedbacks;
     }
+        public ArrayList<Feedback> getFeedBackByProductID(int id) {
+        ArrayList<Feedback> feedbacks = new ArrayList<>();
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            String sql = "select * from feedback where productID = ?";
+            stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                Feedback fb = new Feedback();
+                fb.setFeedbackID(rs.getInt(1));
+                fb.setProduct(new ProductDBContext().get(rs.getInt(2)));
+                fb.setAccount(new AccountDBContext().get(rs.getInt(3)));
+                fb.setFcontent(rs.getNString(4));
+                fb.setDate(rs.getDate(5));
+                fb.setIsDeleted(rs.getBoolean(6));
+                feedbacks.add(fb);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        return feedbacks;
+    }
+    
+    public void DelFeedBackByID(int id) {
+        ArrayList<Feedback> feedbacks = new ArrayList<>();
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            String sql = "update feedback set isDeleted = 1 where feedbackID = ?";
+            stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            stm.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+    }
 
 }

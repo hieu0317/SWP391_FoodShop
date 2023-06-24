@@ -1,3 +1,5 @@
+<jsp:useBean id="helper" class="helper.helper"/>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -16,9 +18,11 @@
                     <tr>
                         <td>#</td>
                         <td>Product</td>
+                        <td>Image</td>
                         <td>Customer</td> 
                         <td>Content</td>  
                         <td>Date</td>
+                        <td></td>
                     </tr>
                 </thead>
                 <tbody>
@@ -26,6 +30,7 @@
                         <tr>
                             <td></td>
                             <td>${f.getProduct().getProductName()}</td>
+                            <td><img src="${f.getProduct().getProductImage().getUrl()}" width="300px" height="300px"></td>
                             <td>${f.getAccount().getFullName()}</td>
                             <td>${f.getFcontent()}</td>
                             <td>${f.getDate()}</td>

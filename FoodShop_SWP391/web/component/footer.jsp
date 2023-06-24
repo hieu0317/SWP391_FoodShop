@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 <%-- 
     Document   : footer
     Created on : Jun 3, 2023, 10:17:09?PM
@@ -5,6 +6,9 @@
 --%>
 
 <div class="footer">
+=======
+<footer>
+>>>>>>> Stashed changes
     <h2>2023 Fast Food Company. All rights reserved.</h2>
     <div class="links">
         <a href="views/AboutUsPage.jsp">

@@ -1,10 +1,4 @@
-<%-- 
-    Document   : BlogSettings
-    Created on : Jun 4, 2023, 3:34:11 AM
-    Author     : toden
---%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -18,14 +12,30 @@
         <%@include file="../component/navbar.jsp" %>
         <div style="margin-top: 120px" class="container">
             <br>
-            <a href="views/BlogAdd.jsp"><button class="btn btn-primary">Add Blog</button></a>
+            <form action="BlogSettings" method="get">
+                <div style="display: flex">
+                    <a href="views/BlogAdd.jsp"><button class="btn btn-primary">Add Blog</button></a>
+                    <div class="input-group" style="display: flex; justify-content:  flex-end">
+                        <div style="width: 500px;"></div>
+                        <div class="form-outline">
+                            <input type="search" name="search" value="${requestScope.search}" id="form1" class="form-control" />
+                            <label class="form-label" for="form1">Search</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+
+
+                </div>
+            </form>            
             <table  class="table table-dark table-striped">
 
                 <thead>
                     <tr>
                         <td>#</td>
                         <td>Title</td>
-                        <td>Img</td> 
+                        <td>Image</td> 
                         <td>Author</td>  
                         <td>Date</td>
                         <td></td>
@@ -40,7 +50,7 @@
                                 <td><img width="100px" src="./images/blogimage/${p.getBlogImage().getUrl()}"></td>
                                 <td>${p.getAccount().getFullName()}</td>
                                 <td>${p.getDate()}</td>
-                                <td><a href=""><button style="margin: 1px" class="btn btn-primary">Update</button></a>
+                                <td><a href="BlogUpdate?id=${p.getBlogID()}"><button style="margin: 1px" class="btn btn-primary">Update</button></a>
                                     <a href="BlogSettings?id=${p.getBlogID()}&del=1"><button style="margin: 1px" class="btn btn-danger">Delete</button></a></td>
                             </tr>
                         </c:if>

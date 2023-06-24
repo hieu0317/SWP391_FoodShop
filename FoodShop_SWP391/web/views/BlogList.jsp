@@ -1,9 +1,3 @@
-<%-- 
-    Document   : BlogList
-    Created on : May 29, 2023, 4:04:26 AM
-    Author     : toden
---%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

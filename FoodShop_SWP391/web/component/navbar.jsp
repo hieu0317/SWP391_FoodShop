@@ -1,10 +1,6 @@
-<%-- 
-    Document   : head
-    Created on : Jun 3, 2023, 10:16:45?PM
-    Author     : toden
---%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<link rel="stylesheet" href="../css/home.css">
+<link rel="stylesheet" href="../css/blogManagement.css">
 <header>
     <div class="navbar">
         <button class="sidebar-button">&#9776; Menu</button>
@@ -16,11 +12,19 @@
                 <li><a href="#">Contact</a></li>
                 <li><a href="#">About Us</a></li>
                     <c:if test="${sessionScope.acc.getRole().getRoleID()==4}">
-                    <li><a href="BlogSettings">Blog Settings</a></li>
+                        <c:if test="${sessionScope.acc.getRole().getRoleID()==4}">
+                        <div class="dropdown">
+                            <a href="#" class="dropdown-toggle">Marketing</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="BlogSettings">Blog Management</a></li>
+                                <li><a href="FeedbackList">Feedback List</a></li>
+                            </ul>
+                        </div>
                     </c:if>
-                    <c:if test="${sessionScope.acc.getRole().getRoleID()==3}">
+                </c:if>
+                <c:if test="${sessionScope.acc.getRole().getRoleID()==3}">
                     <li><a href="ProductSettings">Product Settings</a></li>
-                    </c:if>
+                </c:if>
             </ul>
 
             <a href="home/cart" class="cart-button">My Cart</a>
