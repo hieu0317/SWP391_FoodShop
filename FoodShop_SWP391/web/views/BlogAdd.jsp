@@ -11,6 +11,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link rel="stylesheet" href="../css/home.css">
         <%@include file="../component/head.jsp" %>
 
     </head>
@@ -42,7 +43,9 @@
 
         </div>
         <%@include file="../component/footer.jsp" %>
-        
+        <script>
+           CKEDITOR.replace( 'detail' );
+        </script>
 
     </body>
 </html>

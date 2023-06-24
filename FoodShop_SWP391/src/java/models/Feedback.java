@@ -11,11 +11,32 @@ import java.sql.Date;
  * @author admin
  */
 public class Feedback {
+    private int feedbackID;
     private Account account;
     private Product product;
     private String fcontent;
     private Date date;
+    private boolean isDeleted;
 
+    public boolean isIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+    
+    
+
+    public int getFeedbackID() {
+        return feedbackID;
+    }
+
+    public void setFeedbackID(int feedbackID) {
+        this.feedbackID = feedbackID;
+    }
+
+    
     public Account getAccount() {
         return account;
     }

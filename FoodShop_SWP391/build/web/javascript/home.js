@@ -25,6 +25,7 @@ myButtons.forEach((button, index) => {
     const result = confirm('You sure to add this product to cart?');
   
     if (result) {
+      alert('Add success!');
       myForms[index].submit(); 
     } else {
       alert('Add cancelled!');

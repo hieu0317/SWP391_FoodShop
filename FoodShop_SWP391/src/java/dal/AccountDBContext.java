@@ -258,14 +258,14 @@ public class AccountDBContext extends DBContext<Account> {
         } catch (SQLException ex) {
             Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
         } 
-        finally {
-            try {
-                rs.close();
-                stm.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+//        finally {
+//            try {
+//                rs.close();
+//                stm.close();
+//            } catch (SQLException ex) {
+//                Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
         return null;
 
     }

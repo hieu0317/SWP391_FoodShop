@@ -65,7 +65,6 @@ public class ProfileController extends HttpServlet {
             throws ServletException, IOException {
          HttpSession session = request.getSession();
         Account acc = (Account) session.getAttribute("acc");
-        System.out.println("Bat dau lay thong tin ");
         AccountDBContext accountDBContext = new AccountDBContext();
         Account accounts = accountDBContext.getAccountByID(acc.getAccountID());
         request.setAttribute("accounts", accounts);

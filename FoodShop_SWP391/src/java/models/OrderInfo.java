@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class OrderInfo {
     
     private int orderID;
-    private ArrayList<Product> products;
+    private Product products;
     private int price;
     private int quantiy;
 
@@ -33,11 +33,11 @@ public class OrderInfo {
         this.orderID = orderID;
     }
 
-    public ArrayList<Product> getProducts() {
+    public Product getProducts() {
         return products;
     }
 
-    public void setProducts(ArrayList<Product> products) {
+    public void setProducts(Product products) {
         this.products = products;
     }
 

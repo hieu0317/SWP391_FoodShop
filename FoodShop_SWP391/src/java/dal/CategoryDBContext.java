@@ -35,7 +35,26 @@ public class CategoryDBContext extends DBContext<Category> {
 
     @Override
     public Category get(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            String sql = "select categoryID, categoryName, describe, catImage from category where categoryID = ?";
+            stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                Category ca = new Category();
+                ca.setCategoryID(rs.getInt("categoryID"));
+                ca.setCategoryName(rs.getString("categoryName"));
+                ca.setDescribe(rs.getString("describe"));
+                ca.setCatImage(rs.getString("catImage"));
+                return ca;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     @Override
@@ -68,5 +87,5 @@ public class CategoryDBContext extends DBContext<Category> {
         }
         return categories;
     }
-    
+
 }

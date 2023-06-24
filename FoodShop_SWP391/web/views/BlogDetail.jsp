@@ -33,7 +33,7 @@
 
 
                         <div class="image-block">
-                            <img width="800px" src="./images/blogimage/${requestScope.blog.getBlogImage().getUrl()}" class="img-responsive" >
+                            <img width="800px" src="images/blogimage/${requestScope.blog.getBlogImage().getUrl()}" class="img-responsive" >
                         </div>
 
                         <p>${requestScope.blog.getBlogDetail()}
@@ -52,9 +52,7 @@
 
                             </c:forEach>
 
-                            <a class="list-group-item" href="#"> <h4 class="list-group-item-heading">List group item heading</h4> <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p> </a>
-                            <a class="list-group-item" href="#"> <h4 class="list-group-item-heading">List group item heading</h4> <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p> </a> </div>
-                        <div class="well">
+                            <div class="well">
                         </div>
                     </div>
                 </div>

@@ -16,9 +16,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
+import java.util.ArrayList;
 import java.util.List;
 import models.Account;
 import models.Category;
+import models.Product;
 
 /**
  *
@@ -72,11 +74,26 @@ public class ProductSettings extends HttpServlet {
         //processRequest(request, response);
         HttpSession session = request.getSession();
         ProductDBContext pdb = new ProductDBContext();
+        CategoryDBContext ctb = new CategoryDBContext();
+        String search = request.getParameter("search");
         if(request.getParameter("del")!=null){
             int id = Integer.parseInt(request.getParameter("id"));
             pdb.deleteById(id);
         }
-        session.setAttribute("products", pdb.all());
+        
+        List<Product> products = pdb.all();
+        
+        if(search!=null&&search.trim()!=""){
+            List<Product> Searchp = new ArrayList();
+            for(Product p : products){
+                if(p.getProductName().contains(search)) Searchp.add(p);
+            }
+            products = Searchp;
+        }
+        
+        request.setAttribute("search", search);
+        session.setAttribute("categories", ctb.all());
+        session.setAttribute("products", products);
         request.getRequestDispatcher("views/ProductSettings.jsp").forward(request, response);
     }
 
@@ -99,18 +116,18 @@ public class ProductSettings extends HttpServlet {
         String projectPath = context.getRealPath("/");
         List<Part> Parts = (List<Part>) request.getParts();
         Account acc = (Account) session.getAttribute("acc");
-        String name = request.getParameter("name");
+        String title = request.getParameter("title");
         String detail = request.getParameter("detail");
         int categoryId = Integer.parseInt(request.getParameter("category"));
         Category cate = cdb.get(categoryId);
         int price = Integer.parseInt(request.getParameter("price"));
-        pdb.addProduct(categoryId, name, detail, price);
+        pdb.addProduct(categoryId, title, detail, price);
         //add image file
         for (Part part : Parts) {
             String fileName = part.getSubmittedFileName();
             if (fileName != null) {
                 part.write(projectPath + "images\\"+cate.getCategoryName().toLowerCase()+"\\" + fileName);
-                pdb.addProductImg(fileName);
+                pdb.addProductImg("images\\"+cate.getCategoryName().toLowerCase()+"\\" + fileName);
             }
         }
         //

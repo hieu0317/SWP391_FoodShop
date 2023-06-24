@@ -11,6 +11,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link rel="stylesheet" href="../css/home.css">
         <%@include file="../component/head.jsp" %>
 
     </head>
@@ -18,7 +19,7 @@
         <%@include file="../component/navbar.jsp" %>
         <div id="editor" style="margin-top: 120px" class="container">
             <h1>Add Product</h1>
-            <form method="post" action="ProductSettings" enctype="multipart/form-data">
+            <form method="post" action="../ProductSettings" enctype="multipart/form-data">
                 <div class="form-outline">
                     <label class="form-label" for="formControlLg">Product Name</label>
 
@@ -51,13 +52,9 @@
             </form>
 
         </div>
-        <%@include file="component/footer.jsp" %>
+        <%@include file="../component/footer.jsp" %>
         <script>
-            ClassicEditor
-                    .create(document.querySelector('#content'))
-                    .catch(error => {
-                        console.error(error);
-                    });
+           CKEDITOR.replace( 'detail' );
         </script>
 
     </body>
