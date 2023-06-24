@@ -123,6 +123,58 @@ public class OrderDBContext extends DBContext<Order>{
         }
         return null;
     }
+    
+    public ArrayList<Order> getOrdersByAccountIDAndName(int id, String name){
+        ArrayList<Order> orders = new ArrayList<>();
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            String sql = "  select distinct o.orderID, o.customerName,p.productID,p.productName ,o.paymentMethod, o.total,\n"
+                    + "               o.date, os.orderStatusName from [order] o\n"
+                    + "               inner join orderStatus os\n"
+                    + "               on o.orderStatusID = os.orderStatusID\n"
+                    + "		      inner join orderInfo oi\n"
+                    + "	              on oi.orderID = o.orderID\n"
+                    + "		      inner join product p\n"
+                    + "		      on p.productID = oi.productID\n"
+                    + "               where o.accountID = ? \n";
+            if(name != null){
+                sql += "and p.productName like '%" + name + "%'";
+            }
+            stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            rs = stm.executeQuery();
+             while (rs.next()) {
+                Order order = new Order();
+                order.setCustomerName(rs.getString("customerName"));
+                OrderInfo oi = new OrderInfo();
+                oi.setOrderID(rs.getInt("orderID"));
+                Product p = new Product();
+                p.setProductID(rs.getInt("productID"));
+                p.setProductName(rs.getString("productName"));
+                oi.setProduct(p);
+                order.setPaymentMethod(rs.getString("paymentMethod"));
+                order.setTotal(rs.getInt("total"));
+                order.setDate(rs.getDate("date"));
+                OrderStatus os = new OrderStatus();
+                os.setOrderStatusName(rs.getString("orderStatusName"));
+                order.setOrderInfo(oi);
+                order.setOrderStatus(os);
+                orders.add(order);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                rs.close();
+                stm.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(OrderDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return orders;
+    }
 
     @Override
     public void update(Order model) {
