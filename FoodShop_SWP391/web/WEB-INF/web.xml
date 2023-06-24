@@ -58,14 +58,18 @@
     <servlet>
         <servlet-name>ResetPass</servlet-name>
         <servlet-class>controller.customerController.ResetPass</servlet-class>
-</servlet>
-      <servlet>
+    </servlet>
+    <servlet>
         <servlet-name>cartContact</servlet-name>
         <servlet-class>controller.customerController.CartContactController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CartCompletion</servlet-name>
         <servlet-class>controller.customerController.CartCompletionController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ComboController</servlet-name>
+        <servlet-class>controller.guestController.ComboController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>home</servlet-name>
@@ -138,14 +142,18 @@
     <servlet-mapping>
         <servlet-name>ResetPass</servlet-name>
         <url-pattern>/repass</url-pattern>
- </servlet-mapping>
-  <servlet-mapping>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>cartContact</servlet-name>
         <url-pattern>/home/cart/cartContact</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CartCompletion</servlet-name>
         <url-pattern>/cartCompletion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ComboController</servlet-name>
+        <url-pattern>/combo</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

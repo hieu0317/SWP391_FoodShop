@@ -1,17 +1,20 @@
 <%-- 
-    Document   : home.jsp
-    Created on : May 27, 2023, 6:05:55 PM
-    Author     : admin
+    Document   : combo
+    Created on : Jun 24, 2023, 9:12:32 PM
+    Author     : ngxso
 --%>
+
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="css/home.css">
         <link rel="stylesheet" href="css/bootstrap.css">
         <link rel="stylesheet" href="css/bootstrap.min.css">
+        <title>Combo Page</title>
     </head>
     <body>
         <header>
@@ -32,13 +35,13 @@
                             </c:if>
                     </ul>
                     <c:if test="${not empty acc.accountID}">
-                         <a href="home/cart" class="cart-button">My Cart</a>
+                        <a href="home/cart" class="cart-button">My Cart</a>
                         <div class="login">
                             <a href="profile" class="login-link">Hello-${acc.getFullName()}</a>
                         </div>
                     </c:if>
-                     <c:if test="${empty acc.accountID}">
-                         <a href="login" class="cart-button">My Cart</a>
+                    <c:if test="${empty acc.accountID}">
+                        <a href="login" class="cart-button">My Cart</a>
                         <div class="login">
                             <a href="login" class="login-link">Sign in</a>
                         </div>
@@ -46,57 +49,32 @@
                 </nav>
             </div>
         </header>
-
         <div class="sidebar">
             <button class="close-button">&times;</button>
             <h2>Category</h2>
             <ul>
                 <c:forEach items="${requestScope.categories}" var="c">
                     <li><a href=""><h3>${c.categoryName} ></h3></a></li>
-                </c:forEach>
+                    </c:forEach>
             </ul>
         </div>
-        <div class="slider-wrapper">
-            <div class="slider">
-                <div class="slide">
-                    <a href=""><img src="images/slider/buatruavuive.jpg" alt="Slide 1"></a>
-                </div>
-                <div class="slide">
-                    <a href=""><img src="images/slider/gahoangkim.jpg" alt="Slide 2"></a>
-                </div>
-            </div>
-        </div>
-        <div class="category">
-            <h1>BROWSE CATEGORIES</h1>
-            <div class="line"></div>
-        </div>
-        <div class="category-content">
-            <c:forEach items="${requestScope.categories}" var="c">
-                <div class="col-md-3">
-                    <input type="hidden" name="categoryID" value="${c.categoryID}"/>
-                    <a href=""><img src="${c.catImage}"></a>
-                    <a class="categoryName" href=""><h2>${c.categoryName}</h2></a>
-                </div>
-            </c:forEach>
-        </div>
         <div class="recommend-food">
-            <h1>YOU MAY LIKE</h1>
+            <h1>Combo</h1>
             <div class="line"></div>
         </div>
         <div class="recFood-content">
-            <c:forEach items="${requestScope.recProduct}" var="rd">
+            <c:forEach items="${requestScope.combo}" var="co">
                 <form id="myForm" action="home" method="POST">
                     <div class="col-md-3">
-                        <input type="hidden" name="productID" value="${rd.productID}"/>
-                        <a href=""><img src="${rd.productImage.url}"></a>
-                        <a class="productName" href=""><h2>${rd.productName}</h2></a>
+                        <input type="hidden" name="productID" value="${co.comboID}"/>
+                        <a href=""><img src="${co.image}"></a>
+                        <a class="productName" href=""><h2>${co.comboName}</h2></a>
                         <button class="buyNow" type="submit">Add to cart</button>
                     </div>
                 </form>    
             </c:forEach>
         </div>
-
-        <div class="footer">
+<!--        <div class="footer">
             <h2>2023 Fast Food Company. All rights reserved.</h2>
             <div class="links">
                 <a href="views/AboutUsPage.jsp">
@@ -112,7 +90,7 @@
                 Tax code: 0100773885 </br>
                 Date of issue: Oct 29 1998 by Ha Noi Tax Department
             </p>
-        </div>
+        </div>-->
         <script src="javascript/home.js"></script>
     </body>
 </html>
