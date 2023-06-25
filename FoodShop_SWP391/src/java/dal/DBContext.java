@@ -10,11 +10,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import models.Account;
 
 /**
  *
  * @author admin
+ * @param <T>
  */
 public abstract class DBContext<T> {
     

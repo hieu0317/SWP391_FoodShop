@@ -12,6 +12,7 @@
         <link rel="stylesheet" href="css/home.css">
         <link rel="stylesheet" href="css/bootstrap.css">
         <link rel="stylesheet" href="css/bootstrap.min.css">
+        <title>Home</title>
     </head>
     <body>
         <header>
@@ -28,17 +29,20 @@
                             <li><a href="BlogSettings">Blog Settings</a></li>
                             </c:if>
                             <c:if test="${sessionScope.acc.getRole().getRoleID()==3}">
-                            <li><a href="ProductSettings">Product Settings</a></li>
+                            <li><a href="ProductSettings">Product Manage</a></li>
+                            </c:if>
+                            <c:if test="${sessionScope.acc.getRole().getRoleID()==2}">
+                            <li><a href="manageacc">Admin Dashboard</a></li>
                             </c:if>
                     </ul>
                     <c:if test="${not empty acc.accountID}">
-                         <a href="home/cart" class="cart-button">My Cart</a>
+                        <a href="home/cart" class="cart-button">My Cart</a>
                         <div class="login">
                             <a href="profile" class="login-link">Hello-${acc.getFullName()}</a>
                         </div>
                     </c:if>
-                     <c:if test="${empty acc.accountID}">
-                         <a href="login" class="cart-button">My Cart</a>
+                    <c:if test="${empty acc.accountID}">
+                        <a href="login" class="cart-button">My Cart</a>
                         <div class="login">
                             <a href="login" class="login-link">Sign in</a>
                         </div>
@@ -53,7 +57,7 @@
             <ul>
                 <c:forEach items="${requestScope.categories}" var="c">
                     <li><a href=""><h3>${c.categoryName} ></h3></a></li>
-                </c:forEach>
+                    </c:forEach>
             </ul>
         </div>
         <div class="slider-wrapper">
@@ -96,23 +100,23 @@
             </c:forEach>
         </div>
 
-        <div class="footer">
-            <h2>2023 Fast Food Company. All rights reserved.</h2>
-            <div class="links">
-                <a href="views/AboutUsPage.jsp">
+        <footer>
+            <h2 class="col-md-4">2023 Fast Food Company. All rights reserved.</h2>
+            <div class="col-md-4 links">
+                <a href="">
                     <h2>About Us</h2>
                 </a>
                 <a href="">
                     <h2>Contact Us</h2>
                 </a>
             </div>
-            <p> 292 Ba Trieu St., Le Dai Hanh Ward, Hai Ba Trung Dist., Ha Noi City.</br>
+            <p class="col-md-4"> 292 Ba Trieu St., Le Dai Hanh Ward, Hai Ba Trung Dist., Ha Noi City.</br>
                 Tel: (028) 38489828 </br>
                 Email: lienhe@kfcvietnam.com.vn </br>
                 Tax code: 0100773885 </br>
                 Date of issue: Oct 29 1998 by Ha Noi Tax Department
             </p>
-        </div>
+        </footer>        
         <script src="javascript/home.js"></script>
     </body>
 </html>

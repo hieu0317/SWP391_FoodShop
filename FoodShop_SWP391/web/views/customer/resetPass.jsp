@@ -9,14 +9,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="css/register.css">
+        <link rel="stylesheet" href="css/login.css">
         <title>Reset Password Page</title>
     </head>
     <body>
         <div class="container">
             <div class="title">Reset Password</div>
             <br>
-            <div style="color: red">${error}</div>
+            <div style="color: red">${passError}</div>
 
             <div class="content">
                 <form id="form-4" action="repass" method="post">
@@ -25,9 +25,27 @@
                         <div class="input-box">
                             <span class="details">New Password<span style="color: red"> *</span></span>
                             <input id="pass" type="password" name="pass" placeholder="Enter your new password" class="form-control"required>
-                            <span class="form-message"></span>
+                            <span class="form-message" style="color: red"></span>
                         </div>
+                        <script>
+                            var passwordInput = document.getElementById('pass');
+                            var formMessage = document.querySelector('.form-message');
 
+                            passwordInput.addEventListener('input', function () {
+                                var password = passwordInput.value;
+                                var message = '';
+
+                                if (password.length < 8) {
+                                    message = 'Password must be at least 8 characters long.';
+                                } else if (!/[A-Z]/.test(password)) {
+                                    message = 'Password must contain at least one uppercase letter.';
+                                } else if (!/[!@#$%^&*()]/.test(password)) {
+                                    message = 'Password must contain at least one special character (!@#$%^&*()).';
+                                }
+
+                                formMessage.textContent = message;
+                            });
+                        </script>
                     </div>
                     <ul class="tds-s-list" style="color:#01175e;
                         display:list-item;
@@ -51,14 +69,14 @@
         </div>
         <script src="javascript/validate.js"></script>
         <script>
-            Validator({
-                form: "#form-4",
-                errrorSelector: ".form-message",
-                rule: [
-                    Validator.isPassword('#pass'),
-                    Validator.isRequired('#repass')
-                ]
-            });
+    Validator({
+        form: "#form-4",
+        errrorSelector: ".form-message",
+        rule: [
+            Validator.isPassword('#pass'),
+            Validator.isRequired('#repass')
+        ]
+    });
         </script>
     </body>
 </html>
