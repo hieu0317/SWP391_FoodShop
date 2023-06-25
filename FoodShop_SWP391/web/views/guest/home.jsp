@@ -100,7 +100,11 @@
             </c:forEach>
         </div>
 
+
         <footer>
+
+         <footer>
+
             <h2 class="col-md-4">2023 Fast Food Company. All rights reserved.</h2>
             <div class="col-md-4 links">
                 <a href="">

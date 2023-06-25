@@ -48,7 +48,9 @@ public class OrderController extends HttpServlet{
             }
         }
         req.setAttribute("orders", filterOrders);
+
         req.getRequestDispatcher("views/customer/Order.jsp").forward(req, resp);
+
     }
     
     private void sortByPrice(boolean isAsc, ArrayList<Order> orders){

@@ -44,7 +44,7 @@
             </ul>
         </div>
         <h1 class="thank">Thank you for using my service.Bon appetit!</h1>
-        <h3>Order of ${requestScope.order.customerName} - Date:${requestScope.order.date}</h2>
+        <h3>Order of ${requestScope.order.customerName} - Date:${requestScope.order.date}</h3>
         <h3>The order will be delivered to you as soon as possible - ${requestScope.order.orderStatus.orderStatusName}...</h3>
         <table class="order" border="1px">
             <thead>
