@@ -68,6 +68,14 @@
         <servlet-class>controller.customerController.CartCompletionController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>MyOrder</servlet-name>
+        <servlet-class>controller.customerController.OrderController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>orderDetail</servlet-name>
+        <servlet-class>controller.customerController.orderDetail</servlet-class>
+    </servlet>  
+    <servlet>
         <servlet-name>ComboController</servlet-name>
         <servlet-class>controller.guestController.ComboController</servlet-class>
     </servlet>
@@ -152,6 +160,14 @@
         <url-pattern>/cartCompletion</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>MyOrder</servlet-name>
+        <url-pattern>/myOrder</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>orderDetail</servlet-name>
+        <url-pattern>/myOrder/orderDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>  
         <servlet-name>ComboController</servlet-name>
         <url-pattern>/combo</url-pattern>
     </servlet-mapping>

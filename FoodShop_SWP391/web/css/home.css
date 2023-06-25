@@ -198,7 +198,7 @@ body {
   margin-left: 10px;
 }
 
-.footer {
+footer {
   margin-top: 380px;
   background-color: #f8f8f8;
   display: flex;
@@ -206,23 +206,24 @@ body {
   justify-content: space-between;
   align-items: flex-end;
   padding: 20px;
+  height: 150px;
 }
 
-.footer h2 {
+footer h2 {
   margin-bottom: 35px;
 }
 
-.footer .links {
+footer .links {
   display: flex;
   gap: 10px;
 }
 
-.footer .links a {
+footer .links a {
   text-decoration: none;
   color: #000;
 }
 
-.footer p {
+footer p {
   margin: 0;
 }
 

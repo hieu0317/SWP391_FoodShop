@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import models.Account;
 
 /**
  *
@@ -22,9 +21,9 @@ public abstract class DBContext<T> {
 
      public DBContext() {
         try {
-            String url = "jdbc:sqlserver://NXS:1433;databaseName=FoodShop_SWP391";
-            String username = "sa";
-            String password = "123456789";
+            String url = "jdbc:sqlserver://MSI:1433;databaseName=FoodShop_SWP391";
+            String username = "hieuvm";
+            String password = "123";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             connection = DriverManager.getConnection(url, username, password);
         } catch (ClassNotFoundException ex) {
