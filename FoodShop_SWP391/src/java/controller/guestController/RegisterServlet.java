@@ -35,9 +35,10 @@ public class RegisterServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        String email = GetParam.getStringParam(request, "email", "Enter your email",
-                "\\w+([\\.]{0,1}\\w*)*@(\\w{2,5}\\.){1,2}\\w{2,5}", "This is not gmail", 5, 50, null);
-        if (email == null) {
+        String pass = GetParam.getStringParam(request, "pass", "Enter your password",
+                "^(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()])[A-Za-z\\d!@#$%^&*()]{8,}$",
+                "Password must have at least 8 characters, first letter capitalized and at least 1 special character.", 8, 50, null);
+        if (pass == null) {
             return false;
         }
         return true;

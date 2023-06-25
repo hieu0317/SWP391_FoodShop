@@ -74,6 +74,10 @@
     <servlet>
         <servlet-name>orderDetail</servlet-name>
         <servlet-class>controller.customerController.orderDetail</servlet-class>
+    </servlet>  
+    <servlet>
+        <servlet-name>ComboController</servlet-name>
+        <servlet-class>controller.guestController.ComboController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>home</servlet-name>
@@ -162,6 +166,10 @@
     <servlet-mapping>
         <servlet-name>orderDetail</servlet-name>
         <url-pattern>/myOrder/orderDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>  
+        <servlet-name>ComboController</servlet-name>
+        <url-pattern>/combo</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
