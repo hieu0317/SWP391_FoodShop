@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 /**
  *
  * @author admin
+ * @param <T>
  */
 public abstract class DBContext<T> {
     

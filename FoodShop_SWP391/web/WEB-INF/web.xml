@@ -72,9 +72,23 @@
         <servlet-class>controller.customerController.OrderController</servlet-class>
     </servlet>
     <servlet>
+
+        <servlet-name>ManageAccount</servlet-name>
+        <servlet-class>adminController.ManageAccount</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangeStatusUser</servlet-name>
+        <servlet-class>adminController.ChangeStatusUser</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddNewAccount</servlet-name>
+        <servlet-class>adminController.AddNewAccount</servlet-class>
+    </servlet>
+
         <servlet-name>orderDetail</servlet-name>
         <servlet-class>controller.customerController.orderDetail</servlet-class>
     </servlet>  
+
     <servlet>
         <servlet-name>ComboController</servlet-name>
         <servlet-class>controller.guestController.ComboController</servlet-class>
@@ -164,10 +178,25 @@
         <url-pattern>/myOrder</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+
+        <servlet-name>ManageAccount</servlet-name>
+        <url-pattern>/manageacc</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeStatusUser</servlet-name>
+        <url-pattern>/changestatus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddNewAccount</servlet-name>
+        <url-pattern>/addaccount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+
         <servlet-name>orderDetail</servlet-name>
         <url-pattern>/myOrder/orderDetail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>  
+
         <servlet-name>ComboController</servlet-name>
         <url-pattern>/combo</url-pattern>
     </servlet-mapping>
