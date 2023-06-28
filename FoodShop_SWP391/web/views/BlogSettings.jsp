@@ -26,9 +26,15 @@
                         </button>
                     </div>
 
-
                 </div>
-            </form>            
+            </form>
+            <form id="orderByFrm" action="BlogSettings" method="get">
+                Order By:<select id="mySelect" name="orderby">
+                    <option value="blogID" >All</option>
+                    <option value="blogTitle" ${orderby=="blogTitle"?"selected":""}>Title</option>
+                    <option value="date" ${orderby=="date"?"selected":""}>CreateDate</option>
+                </select>
+            </form>
             <table  class="table table-dark table-striped">
 
                 <thead>
@@ -64,6 +70,10 @@
 
         </div>
         <%@include file="../component/footer.jsp" %>
-
+        <script>
+            document.getElementById("mySelect").addEventListener("change", function () {
+                document.getElementById("orderByFrm").submit();
+            });
+        </script>
     </body>
 </html>

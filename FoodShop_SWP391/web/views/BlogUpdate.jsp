@@ -17,7 +17,7 @@
                     <label class="form-label" for="formControlLg">Title</label>
                     <input required name="title" value="${requestScope.blog.getBlogTitle()}"  type="text" id="formControlLg" class="form-control form-control-lg" />
                 </div>
-                
+
                 <div class="md-form">
                     <label for="form7">Detail</label>
                     <textarea id="content" required name="detail" id="form7" class="md-textarea form-control" rows="3">${requestScope.blog.getBlogDetail()}</textarea>
@@ -34,6 +34,9 @@
             </form>
         </div>
         <%@include file="../component/footer.jsp" %>
+        <script>
+            CKEDITOR.replace('detail');
+        </script>
     </body>
 </html>
 
