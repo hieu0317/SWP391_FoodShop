@@ -78,5 +78,35 @@ public class ComboDBContext extends DBContext<Combo> {
         }
         return combo;
     }
-
+    public Combo getComboByID(int comboID) {
+        Combo combo = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            String sql = "SELECT comboID, comboName, price, status, describe, image FROM combo WHERE comboID = ?";
+            stm = connection.prepareStatement(sql);
+            stm.setInt(1, comboID);
+            rs = stm.executeQuery();
+            if (rs.next()) {
+                combo = new Combo();
+                combo.setComboID(rs.getInt("comboID"));
+                combo.setComboName(rs.getString("comboName"));
+                combo.setPrice(rs.getInt("price"));
+                combo.setStatus(rs.getBoolean("status"));
+                combo.setDescribe(rs.getString("describe"));
+                combo.setImage(rs.getString("image"));
+                System.out.println("getComboByID success");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ComboDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                rs.close();
+                stm.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(ComboDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return combo;
+    }
 }

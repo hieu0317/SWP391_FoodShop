@@ -2,23 +2,24 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.guestController;
+package adminController;
 
-import dal.AccountDBContext;
-import java.io.IOException;
-import java.io.PrintWriter;
+import dal.ComboDBContext;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import models.Account;
+import java.io.IOException;
+import java.io.PrintWriter;
+import models.Combo;
 
 /**
  *
- * @author ngxso
+ * @author asus
  */
-public class Login extends HttpServlet {
+public class ComboDetailController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +38,10 @@ public class Login extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Login</title>");
+            out.println("<title>Servlet ComboDetailController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Login at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ComboDetailController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,8 +59,21 @@ public class Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("views/guest/login.jsp").forward(request, response);
 
+        ComboDBContext comboDBContext = new ComboDBContext();
+        String id = request.getParameter("id");
+        int comboId = Integer.parseInt(id);
+
+        Combo combo = comboDBContext.getComboByID(comboId);
+
+        System.out.println("check comboID: " + id);
+        if (combo != null) {
+            System.out.println("comboid thanh cong");
+            request.setAttribute("comboDetails", combo);
+
+            // Forward the request to comboDetail.jsp
+            request.getRequestDispatcher("views/customer/comboDetails.jsp").forward(request, response);
+        }
     }
 
     /**
@@ -70,29 +84,13 @@ public class Login extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    private ComboDBContext comboDBContext; // Assuming you have already instantiated this
+
+    // Other methods and code for the servlet
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        AccountDBContext acc = new AccountDBContext();
-        Account cus = acc.checkLogin(email, password);
-        if (cus == null) {
-            request.setAttribute("error", "Wrong username or password!!");
-            request.getRequestDispatcher("views/guest/login.jsp").forward(request, response);
-        } else {
-            HttpSession session = request.getSession();
-            session.setAttribute("acc", cus);
-            System.out.println("Check role: " + cus.getRole());
-            // Check role
-            if (acc.getRoleID(email) == 3) {               
-                response.sendRedirect("listCustomer");
-            } else {
-                System.out.println("Redirecting to home");
-                response.sendRedirect("home");
-            }
-        }
-        
+
     }
 
     /**

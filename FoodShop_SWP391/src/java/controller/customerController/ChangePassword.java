@@ -2,23 +2,22 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.guestController;
+package controller.customerController;
 
 import dal.AccountDBContext;
-import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import models.Account;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  *
- * @author ngxso
+ * @author asus
  */
-public class Login extends HttpServlet {
+public class ChangePassword extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +36,10 @@ public class Login extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Login</title>");
+            out.println("<title>Servlet ChangePassword</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Login at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ChangePassword at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,8 +57,8 @@ public class Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("views/guest/login.jsp").forward(request, response);
-
+        System.out.println("Get changePass");
+        request.getRequestDispatcher("views/account/changePassword.jsp").forward(request, response);
     }
 
     /**
@@ -73,26 +72,27 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
         String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        AccountDBContext acc = new AccountDBContext();
-        Account cus = acc.checkLogin(email, password);
-        if (cus == null) {
-            request.setAttribute("error", "Wrong username or password!!");
-            request.getRequestDispatcher("views/guest/login.jsp").forward(request, response);
+        String currentPassword = request.getParameter("currentPassword");
+        String newPassword = request.getParameter("newPassword");
+        String confirmNewPassword = request.getParameter("confirmNewPassword");
+        System.out.println("chay change pass");
+        // Perform password change
+        AccountDBContext accountDB = new AccountDBContext();
+        boolean passwordChanged = accountDB.changePassword(email, currentPassword, newPassword);
+        if (newPassword.equals(currentPassword)) {
+            request.setAttribute("ms1", "New password cannot be the same as the old password. Please choose a different password.");
+        } else if (!newPassword.equals(confirmNewPassword)) {
+            request.setAttribute("ms3", "Confirmed password does not match the new password. Please try again.");
         } else {
-            HttpSession session = request.getSession();
-            session.setAttribute("acc", cus);
-            System.out.println("Check role: " + cus.getRole());
-            // Check role
-            if (acc.getRoleID(email) == 3) {               
-                response.sendRedirect("listCustomer");
+            if (passwordChanged) {
+                request.setAttribute("sc", "Change password success.");
             } else {
-                System.out.println("Redirecting to home");
-                response.sendRedirect("home");
+                request.setAttribute("ms2", "Your old password is incorrect. Please check again.");
             }
         }
-        
+
     }
 
     /**

@@ -497,4 +497,56 @@ public class AccountDBContext extends DBContext<Account> {
         }
         return accList;
     }
+    public boolean changePassword(String email, String password, String newPass) {
+        PreparedStatement stm = null;
+
+        try {
+            String sql = "UPDATE Account SET password = ? WHERE email = ? AND password = ?";
+            stm = connection.prepareStatement(sql);
+            stm.setString(1, newPass);
+            stm.setString(2, email);
+            stm.setString(3, password);
+
+            int affectedRows = stm.executeUpdate();
+
+            if (affectedRows > 0) {
+                System.out.println("Password changed successfully");
+                return true;
+            } else {
+                System.out.println("Failed to change password");
+                return false;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (stm != null) {
+                    stm.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        return false;
+    }
+    public int getRoleID(String email) {
+        int roleID = -1; // Default value if roleID is not found
+
+        String sql = "SELECT [roleID] FROM [dbo].[account] WHERE [email] = ?";
+
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, email);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    roleID = resultSet.getInt("roleID");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return roleID;
+    }
 }
