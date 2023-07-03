@@ -20,6 +20,11 @@ body {
     align-items: center;
   }
   
+  .logo a, .logo a:hover{
+      color: black;
+      text-decoration: none;
+  }
+  
   .sidebar-button {
     background: none;
     border: none;

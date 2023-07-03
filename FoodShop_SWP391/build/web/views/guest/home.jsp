@@ -17,19 +17,32 @@
         <header>
             <div class="navbar">
                 <button class="sidebar-button">&#9776; Menu</button>
-                <h1 class="logo">Fast Food Restaurant</h1>
+                <h1 class="logo"><a href="home">Fast Food Restaurant</a></h1>
                 <nav class="header-link">
                     <ul class="navigation">
                         <li><a href="#">Combo</a></li>
-                        <li><a href="#">Blog</a></li>
+                        <li><a href="BlogController">Blog</a></li>
                         <li><a href="#">Contact</a></li>
                         <li><a href="#">About Us</a></li>
+                            <c:if test="${sessionScope.acc.getRole().getRoleID()==4}">
+                            <li><a href="BlogSettings">Blog Settings</a></li>
+                            </c:if>
+                            <c:if test="${sessionScope.acc.getRole().getRoleID()==3}">
+                            <li><a href="ProductSettings">Product Settings</a></li>
+                            </c:if>
                     </ul>
-                    
-                    <a href="#" class="cart-button">Cart(${requestScope.total})</a>
-                    <div class="login">
-                        <a href="#" class="login-link">My Account</a>
-                    </div>
+
+                    <a href="home/cart" class="cart-button">My Cart</a>
+                    <c:if test="${not empty acc.accountID}">
+                        <div class="login">
+                            <a href="" class="login-link">My Account</a>
+                        </div>
+                    </c:if>
+                     <c:if test="${empty acc.accountID}">
+                        <div class="login">
+                            <a href="login" class="login-link">Sign in</a>
+                        </div>
+                    </c:if>
                 </nav>
             </div>
         </header>
@@ -38,9 +51,9 @@
             <button class="close-button">&times;</button>
             <h2>Category</h2>
             <ul>
-                <c:forEach items="${requestScope.categories}" var="c">
+                <c:forEach items="${sessionScope.categories}" var="c">
                     <li><a href=""><h3>${c.categoryName} ></h3></a></li>
-                </c:forEach>
+                    </c:forEach>
             </ul>
         </div>
         <div class="slider-wrapper">
@@ -58,7 +71,7 @@
             <div class="line"></div>
         </div>
         <div class="category-content">
-            <c:forEach items="${requestScope.categories}" var="c">
+            <c:forEach items="${sessionScope.categories}" var="c">
                 <div class="col-md-3">
                     <input type="hidden" name="categoryID" value="${c.categoryID}"/>
                     <a href=""><img src="${c.catImage}"></a>
@@ -71,7 +84,7 @@
             <div class="line"></div>
         </div>
         <div class="recFood-content">
-            <c:forEach items="${requestScope.recProduct}" var="rd">
+            <c:forEach items="${sessionScope.recProduct}" var="rd">
                 <form id="myForm" action="home" method="POST">
                     <div class="col-md-3">
                         <input type="hidden" name="productID" value="${rd.productID}"/>
