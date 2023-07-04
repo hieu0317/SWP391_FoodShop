@@ -68,5 +68,5 @@ public class CategoryDBContext extends DBContext<Category> {
         }
         return categories;
     }
-    
+
 }

@@ -119,7 +119,7 @@ public class AccountDBContext extends DBContext<Account> {
                 a.setRole(new RoleDBContext().get(rs.getInt(4)));
                 a.setFullName(rs.getNString(5));
                 a.setPhoneNumber(rs.getString(6));
-                a.setStatus(rs.getBoolean(7));
+                a.setStatus(rs.getBoolean(8));
                 a.setAddress(rs.getString("address"));
                 return a;
             }
@@ -152,33 +152,106 @@ public class AccountDBContext extends DBContext<Account> {
         }
     }
 
-    public Account checkLoginAdmin(String emmail, String password) {
+    public void addNewAcc(String email, String password, int roleID, String fullname, String phone, String address, boolean status) {
+
+        try {
+            String sql = "INSERT INTO [dbo].[account]([email],[password],[roleID],"
+                    + "[fullname],[phonenum],[address],[status])\n"
+                    + "VALUES(?,?,?,?,?,?,?)";
+            stm = connection.prepareStatement(sql);
+            stm.setString(1, email);
+            stm.setString(2, password);
+            stm.setInt(3, roleID);
+            stm.setString(4, fullname);
+            stm.setString(5, phone);
+            stm.setString(6, address);
+            stm.setBoolean(7, status);
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                stm.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    public Account checkLoginAdmin(String email, String password) {
 
         try {
             String sql = "SELECT * from [dbo].[Account] where [roleID] = '2'";
             stm = connection.prepareStatement(sql);
+            stm.setString(1, email);
+            stm.setString(2, password);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                Account a = new Account();
+
+                a.setEmail(email);
+                a.setPassword(password);
+                a.setAccountID(rs.getInt(1));
+                a.setRole(new RoleDBContext().get(rs.getInt(4)));
+                a.setFullName(rs.getNString(5));
+                a.setPhoneNumber(rs.getString(6));
+                a.setStatus(rs.getBoolean(7));
+                a.setAddress(rs.getString("address"));
+                return a;
+            }
         } catch (SQLException e) {
 
         }
         return null;
     }
 
-    public Account checkLoginSale(String emmail, String password) {
+    public Account checkLoginSale(String email, String password) {
 
         try {
             String sql = "SELECT * from [dbo].[Account] where [roleID] = '3'";
             stm = connection.prepareStatement(sql);
+            stm.setString(1, email);
+            stm.setString(2, password);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                Account a = new Account();
+                a.setEmail(email);
+                a.setPassword(password);
+                a.setAccountID(rs.getInt(1));
+                a.setRole(new RoleDBContext().get(rs.getInt(4)));
+                a.setFullName(rs.getNString(5));
+                a.setPhoneNumber(rs.getString(6));
+                a.setStatus(rs.getBoolean(7));
+                a.setAddress(rs.getString("address"));
+                return a;
+            }
         } catch (SQLException e) {
 
         }
         return null;
     }
 
-    public Account checkLoginMKT(String emmail, String password) {
+    public Account checkLoginMKT(String email, String password) {
 
         try {
             String sql = "SELECT * from [dbo].[Account] where [roleID] = '4'";
             stm = connection.prepareStatement(sql);
+            stm.setString(1, email);
+            stm.setString(2, password);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                Account a = new Account();
+
+                a.setEmail(email);
+                a.setPassword(password);
+                a.setAccountID(rs.getInt(1));
+                a.setRole(new RoleDBContext().get(rs.getInt(4)));
+                a.setFullName(rs.getNString(5));
+                a.setPhoneNumber(rs.getString(6));
+                a.setStatus(rs.getBoolean(7));
+                a.setAddress(rs.getString("address"));
+                return a;
+            }
         } catch (SQLException e) {
 
         }
@@ -234,6 +307,19 @@ public class AccountDBContext extends DBContext<Account> {
         }
     }
 
+    public void updateUserStatus(int accountID, boolean status) {
+        String sql = "UPDATE Account\n"
+                + "SET [status] = ?\n"
+                + "WHERE [accountID] = ?";
+        try {
+            stm = connection.prepareStatement(sql);
+            stm.setInt(2, accountID);
+            stm.setBoolean(1, status);
+            stm.executeUpdate();
+        } catch (SQLException e) {
+        }
+    }
+
     @Override
     public void insert(Account model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -284,6 +370,81 @@ public class AccountDBContext extends DBContext<Account> {
 
     }
 
+    public ArrayList<Account> getAllAccount() {
+        ArrayList<Account> acc = new ArrayList<>();
+        try {
+            String sql = "SELECT a.accountID, a.fullname, a.email, a.roleID, "
+                    + "a.address, a.phonenum, a.status, r.roleName\n"
+                    + "FROM Account a\n"
+                    + "inner join role r\n"
+                    + "on a.roleID = r.roleID";
+            stm = connection.prepareStatement(sql);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                Account ac = new Account();
+                ac.setAccountID(rs.getInt("accountID"));
+                ac.setEmail(rs.getString("email"));
+                Role rl = new Role();
+                rl.setRoleID(rs.getInt("roleID"));
+                rl.setRoleName(rs.getString("roleName"));
+                ac.setRole(rl);
+                ac.setFullName(rs.getString("fullName"));
+                ac.setPhoneNumber(rs.getString("phonenum"));
+                ac.setAddress(rs.getString("address"));
+                ac.setStatus(rs.getBoolean("status"));
+                acc.add(ac);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (stm != null) {
+                    stm.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(CategoryDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return acc;
+
+    }
+
+    public ArrayList<Role> getRoleManage() {
+        ArrayList<Role> role = new ArrayList<>();
+        try {
+            String sql = "SELECT roleID, roleName\n"
+                    + "FROM role\n"
+                    + "WHERE roleID IN (2, 3, 4);";
+            stm = connection.prepareStatement(sql);
+            rs = stm.executeQuery();
+            while (rs.next()) {              
+                Role rl = new Role();
+                rl.setRoleID(rs.getInt("roleID"));
+                rl.setRoleName(rs.getString("roleName"));
+                role.add(rl);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (stm != null) {
+                    stm.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(CategoryDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return role;
+
+    }
+
     @Override
     public ArrayList<Account> all() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -292,49 +453,48 @@ public class AccountDBContext extends DBContext<Account> {
     public ArrayList<Account> editAccount(String account) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
     public ArrayList<Account> getListCustomer() {
         ArrayList<Account> accList = new ArrayList<>();
-        PreparedStatement stm = null;
-        ResultSet rs = null;
-        
+
         try {
             String sql = "SELECT a.accountID, a.email, a.password, a.roleID, a.fullname, a.phonenum, a.address, a.status, r.roleName FROM Account a "
-                        + "INNER JOIN Role r ON a.roleID = r.roleID WHERE a.roleID = ?";
+                    + "INNER JOIN Role r ON a.roleID = r.roleID WHERE a.roleID = ?";
             stm = connection.prepareStatement(sql);
             stm.setInt(1, 1); // Loc theo roleID = 1
             rs = stm.executeQuery();
-            
-            while(rs.next()){
+
+            while (rs.next()) {
                 Account acc = new Account();
                 acc.setAccountID(rs.getInt("accountID"));
                 acc.setEmail(rs.getString("email"));
                 acc.setPassword(rs.getString("password"));
-                
+
                 Role rl = new Role();
                 rl.setRoleID(rs.getInt("roleID"));
                 rl.setRoleName(rs.getString("roleName"));
-                
+
                 acc.setRole(rl);
                 acc.setFullName(rs.getString("fullName"));
                 acc.setAddress(rs.getString("address"));
                 acc.setStatus(rs.getBoolean("status"));
                 accList.add(acc);
-           }
+            }
             System.out.println("Get all accounts success");
         } catch (SQLException ex) {
             Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
-        }finally{
+        } finally {
             try {
                 if (rs != null) {
                     rs.close();
                 }
-                if(stm != null){
+                if (stm != null) {
                     stm.close();
                 }
-            }  catch (SQLException ex) {
-            Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return accList;
-        }
+    }
 }

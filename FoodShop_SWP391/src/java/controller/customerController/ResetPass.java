@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import models.Account;
+import utils.GetParam;
 
 /**
  *
@@ -25,12 +26,21 @@ public class ResetPass extends HttpServlet {
      *
      * @param request servlet request
      * @param response servlet response
+     * @return
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected boolean processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+
+        String pass = GetParam.getStringParam(request, "pass", "Enter your password",
+                "^(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()])[A-Za-z\\d!@#$%^&*()]{8,}$",
+                "Password must have at least 8 characters, first letter capitalized and at least 1 special character.", 8, 50, null);
+        if (pass == null) {
+            return false;
+        }
+        return true;
 
     }
 
@@ -61,20 +71,17 @@ public class ResetPass extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String email = request.getParameter("email");
-        String pass = request.getParameter("pass");
-        String repass = request.getParameter("repass");
-        if (!pass.equals(repass)) {
-            request.setAttribute("error", "New pass and Re-pass is not match!!");
-            request.getRequestDispatcher("resetPass.jsp").forward(request, response);
-        } else {      
+        if (processRequest(request, response)) {
+            String email = request.getParameter("email");
+            String pass = request.getParameter("pass");
             HttpSession session = request.getSession();
             String myemail = (String) session.getAttribute("email");
             AccountDBContext acc = new AccountDBContext();
             acc.updateUserPass(myemail, pass);
-
             request.setAttribute("mess", "Reset Password successful. Please login again");
             request.getRequestDispatcher("views/guest/login.jsp").forward(request, response);
+        } else {
+            this.doGet(request, response);
         }
     }
 

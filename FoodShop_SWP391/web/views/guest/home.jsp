@@ -12,6 +12,7 @@
         <link rel="stylesheet" href="css/home.css">
         <link rel="stylesheet" href="css/bootstrap.css">
         <link rel="stylesheet" href="css/bootstrap.min.css">
+        <title>Home</title>
     </head>
     <body>
         <header>
@@ -20,7 +21,7 @@
                 <h1 class="logo"><a href="home">Fast Food Restaurant</a></h1>
                 <nav class="header-link">
                     <ul class="navigation">
-                        <li><a href="#">Combo</a></li>
+                        <li><a href="combo">Combo</a></li>
                         <li><a href="BlogController">Blog</a></li>
                         <li><a href="#">Contact</a></li>
                         <li><a href="#">About Us</a></li>
@@ -28,17 +29,20 @@
                             <li><a href="BlogSettings">Blog Settings</a></li>
                             </c:if>
                             <c:if test="${sessionScope.acc.getRole().getRoleID()==3}">
-                            <li><a href="ProductSettings">Product Settings</a></li>
+                            <li><a href="ProductSettings">Product Manage</a></li>
+                            </c:if>
+                            <c:if test="${sessionScope.acc.getRole().getRoleID()==2}">
+                            <li><a href="manageacc">Admin Dashboard</a></li>
                             </c:if>
                     </ul>
                     <c:if test="${not empty acc.accountID}">
-                         <a href="home/cart" class="cart-button">My Cart</a>
+                        <a href="home/cart" class="cart-button">My Cart</a>
                         <div class="login">
                             <a href="profile" class="login-link">Hello-${acc.getFullName()}</a>
                         </div>
                     </c:if>
-                     <c:if test="${empty acc.accountID}">
-                         <a href="login" class="cart-button">My Cart</a>
+                    <c:if test="${empty acc.accountID}">
+                        <a href="login" class="cart-button">My Cart</a>
                         <div class="login">
                             <a href="login" class="login-link">Sign in</a>
                         </div>
@@ -53,7 +57,7 @@
             <ul>
                 <c:forEach items="${requestScope.categories}" var="c">
                     <li><a href=""><h3>${c.categoryName} ></h3></a></li>
-                </c:forEach>
+                    </c:forEach>
             </ul>
         </div>
         <div class="slider-wrapper">
@@ -99,7 +103,6 @@
                 </form>    
             </c:forEach>
         </div>
-
          <footer>
             <h2 class="col-md-4">2023 Fast Food Company. All rights reserved.</h2>
             <div class="col-md-4 links">

@@ -246,7 +246,9 @@ footer p {
 .category-content div h2, .recFood-content div h2 {
   text-align: center;
 }
-
+.recFood-content div h5 {
+  text-align: center;
+}
 .category-content div img ,.recFood-content div img{
   height: 90%;
   width: 100%;
@@ -256,7 +258,10 @@ a h2{
   color: black;
   transition: color 0.3s ease;
 }
-
+a h5{
+  color: black;
+  transition: color 0.3s ease;
+}
 .categoryName:hover , .productName:hover {
     color: black;
     text-decoration: none; 
