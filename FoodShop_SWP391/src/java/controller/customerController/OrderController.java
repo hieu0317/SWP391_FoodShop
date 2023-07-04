@@ -32,12 +32,24 @@ public class OrderController extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String status = req.getParameter("status");
+        if(status == null){
+            status ="0";
+        }
+        int parseStatus = Integer.parseInt(status);
         String value = req.getParameter("value");
         String name = req.getParameter("name");
+        String date = req.getParameter("date");
+        if(name == null || name.isEmpty()){
+            name = "0";
+        }
+        if(date == null || date.isEmpty()){
+            date = "0";
+        }
         HttpSession session = req.getSession();
         Account account = (Account) session.getAttribute("acc");
         OrderDBContext odb = new OrderDBContext();
-        ArrayList<Order> orders = odb.getOrdersByAccountIDAndName(account.getAccountID(), name);    
+        ArrayList<Order> orders = odb.getOrdersByAccountIDAndName(account.getAccountID(), name,date,parseStatus);    
         ArrayList<Order> filterOrders = filterOrders(orders);
         if(value != null){
             if(Integer.parseInt(value) == 0){

@@ -18,7 +18,7 @@ import models.OrderInfo;
  *
  * @author admin
  */
-public class orderDetail extends HttpServlet{
+public class orderDetailController extends HttpServlet{
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

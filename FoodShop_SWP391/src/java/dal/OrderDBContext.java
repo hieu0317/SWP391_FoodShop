@@ -93,7 +93,7 @@ public class OrderDBContext extends DBContext<Order>{
         PreparedStatement stm = null;
         ResultSet rs = null;
         try {
-            String sql = "select o.customerName,o.date,o.total,os.orderStatusName from [order] o \n"
+            String sql = "select o.customerName,o.date,o.total,os.orderStatusID,os.orderStatusName from [order] o \n"
                     + "inner join orderStatus os \n"
                     + "on o.orderStatusID = os.orderStatusID\n"
                     + "where o.orderID = ?";
@@ -107,6 +107,7 @@ public class OrderDBContext extends DBContext<Order>{
                 o.setTotal(rs.getInt("total"));
                 OrderStatus os = new OrderStatus();
                 os.setOrderStatusName(rs.getString("orderStatusName"));
+                os.setOrderStatusID(rs.getInt("orderStatusID"));
                 o.setOrderStatus(os);
                 return o;
             }
@@ -124,7 +125,7 @@ public class OrderDBContext extends DBContext<Order>{
         return null;
     }
     
-    public ArrayList<Order> getOrdersByAccountIDAndName(int id, String name){
+    public ArrayList<Order> getOrdersByAccountIDAndName(int id, String name,String date,int status){
         ArrayList<Order> orders = new ArrayList<>();
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -138,8 +139,14 @@ public class OrderDBContext extends DBContext<Order>{
                     + "		      inner join product p\n"
                     + "		      on p.productID = oi.productID\n"
                     + "               where o.accountID = ? \n";
-            if(name != null){
-                sql += "and p.productName like '%" + name + "%'";
+            if(!name.equals("0")){
+                sql += "and p.productName like '%" + name + "%'\n";
+            }
+            if(status != 0){
+                sql += "and o.orderStatusID = "+ status ;
+            }
+            if(!date.equals("0")){
+                sql += "and o.date = '"+ date +"'";
             }
             stm = connection.prepareStatement(sql);
             stm.setInt(1, id);
