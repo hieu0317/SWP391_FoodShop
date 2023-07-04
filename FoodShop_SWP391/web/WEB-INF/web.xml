@@ -72,7 +72,6 @@
         <servlet-class>controller.customerController.OrderController</servlet-class>
     </servlet>
     <servlet>
-
         <servlet-name>ManageAccount</servlet-name>
         <servlet-class>adminController.ManageAccount</servlet-class>
     </servlet>
@@ -84,11 +83,10 @@
         <servlet-name>AddNewAccount</servlet-name>
         <servlet-class>adminController.AddNewAccount</servlet-class>
     </servlet>
-
+    <servlet>
         <servlet-name>orderDetail</servlet-name>
         <servlet-class>controller.customerController.orderDetail</servlet-class>
     </servlet>  
-
     <servlet>
         <servlet-name>ComboController</servlet-name>
         <servlet-class>controller.guestController.ComboController</servlet-class>

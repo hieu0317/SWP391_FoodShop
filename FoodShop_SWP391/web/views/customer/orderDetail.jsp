@@ -37,6 +37,7 @@
         </header>
         <main>
              <h3>Order of ${requestScope.order.customerName} - Date:${requestScope.order.date}</h3>
+             <h3>Order Status: ${requestScope.order.orderStatus.getOrderStatusName()}</h3>
             <table class="order" border="1px">
                 <thead>
                     <tr>
@@ -45,6 +46,10 @@
                         <th>Unit Price</th>
                         <th>Quantity</th>
                         <th>Into Money</th>
+ <%--                        <c:if test="${requestScope.order.orderStatus.orderStatusID == 3}">
+                                <th></th>
+                        </c:if>
+ --%>
                     </tr>
                 </thead>
                 <tbody>
@@ -56,6 +61,10 @@
                             <td>${ois.quantity}</td>
                             <c:set  var="totalprice" value="${ois.product.price * ois.quantity}"/>
                             <td>${totalprice} VNĐ</td>
+ <%--                           <c:if test="${requestScope.order.orderStatus.orderStatusID == 3}">
+                                <td><button class=""><a>Feedback</a></button></td>
+                            </c:if>
+ --%>
                         </tr>
                     </c:forEach>
                 </tbody>
