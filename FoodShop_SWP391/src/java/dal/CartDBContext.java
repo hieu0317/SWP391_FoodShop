@@ -12,7 +12,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import models.Account;
 import models.CartDetail;
-import models.Category;
 import models.Product;
 import models.ProductImage;
 
@@ -22,48 +21,29 @@ import models.ProductImage;
  */
 public class CartDBContext extends DBContext<CartDetail>{
     
-    public int getTotalCartByID(int id){
-        int count = 0;
-        PreparedStatement stm = null;
-        ResultSet rs = null;
-        try {
-            String sql = "SELECT COUNT(*) AS total_count FROM cartDetail WHERE accountID = ? and status = 1;";
-            stm = connection.prepareStatement(sql);
-            stm.setInt(1, id);
-            rs = stm.executeQuery();
-            count = rs.getInt("total_count");
-
-        } catch (SQLException ex) {
-            Logger.getLogger(CartDBContext.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                rs.close();
-                stm.close();
-                connection.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(CartDBContext.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        return count;
-    }
-    
     public ArrayList<CartDetail> getCartByID(int id){
          ArrayList<CartDetail> cds = new ArrayList<>();
         PreparedStatement stm = null;
         ResultSet rs = null;
         try {
-            String sql = "select ca.cartID, ca.accountID, p.productID, p.productName, ca.quantity,\n"
-                    + "   p.price, pImg.url, pImg.imageID, ca.status from cartDetail ca \n"
-                    + "		inner join Product p on ca.productID = p.productID\n"
-                    + "         inner join ProductImage pImg on pImg.productID = p.productID\n"
-                    + "         where ca.accountID = ?";
+//            String sql = "select ca.cartID, ca.accountID, p.productID, p.productName, ca.quantity,\n"
+//                    + "   p.price, pImg.url, pImg.imageID, ca.status from cartDetail ca \n"
+//                    + "		inner join Product p on ca.productID = p.productID\n"
+//                    + "         inner join ProductImage pImg on pImg.productID = p.productID\n"
+//                    + "         where ca.accountID = ?";
+            String sql = "SELECT c.productID, p.productName, P.price,pi.url, SUM(c.quantity) AS quantity FROM cartDetail c\n"
+                    + "         INNER JOIN productImage pi ON c.productID = pi.productID\n"
+                    + "         INNER JOIN product p ON c.productID = p.productID\n"
+                    + "         WHERE c.accountID = ? AND c.status = 1\n"
+                    + "         GROUP BY c.productID, p.productName, P.price,pi.url\n"
+                    + "         ORDER BY quantity DESC;";
             stm = connection.prepareStatement(sql);
             stm.setInt(1, id);
             rs = stm.executeQuery();
             while (rs.next()) {
                 Account a = new Account();
                 Product p = new Product();
-                a.setAccountID(rs.getInt("accountID"));
+                a.setAccountID(id);
                 p.setProductID(rs.getInt("productID"));
                 p.setProductName(rs.getString("productName"));
                 p.setPrice(rs.getInt("price"));
@@ -72,8 +52,7 @@ public class CartDBContext extends DBContext<CartDetail>{
                 p.setProductImage(pImg);
                 CartDetail cd = new CartDetail();
                 cd.setAccount(a);
-                cd.setCartID(rs.getInt("cartID"));
-                cd.setStatus(rs.getBoolean("status"));
+//                cd.setCartID(rs.getInt("cartID"));
                 cd.setQuantity(rs.getInt("quantity"));
                 cd.setP(p);
                 cds.add(cd);
@@ -124,7 +103,23 @@ public class CartDBContext extends DBContext<CartDetail>{
 
     @Override
     public void delete(CartDetail model) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        PreparedStatement stm = null;
+        try {
+            String sql = "DELETE FROM [dbo].[cartDetail] WHERE productID = ? and accountID = ?";
+            stm = connection.prepareStatement(sql);
+            stm.setInt(1, model.getP().getProductID());
+            stm.setInt(2, model.getAccount().getAccountID());
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CartDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                stm.close();
+                connection.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(CartDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     @Override

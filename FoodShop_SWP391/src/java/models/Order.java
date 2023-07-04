@@ -5,6 +5,7 @@
 package models;
 
 import java.sql.Date;
+import java.util.List;
 
 /**
  *
@@ -13,12 +14,23 @@ import java.sql.Date;
 public class Order {
     
     private Account account;
-    private OrderInfo orderInfo;
+    private List<OrderInfo> orderInfo;
     private OrderStatus orderStatus;
     private int total;
     private Date date;
     private String address;
     private String note;
+    private int orderID;
+
+    public int getOrderID() {
+        return orderID;
+    }
+
+    public void setOrderID(int orderID) {
+        this.orderID = orderID;
+    }
+    
+    
 
     public Account getAccount() {
         return account;
@@ -28,11 +40,11 @@ public class Order {
         this.account = account;
     }
     
-    public OrderInfo getOrderInfo() {
+    public List<OrderInfo> getOrderInfo() {
         return orderInfo;
     }
 
-    public void setOrderInfo(OrderInfo orderInfo) {
+    public void setOrderInfo(List<OrderInfo> orderInfo) {
         this.orderInfo = orderInfo;
     }
 

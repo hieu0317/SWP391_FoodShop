@@ -12,6 +12,7 @@ import java.sql.Date;
  */
 public class Blog {
     private Account account;
+    private int blogID;
     private String blogTitle;
     private BlogImage blogImage;
     private String blogDetail;
@@ -22,6 +23,15 @@ public class Blog {
         return blogTitle;
     }
 
+    public int getBlogID() {
+        return blogID;
+    }
+
+    public void setBlogID(int blogID) {
+        this.blogID = blogID;
+    }
+
+    
     public void setBlogTitle(String blogTitle) {
         this.blogTitle = blogTitle;
     }
