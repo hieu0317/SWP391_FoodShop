@@ -1,87 +1,62 @@
-function Validator(options) {
-    var formElement = document.querySelector(options.form);
-    var validate = function (inputElement, rule) {
-        var errorElement = inputElement.parentElement.querySelector('.form-message');
 
-        var errorMessage = rule.test(inputElement.value);
-        if (errorMessage) {
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="css/login.css">
+        <title>Change Password</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="title">Change Password</div>
+            <br>
+            <div style="color: red">${error}</div>
+            <div class="content">
+                <form action="changePassword" method="post">
+                    <div class="user-details">
+                        <div class="input-box">
+                            <c:if test="${sc ne null}" >
+                                <p style="color: red; font-size: 20px">${sc}</p>
+                            </c:if>
+                            <p class="details">Email<span style="color: red"> *</span></p>
+                            <input type="email" id="email" name="email" required><br><br>
+                            <c:if test="${ms2 ne null}" >
+                                <p style="color: red; font-size: 20px">${ms2}</p>
+                            </c:if>
+                            <p class="details">Current Password<span style="color: red"> *</span></p>
+                            <input type="password" id="currentPassword" name="currentPassword" required><br><br>
+                            <c:if test="${ms1 ne null}" >
+                                <p style="color: red; font-size: 20px">${ms1}</p>
+                            </c:if>
+                            <p class="details">New Password<span style="color: red"> *</span></p>
+                            <input type="password" id="newPassword" name="newPassword" required><br><br>
+                            <c:if test="${ms3 ne null}" >
+                                <p style="color: red; font-size: 20px">${ms3}</p>
+                            </c:if>
+                            <p class="details">Confirm New Password<span style="color: red"> *</span></p>
+                            <input type="password" id="confirmNewPassword" name="confirmNewPassword" required><br><br>
 
-            errorElement.innerText = errorMessage;
-            inputElement.parentElement.classList.add('invalid');
-            console.log(inputElement.parentElement.classList);
-        } else {
-            errorElement.innerText = '';
-            inputElement.parentElement.classList.remove('invalid');
-        }
-    };
-    if (formElement) {
-        options.rules.forEach(function (rule) {
-            var inputElement = formElement.querySelector(rule.selector);
-            if (inputElement) {
-                inputElement.onblur = function () {
-                    validate(inputElement, rule);
-                };
-                inputElement.oninput = function () {
-                    var errorElement = inputElement.parentElement.querySelector('.form-message');
-                    errorElement.innerText = '';
-                    inputElement.parentElement.classList.remove('invalid');
-                };
+                        </div>
+                    </div>
+                    <div class="button">
+                        <input type="submit" value="Change Password">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <script src="javascript/validate.js"></script>
+        <script>
+            Validator({
+                form: "#form-5",
+                errorSelector: ".form-message",
+                rule: [
+                    Validator.isEmail('#email')
+                ]
+            });
+        </script>
 
 
-            }
-        });
-    }
-
-}
-
-Validator.isRequired = function (selector, message) {
-  return {
-    selector: selector,
-    test: function (value) {
-      return value ? undefined : message || "Please enter this field";
-    }
-  };
-};
-
-Validator.isEmail = function (selector) {
-    return{
-        selector: selector,
-        test: function (value) {
-            var regex = /\\w+([\\.]{0,1}\\w*)*@(\\w{2,5}\\.){1,2}\\w{2,5}/;
-            return regex.test(value) ? undefined : 'Please enter the correct your email';
-        }
-    };
-};
-
-Validator.isPassword = function (selector) {
-    return {
-        selector: selector,
-        test: function (value) {
-            var regex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z\d!@#$%^&*()]{8,}$/;
-            if (!regex.test(value)) {
-                return 'Password must have at least 8 characters, first letter capitalized and at least 1 special character.';
-            }
-            return undefined;
-        }
-    };
-};
-
-Validator.isPhone = function (selector) {
-    return {
-        selector: selector,
-        test: function (value) {
-            var regex = /^(?:\+84|0)(?:3[2-9]|5[2689]|7[06-9]|8[1-9]|9[0-9])[0-9]{7}$/;
-            if (!regex.test(value)) {
-                return 'Please enter the correct phone number';
-            }
-            return undefined;
-        }
-    };
-};
-
-const form1 = document.getElementById('form-1');
-const form2 = document.getElementById('form-2');
-const form3 = document.getElementById('form-3');
-const form4 = document.getElementById('form-4');
-const form5 = document.getElementById('form-5');
-const form6 = document.getElementById('form-6');
+    </body>
+</html>

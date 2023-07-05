@@ -197,8 +197,8 @@
                                     <th>Account Id</th>
                                     <th>Name</th>
                                     <th>Email</th>
-                                    <th>Address</th>
                                     <th>Phone</th>
+                                    <th>Address</th>                
                                     <th>Action</th> <!-- New column for the arrow icon -->
                                 </tr>
                             </thead>

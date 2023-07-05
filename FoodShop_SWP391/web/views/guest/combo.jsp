@@ -67,7 +67,8 @@
                 <form id="myForm" action="home" method="POST">
                     <div class="col-md-3">
                         <input type="hidden" name="productID" value="${co.comboID}"/>
-                        <a href=""><img src="${co.image}"></a>
+                        <a href="comboDetails?id=${co.getComboID()}">
+<img src="${co.image}"></a>
                         <a class="productName" href=""><h2>${co.comboName}</h2></a>
                         <button class="buyNow" type="submit">Add to cart</button>
                     </div>

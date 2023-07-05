@@ -104,7 +104,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a type="button" class="btn btn-outline-primary ms-1 " href="logout">Logout</a>                
+                                <a type="button" class="btn btn-outline-primary ms-1 " href="logout">Logout</a>   
+                                <a type="button" class="btn btn-outline-primary ms-1 " href="changePassword">Change Password</a>
                             </div>
                         </div>
                     </div>

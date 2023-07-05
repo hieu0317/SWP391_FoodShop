@@ -549,4 +549,28 @@ public class AccountDBContext extends DBContext<Account> {
 
         return roleID;
     }
+    public boolean checkPassword(String email, String password) {
+    try {
+        String sql = "SELECT password FROM account WHERE email = ?";
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setString(1, email);
+        ResultSet rs = stmt.executeQuery();
+        
+        if (rs.next()) {
+            String storedPassword = rs.getString("password");
+            
+            // So sánh mật khẩu
+            if (storedPassword.equals(password)) {
+                return true; // Mật khẩu chính xác
+            }
+        }
+        
+        // Mật khẩu không chính xác hoặc không tìm thấy tài khoản
+        return false;
+    } catch (SQLException ex) {
+        Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        return false;
+    }
+}
+
 }

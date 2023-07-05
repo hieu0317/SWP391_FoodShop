@@ -77,30 +77,53 @@ public class ChangePassword extends HttpServlet {
         String currentPassword = request.getParameter("currentPassword");
         String newPassword = request.getParameter("newPassword");
         String confirmNewPassword = request.getParameter("confirmNewPassword");
-        System.out.println("chay change pass");
+
         // Perform password change
         AccountDBContext accountDB = new AccountDBContext();
-        boolean passwordChanged = accountDB.changePassword(email, currentPassword, newPassword);
-        if (newPassword.equals(currentPassword)) {
-            request.setAttribute("ms1", "New password cannot be the same as the old password. Please choose a different password.");
-        } else if (!newPassword.equals(confirmNewPassword)) {
-            request.setAttribute("ms3", "Confirmed password does not match the new password. Please try again.");
-        } else {
-            if (passwordChanged) {
-                request.setAttribute("sc", "Change password success.");
-            } else {
-                request.setAttribute("ms2", "Your old password is incorrect. Please check again.");
-            }
+        boolean passwordCorrect = accountDB.checkPassword(email, currentPassword);
+        if (!passwordCorrect) {
+            // Mật khẩu không chính xác, quay lại trang changePassword.jsp
+            request.setAttribute("ms2", "Your old password is incorrect. Please check again.");
+            request.getRequestDispatcher("views/account/changePassword.jsp").forward(request, response);
+            return;
         }
 
+        // Kiểm tra mật khẩu mới và xác nhận mật khẩu mới
+        if (newPassword.equals(currentPassword)) {
+            // Mật khẩu mới không được trùng với mật khẩu cũ, quay lại trang changePassword.jsp
+            request.setAttribute("ms1", "New password cannot be the same as the old password. Please choose a different password.");
+            System.out.println("ms1");
+            request.getRequestDispatcher("views/account/changePassword.jsp").forward(request, response);
+            return;
+        }
+
+        if (!newPassword.equals(confirmNewPassword)) {
+            // Xác nhận mật khẩu mới không khớp, quay lại trang changePassword.jsp
+            System.out.println("ms3");
+            request.setAttribute("ms3", "Confirmed password does not match the new password. Please try again.");
+            request.getRequestDispatcher("views/account/changePassword.jsp").forward(request, response);
+            return;
+        }
+
+        // Thực hiện thay đổi mật khẩu
+        boolean passwordChanged = accountDB.changePassword(email, currentPassword, newPassword);
+
+        if (passwordChanged) {
+            // Thay đổi mật khẩu thành công, chuyển hướng đến trang profile.jsp
+            request.setAttribute("sc", "Change password success.");
+            System.out.println("sc");
+            request.getRequestDispatcher("views/account/changePassword.jsp").forward(request, response);
+        
+        } else {
+            // Thay đổi mật khẩu thất bại, quay lại trang changePassword.jsp
+            System.out.println("ms2");
+            request.setAttribute("ms2", "Your old password is incorrect. Please check again.");
+            request.getRequestDispatcher("views/account/changePassword.jsp").forward(request, response);
+        }
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
+
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
