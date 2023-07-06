@@ -94,17 +94,16 @@
                         <input type="hidden" name="productID" value="${rd.productID}"/>
                         <a href=""><img src="${rd.productImage.url}"></a>
                         <a class="productName" href=""><h2>${rd.productName}</h2></a>
+                                <c:if test="${empty acc.accountID}">
+                            <input type="hidden" class="isLogged" value="0">
+                                </c:if>
+                        <input type="hidden" class="isLogged" value="1"> 
                         <button class="buyNow" type="submit">Add to cart</button>
                     </div>
                 </form>    
             </c:forEach>
         </div>
-
-
-        <footer>
-
          <footer>
-
             <h2 class="col-md-4">2023 Fast Food Company. All rights reserved.</h2>
             <div class="col-md-4 links">
                 <a href="">

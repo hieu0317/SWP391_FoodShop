@@ -1,5 +1,5 @@
 .tool select {
-    margin-left: 49%;
+    margin-left: 38%;
 }
 
 .tool form input:first-child {
@@ -110,6 +110,28 @@
     height: 1px;
     background-color: rgb(206, 202, 202);
     margin-left: 10px;
+  }
+  
+  .orderStatus {
+      box-shadow: 0 5px 4px rgba(0, 0, 0, 0.2);
+      display: flex;
+      justify-content: space-around;
+      margin:auto;
+      width: 80%;
+      height: 40px;
+      background-color: #D2B48C;
+      margin-bottom: 5px;
+      
+  }
+  
+  .orderStatus a{
+      color: black;
+      text-decoration: none;
+  }
+  
+  .orderStatus a:hover {
+      color: gainsboro;
+      text-decoration: none;
   }
 
 

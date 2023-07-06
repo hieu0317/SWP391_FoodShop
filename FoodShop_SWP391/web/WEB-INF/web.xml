@@ -86,7 +86,7 @@
     <servlet>
         <servlet-name>orderDetail</servlet-name>
         <servlet-class>controller.customerController.orderDetail</servlet-class>
-    </servlet>
+    </servlet>  
     <servlet>
         <servlet-name>ComboController</servlet-name>
         <servlet-class>controller.guestController.ComboController</servlet-class>
