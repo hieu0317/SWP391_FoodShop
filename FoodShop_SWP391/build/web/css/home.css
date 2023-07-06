@@ -5,9 +5,12 @@ body {
   }
   
   header {
+/*    margin-left:10px;*/
     position: sticky;
     top: 0;
     background-color: #f8f8f8;
+    width: 100%;
+    height:60px;
     padding: 1px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     z-index: 1;
@@ -16,8 +19,13 @@ body {
   .navbar {
     position: relative;
     display: flex;
-     justify-content: space-between; 
+    justify-content: space-between; 
     align-items: center;
+  }
+  
+  .logo a, .logo a:hover{
+      color: black;
+      text-decoration: none;
   }
   
   .sidebar-button {
@@ -28,11 +36,9 @@ body {
   }
   
   .logo {
-/*     position: absolute;
-    top: 4px;
-    left: 43%; 
-    margin: 0;*/
-    margin-left: 36%;
+    color: black;
+    text-decoration: none;
+    margin-left: 34%;
     font-size: 24px;
   }
   
@@ -89,7 +95,7 @@ body {
 }
 
 .header-link {
-  margin-left: 15%;
+  margin-left: 10%;
   display: flex;
 }
 
@@ -149,7 +155,6 @@ body {
 .slide img {
   width: 100%;
   height: 100%;
-
 }
 
 .slide:nth-child(1) {
@@ -193,38 +198,34 @@ body {
   margin-left: 10px;
 }
 
-.footer {
-/*   position: fixed;
-  bottom: 0;
-  right:0;
-  left:0; */
- margin-top: 380px;
+footer {
+  margin-top: 380px;
   background-color: #f8f8f8;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-end;
   padding: 20px;
+  height: 150px;
 }
 
-.footer h2 {
+footer h2 {
   margin-bottom: 35px;
 }
 
-.footer .links {
+footer .links {
   display: flex;
   gap: 10px;
 }
 
-.footer .links a {
+footer .links a {
   text-decoration: none;
   color: #000;
 }
 
-.footer p {
+footer p {
   margin: 0;
 }
-
 
 
 .category-content div , .recFood-content div{
@@ -232,8 +233,7 @@ body {
     margin-bottom: 50px;
     margin-left: 30px;
     height: 300px;
-    width: 350px;
-/*    border: 10px solid rgba(170, 165, 165,0.5);*/
+    width: 330px;
     background-color: #fff;
     box-shadow: 0 5px 4px rgba(0, 0, 0, 0.2);
 }
@@ -246,7 +246,9 @@ body {
 .category-content div h2, .recFood-content div h2 {
   text-align: center;
 }
-
+.recFood-content div h5 {
+  text-align: center;
+}
 .category-content div img ,.recFood-content div img{
   height: 90%;
   width: 100%;
@@ -256,16 +258,14 @@ a h2{
   color: black;
   transition: color 0.3s ease;
 }
-
+a h5{
+  color: black;
+  transition: color 0.3s ease;
+}
 .categoryName:hover , .productName:hover {
     color: black;
     text-decoration: none; 
 }
-
-/*a h2:hover {
-  color: black;
-  text-decoration: none; 
-}*/
 
 .sidebar ul li a{
     color: black;
