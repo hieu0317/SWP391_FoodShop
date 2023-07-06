@@ -26,24 +26,17 @@ import models.Product;
 public class HomeController extends HttpServlet{
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-        Account acc = (Account) session.getAttribute("acc");
-        int productID = Integer.parseInt(req.getParameter("productID"));
-        int quantity = 1;        
-        CartDBContext cDb = new CartDBContext();
-   
-            CartDetail cd = new CartDetail();
-            Account a = new Account();
-            Product p = new Product();
-            a.setAccountID(acc.getAccountID());
-            cd.setAccount(a);
-            cd.setQuantity(quantity);
-            p.setProductID(productID);
-            cd.setP(p);
-            cDb.insert(cd);
-            resp.sendRedirect("home");
-               
+    
+protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    HttpSession session = req.getSession();
+    Account acc = (Account) session.getAttribute("acc");
+    String productIDParam = req.getParameter("productID");
+    
+    // Kiểm tra xem tham số productID có giá trị hợp lệ hay không
+    if (productIDParam == null || productIDParam.isEmpty()) {
+        // Xử lý lỗi khi productID không hợp lệ
+        resp.sendRedirect("home"); // Hoặc chuyển hướng đến trang lỗi nếu cần
+        return;
     }
     
     int productID;
