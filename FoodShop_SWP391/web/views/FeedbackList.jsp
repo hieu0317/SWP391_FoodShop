@@ -34,7 +34,7 @@
                             <td>${f.getAccount().getFullName()}</td>
                             <td>${f.getFcontent()}</td>
                             <td>${f.getDate()}</td>
-                            <td></td>
+                            <td><a href="ProductDetail?id=${f.getProduct().getProductID()}">detail</a></td>
                         </tr>
                     </c:forEach>
                 </tbody>

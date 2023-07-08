@@ -20,7 +20,7 @@
 
                 <div class="md-form">
                     <label for="form7">Detail</label>
-                    <textarea id="content" required name="detail" id="form7" class="md-textarea form-control" rows="3">${requestScope.blog.getBlogDetail()}</textarea>
+                    <textarea id="content" required name="detail" id="detail" class="md-textarea form-control" rows="3">${requestScope.blog.getBlogDetail()}</textarea>
                 </div>
                 <br>
                 <div class="form-outline">

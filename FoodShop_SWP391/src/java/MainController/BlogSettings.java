@@ -86,6 +86,12 @@ public class BlogSettings extends HttpServlet {
                 }
                 blogs = Searchblogs;
             }
+        if(request.getParameter("orderby")!=null){
+            String orderby = request.getParameter("orderby");
+            blogs = blogdao.orderBy(request.getParameter("orderby"));
+            request.setAttribute("orderby", request.getParameter("orderby"));
+            
+        }
         request.setAttribute("search", search);
         session.setAttribute("blogs", blogs);
         request.getRequestDispatcher("views/BlogSettings.jsp").forward(request, response);

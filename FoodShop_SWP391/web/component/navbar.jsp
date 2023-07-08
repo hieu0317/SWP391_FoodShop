@@ -44,3 +44,56 @@
             </c:forEach>
     </ul>
 </div>
+
+<style>
+    .dropdown {
+        margin-left: 7px;
+        margin-right: 7px;
+    }
+
+    .dropdown-toggle {
+        display: block;
+        padding: 8px;
+        font-size: 16px;
+        background-color: #f2f2f2;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        text-decoration: none;
+        color: #333;
+    }
+
+    .dropdown-toggle::after {
+        content: "\25BE"; /* Unicode character for down arrow */
+        margin-left: 5px;
+    }
+
+    .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 1;
+        display: none;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        background-color: #f2f2f2;
+        border: 1px solid #ccc;
+        border-top: none;
+        border-radius: 0 0 4px 4px;
+    }
+
+    .dropdown-menu li {
+        padding: 8px;
+    }
+
+    .dropdown-menu li a {
+        display: block;
+        text-decoration: none;
+        color: #333;
+    }
+
+    .dropdown:hover .dropdown-menu {
+        display: block;
+    }
+
+</style>

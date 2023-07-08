@@ -14,12 +14,11 @@
             <br>
             <form action="BlogSettings" method="get">
                 <div style="display: flex">
-                    <a href="views/BlogAdd.jsp"><button class="btn btn-primary">Add Blog</button></a>
+                    <a href="views/BlogAdd.jsp" class="btn btn-primary">Add Blog</a>
                     <div class="input-group" style="display: flex; justify-content:  flex-end">
                         <div style="width: 500px;"></div>
                         <div class="form-outline">
-                            <input type="search" name="search" value="${requestScope.search}" id="form1" class="form-control" />
-                            <label class="form-label" for="form1">Search</label>
+                            <input style="background-color: #D6D6D6" type="search" name="search" value="${requestScope.search}" id="form1" class="form-control" />
                         </div>
                         <button type="submit" class="btn btn-primary">
                             <i class="fas fa-search"></i>

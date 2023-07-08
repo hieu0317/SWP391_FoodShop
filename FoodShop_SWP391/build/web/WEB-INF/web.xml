@@ -51,6 +51,14 @@
         <servlet-name>Logout</servlet-name>
         <servlet-class>controller.guestController.Logout</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BlogUpdate</servlet-name>
+        <servlet-class>MainController.BlogUpdate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FeedbackList</servlet-name>
+        <servlet-class>MainController.FeedbackList</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>home</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -114,6 +122,14 @@
     <servlet-mapping>
         <servlet-name>Logout</servlet-name>
         <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlogUpdate</servlet-name>
+        <url-pattern>/BlogUpdate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FeedbackList</servlet-name>
+        <url-pattern>/FeedbackList</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

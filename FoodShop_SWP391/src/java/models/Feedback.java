@@ -5,6 +5,8 @@
 package models;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -18,6 +20,26 @@ public class Feedback {
     private String fcontent;
     private Date date;
     private boolean isDeleted;
+    List<Like> likes = new ArrayList();
+    List<Reply> replys = new ArrayList();
+
+    
+    public List<Like> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(List<Like> likes) {
+        this.likes = likes;
+    }
+
+    public List<Reply> getReplys() {
+        return replys;
+    }
+
+    public void setReplys(List<Reply> replys) {
+        this.replys = replys;
+    }
+
     
     public boolean isIsDeleted() {
         return isDeleted;
