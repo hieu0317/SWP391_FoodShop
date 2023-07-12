@@ -58,6 +58,8 @@
     <servlet>
         <servlet-name>FeedbackList</servlet-name>
         <servlet-class>MainController.FeedbackList</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>ForgotPass</servlet-name>
         <servlet-class>controller.customerController.ForgotPass</servlet-class>
     </servlet>
@@ -92,7 +94,7 @@
     <servlet>
         <servlet-name>orderDetail</servlet-name>
         <servlet-class>controller.customerController.orderDetail</servlet-class>
-    </servlet>  
+    </servlet>
     <servlet>
         <servlet-name>ComboController</servlet-name>
         <servlet-class>controller.guestController.ComboController</servlet-class>
@@ -104,6 +106,10 @@
     <servlet>
         <servlet-name>ChangePassword</servlet-name>
         <servlet-class>controller.customerController.ChangePassword</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProductDetail</servlet-name>
+        <servlet-class>MainController.ProductDetail</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>home</servlet-name>
@@ -176,6 +182,8 @@
     <servlet-mapping>
         <servlet-name>FeedbackList</servlet-name>
         <url-pattern>/FeedbackList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>ForgotPass</servlet-name>
         <url-pattern>/forgotpass</url-pattern>
     </servlet-mapping>
@@ -222,6 +230,10 @@
     <servlet-mapping>
         <servlet-name>ChangePassword</servlet-name>
         <url-pattern>/changePassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductDetail</servlet-name>
+        <url-pattern>/ProductDetail</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
