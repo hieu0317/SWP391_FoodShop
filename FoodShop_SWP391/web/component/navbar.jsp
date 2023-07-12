@@ -7,7 +7,7 @@
         <h1 class="logo"><a href="home">Fast Food Restaurant</a></h1>
         <nav class="header-link">
             <ul class="navigation">
-                <li><a href="#">Combo</a></li>
+                <li><a href="combo">Combo</a></li>
                 <li><a href="BlogController">Blog</a></li>
                 <li><a href="#">Contact</a></li>
                 <li><a href="#">About Us</a></li>

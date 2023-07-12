@@ -7,7 +7,6 @@ package controller.guestController;
 import dal.AccountDBContext;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -28,6 +27,7 @@ public class RegisterServlet extends HttpServlet {
      *
      * @param request servlet request
      * @param response servlet response
+     * @return 
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
@@ -35,12 +35,14 @@ public class RegisterServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        String email = GetParam.getStringParam(request, "email", "Enter your email",
-                "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", "This is not gmail", 5, 50, null);
-        if (email == null) {
+        String pass = GetParam.getStringParam(request, "pass", "Enter your password",
+                "^(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()])[A-Za-z\\d!@#$%^&*()]{8,}$",
+                "Password must have at least 8 characters, first letter capitalized and at least 1 special character.", 8, 50, null);
+        if (pass == null) {
             return false;
         }
         return true;
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -79,13 +81,12 @@ public class RegisterServlet extends HttpServlet {
             String phoneNumber = request.getParameter("phone");
             String address = request.getParameter("address");
             if (!pass.equals(repass)) {
-                request.setAttribute("errorPass", "Password doesn't match Confirm Password");
+                request.setAttribute("error", "Password doesn't match Confirm Password");
                 request.getRequestDispatcher("views/guest/register.jsp").forward(request, response);
             } else {
                 
-                if (uDao.checkAccountExit(email) == null) {
-                    RandomCode getRandom = new RandomCode();
-                    String randomCode = getRandom.generateRandomCode(6);
+                if (uDao.checkAccountExsit(email) == null) {                  
+                    String randomCode = RandomCode.generateRandomCode(6);
 
                     HttpSession session = request.getSession();
                     session.setAttribute("fullname", name);
@@ -96,7 +97,7 @@ public class RegisterServlet extends HttpServlet {
                     session.setAttribute("phone", phoneNumber);
                     session.setMaxInactiveInterval(300);
                     
-                    String subject = "Mã đăng kí tài khoản EDUBIN của bạn";                   
+                    String subject = "Your FoodShop account registration code";                   
                     String message = "<div style=\"font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2\">\n"
                     + "  <div style=\"margin:50px auto;width:70%;padding:20px 0\">\n"
                     + "    <div style=\"border-bottom:1px solid #eee\">\n"
@@ -115,7 +116,7 @@ public class RegisterServlet extends HttpServlet {
                     send.sentMail(email, subject, message);
                     request.getRequestDispatcher("views/guest/registerCodeMail.jsp").forward(request, response);
                 } else {
-                    request.setAttribute("error", "Gmail is exist ");
+                    request.setAttribute("error", "Email is exsit ");
                     request.getRequestDispatcher("views/guest/register.jsp").forward(request, response);
                 }
             }

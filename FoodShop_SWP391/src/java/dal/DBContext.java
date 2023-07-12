@@ -10,17 +10,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import models.Account;
 
 /**
  *
  * @author admin
+ * @param <T>
  */
 public abstract class DBContext<T> {
     
      protected Connection connection;
 
-    public DBContext() {
+     public DBContext() {
         try {
             String url = "jdbc:sqlserver://MSI:1433;databaseName=FoodShop_SWP391";
             String username = "hieuvm";

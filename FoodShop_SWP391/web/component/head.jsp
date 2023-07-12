@@ -107,6 +107,8 @@
   .sidebar-button.open {
     left: 0;
   }
+<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/bootstrap.min.css">
 
 .sidebar {
   z-index: 1;

@@ -9,15 +9,15 @@ package models;
  * @author admin
  */
 public class OrderStatus {
-    private int orderStatus;
+    private int orderStatusID;
     private String orderStatusName;
 
-    public int getOrderStatus() {
-        return orderStatus;
+    public int getOrderStatusID() {
+        return orderStatusID;
     }
 
-    public void setOrderStatus(int orderStatus) {
-        this.orderStatus = orderStatus;
+    public void setOrderStatusID(int orderStatus) {
+        this.orderStatusID = orderStatus;
     }
 
     public String getOrderStatusName() {

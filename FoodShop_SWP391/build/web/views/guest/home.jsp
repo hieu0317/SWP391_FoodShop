@@ -12,6 +12,7 @@
         <link rel="stylesheet" href="css/home.css">
         <link rel="stylesheet" href="css/bootstrap.css">
         <link rel="stylesheet" href="css/bootstrap.min.css">
+        <title>Home</title>
     </head>
     <body>
         <header>
@@ -20,7 +21,7 @@
                 <h1 class="logo"><a href="home">Fast Food Restaurant</a></h1>
                 <nav class="header-link">
                     <ul class="navigation">
-                        <li><a href="#">Combo</a></li>
+                        <li><a href="combo">Combo</a></li>
                         <li><a href="BlogController">Blog</a></li>
                         <li><a href="#">Contact</a></li>
                         <li><a href="#">About Us</a></li>
@@ -36,16 +37,23 @@
                         </c:if>
                         <c:if test="${sessionScope.acc.getRole().getRoleID()==3}">
                             <li><a href="ProductSettings">Product Settings</a></li>
+                            <li><a href="BlogSettings">Blog Settings</a></li>
+                            </c:if>
+                            <c:if test="${sessionScope.acc.getRole().getRoleID()==3}">
+                            <li><a href="ProductSettings">Product Manage</a></li>
+                            </c:if>
+                            <c:if test="${sessionScope.acc.getRole().getRoleID()==2}">
+                            <li><a href="manageacc">Admin Dashboard</a></li>
                             </c:if>
                     </ul>
                     <c:if test="${not empty acc.accountID}">
-                         <a href="home/cart" class="cart-button">My Cart</a>
+                        <a href="home/cart" class="cart-button">My Cart</a>
                         <div class="login">
-                            <a href="profile" class="login-link">My Account</a>
+                            <a href="profile" class="login-link">Hello-${acc.getFullName()}</a>
                         </div>
                     </c:if>
-                     <c:if test="${empty acc.accountID}">
-                         <a href="login" class="cart-button">My Cart</a>
+                    <c:if test="${empty acc.accountID}">
+                        <a href="login" class="cart-button">My Cart</a>
                         <div class="login">
                             <a href="login" class="login-link">Sign in</a>
                         </div>
@@ -149,29 +157,32 @@
                         <input type="hidden" name="productID" value="${rd.productID}"/>
                         <a href=""><img src="${rd.productImage.url}"></a>
                         <a class="productName" href=""><h2>${rd.productName}</h2></a>
+                                <c:if test="${empty acc.accountID}">
+                            <input type="hidden" class="isLogged" value="0">
+                                </c:if>
+                        <input type="hidden" class="isLogged" value="1"> 
                         <button class="buyNow" type="submit">Add to cart</button>
                     </div>
                 </form>    
             </c:forEach>
         </div>
-
-        <div class="footer">
-            <h2>2023 Fast Food Company. All rights reserved.</h2>
-            <div class="links">
-                <a href="views/AboutUsPage.jsp">
+         <footer>
+            <h2 class="col-md-4">2023 Fast Food Company. All rights reserved.</h2>
+            <div class="col-md-4 links">
+                <a href="">
                     <h2>About Us</h2>
                 </a>
                 <a href="">
                     <h2>Contact Us</h2>
                 </a>
             </div>
-            <p> 292 Ba Trieu St., Le Dai Hanh Ward, Hai Ba Trung Dist., Ha Noi City.</br>
+            <p class="col-md-4"> 292 Ba Trieu St., Le Dai Hanh Ward, Hai Ba Trung Dist., Ha Noi City.</br>
                 Tel: (028) 38489828 </br>
                 Email: lienhe@kfcvietnam.com.vn </br>
                 Tax code: 0100773885 </br>
                 Date of issue: Oct 29 1998 by Ha Noi Tax Department
             </p>
-        </div>
+        </footer>        
         <script src="javascript/home.js"></script>
     </body>
 </html>

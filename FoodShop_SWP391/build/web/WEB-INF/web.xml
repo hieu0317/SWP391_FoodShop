@@ -58,6 +58,52 @@
     <servlet>
         <servlet-name>FeedbackList</servlet-name>
         <servlet-class>MainController.FeedbackList</servlet-class>
+        <servlet-name>ForgotPass</servlet-name>
+        <servlet-class>controller.customerController.ForgotPass</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ResetPass</servlet-name>
+        <servlet-class>controller.customerController.ResetPass</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>cartContact</servlet-name>
+        <servlet-class>controller.customerController.CartContactController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CartCompletion</servlet-name>
+        <servlet-class>controller.customerController.CartCompletionController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MyOrder</servlet-name>
+        <servlet-class>controller.customerController.OrderController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManageAccount</servlet-name>
+        <servlet-class>adminController.ManageAccount</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangeStatusUser</servlet-name>
+        <servlet-class>adminController.ChangeStatusUser</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddNewAccount</servlet-name>
+        <servlet-class>adminController.AddNewAccount</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>orderDetail</servlet-name>
+        <servlet-class>controller.customerController.orderDetail</servlet-class>
+    </servlet>  
+    <servlet>
+        <servlet-name>ComboController</servlet-name>
+        <servlet-class>controller.guestController.ComboController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ComboDetailController</servlet-name>
+        <servlet-class>adminController.ComboDetailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangePassword</servlet-name>
+        <servlet-class>controller.customerController.ChangePassword</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>home</servlet-name>
@@ -130,6 +176,52 @@
     <servlet-mapping>
         <servlet-name>FeedbackList</servlet-name>
         <url-pattern>/FeedbackList</url-pattern>
+        <servlet-name>ForgotPass</servlet-name>
+        <url-pattern>/forgotpass</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResetPass</servlet-name>
+        <url-pattern>/repass</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>cartContact</servlet-name>
+        <url-pattern>/home/cart/cartContact</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CartCompletion</servlet-name>
+        <url-pattern>/cartCompletion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MyOrder</servlet-name>
+        <url-pattern>/myOrder</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageAccount</servlet-name>
+        <url-pattern>/manageacc</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeStatusUser</servlet-name>
+        <url-pattern>/changestatus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddNewAccount</servlet-name>
+        <url-pattern>/addaccount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>orderDetail</servlet-name>
+        <url-pattern>/myOrder/orderDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ComboController</servlet-name>
+        <url-pattern>/combo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ComboDetailController</servlet-name>
+        <url-pattern>/comboDetails</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangePassword</servlet-name>
+        <url-pattern>/changePassword</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

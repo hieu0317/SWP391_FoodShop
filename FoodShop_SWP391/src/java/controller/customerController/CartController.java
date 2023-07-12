@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import models.Account;
 import models.CartDetail;
+import models.Product;
 
 /**
  *
@@ -23,7 +24,24 @@ public class CartController extends HttpServlet{
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+        HttpSession session = req.getSession();
+        Account acc = (Account) session.getAttribute("acc");
+        String[] productID = req.getParameterValues("productID");
+        String[] quantity = req.getParameterValues("quantity");
+        ArrayList<CartDetail> cds = new ArrayList<>();
+        for (int i = 0; i < productID.length; i++) {
+            int pID = Integer.parseInt(productID[i]);
+            Product p = new Product();
+            p.setProductID(pID);
+            int num = Integer.parseInt(quantity[i]);
+            cds.add(new CartDetail(acc,p,num,true));
+        }
+        CartDBContext cdb = new CartDBContext();
+        cdb.deleteCartByAccountID(acc.getAccountID());
+        for (CartDetail cd : cds) {
+            cdb.insert(cd);
+        }
+        resp.sendRedirect("cart/cartContact");
     }
 
     @Override

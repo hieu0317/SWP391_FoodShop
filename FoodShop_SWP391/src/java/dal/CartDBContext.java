@@ -21,16 +21,30 @@ import models.ProductImage;
  */
 public class CartDBContext extends DBContext<CartDetail>{
     
+    public void deleteCartByAccountID(int id){
+        PreparedStatement stm = null;
+        try {
+            String sql = "DELETE FROM cartDetail WHERE accountID = ?";
+            stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CartDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                stm.close();
+//                connection.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(CartDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
     public ArrayList<CartDetail> getCartByID(int id){
          ArrayList<CartDetail> cds = new ArrayList<>();
         PreparedStatement stm = null;
         ResultSet rs = null;
         try {
-//            String sql = "select ca.cartID, ca.accountID, p.productID, p.productName, ca.quantity,\n"
-//                    + "   p.price, pImg.url, pImg.imageID, ca.status from cartDetail ca \n"
-//                    + "		inner join Product p on ca.productID = p.productID\n"
-//                    + "         inner join ProductImage pImg on pImg.productID = p.productID\n"
-//                    + "         where ca.accountID = ?";
             String sql = "SELECT c.productID, p.productName, P.price,pi.url, SUM(c.quantity) AS quantity FROM cartDetail c\n"
                     + "         INNER JOIN productImage pi ON c.productID = pi.productID\n"
                     + "         INNER JOIN product p ON c.productID = p.productID\n"
@@ -64,7 +78,7 @@ public class CartDBContext extends DBContext<CartDetail>{
             try {
                 rs.close();
                 stm.close();
-                connection.close();
+//                connection.close();
             } catch (SQLException ex) {
                 Logger.getLogger(CartDBContext.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -115,7 +129,7 @@ public class CartDBContext extends DBContext<CartDetail>{
         } finally {
             try {
                 stm.close();
-                connection.close();
+//                connection.close();
             } catch (SQLException ex) {
                 Logger.getLogger(CartDBContext.class.getName()).log(Level.SEVERE, null, ex);
             }

@@ -1,13 +1,24 @@
+html,
 body {
     height: 100%;
     margin: 0;
     padding: 0;
   }
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
   
   header {
     position: sticky;
     top: 0;
     background-color: #f8f8f8;
+    height:60px;
     padding: 1px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     z-index: 1;
@@ -35,7 +46,7 @@ body {
     top: 4px;
     left: 43%; 
     margin: 0;*/
-    margin-left: 30%;
+    margin-left: 32%;
     font-size: 24px;
   }
   
@@ -111,7 +122,7 @@ body {
 }
 
 .header-link {
-  margin-left: 10%;
+  margin-left: 11%;
   display: flex;
 }
 
@@ -143,37 +154,40 @@ body {
   background-color: #ccc;
 }
 
-.footer {
+footer {
 /*   position: fixed;
   bottom: 0;
   right:0;
   left:0; */
- margin-top: 380px;
+flex-shrink: 0;
+ margin-top: 50px;
   background-color: #f8f8f8;
-  display: flex;
+/*  display: flex;*/
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-end;
   padding: 20px;
+  height: 150px;
 }
 
-.footer h2 {
+footer h2 {
   margin-bottom: 35px;
 }
 
-.footer .links {
+footer .links {
   display: flex;
   gap: 10px;
 }
 
-.footer .links a {
+footer .links a {
   text-decoration: none;
   color: #000;
 }
 
-.footer p {
+footer p {
   margin: 0;
 }
+
 
 .number-input {
     position: absolute;
@@ -221,10 +235,37 @@ body {
     margin-top: 60px;
 
   }
+  
+  .button {
+      margin-left: 75%;
+      margin-top: 15px;
+   }
+   
+   .button a:hover {
+       text-decoration: none;
+       background-color: rgb(255, 253, 208);
+       color:black;
+    }
+    
+    .buy:hover {
+        background-color: rgb(255, 253, 208);
 
+    }
+  
+   .button a{
+        padding: 17px;
+        text-decoration: none;
+        height: 50px;
+        width: 100px;
+        border-radius: 10px;
+        background-color: #cfc5c5;
+        box-shadow: 0 5px 4px rgba(0, 0, 0, 0.2);
+        color: #100303;
+        font-size: 16px;
+   }
+   
   .buy {
-    margin-left: 83%;
-    margin-top: 20px;
+    margin-left: 15px;
     height: 50px;
     width: 100px;
     border-radius: 10px;
@@ -261,10 +302,14 @@ body {
 }
 
 .cart-titles h2:first-child {
-    margin-left: 32%
+    margin-left: 50px;
 }
 
-.cart-titles h2:nth-child(2) {
+.cart-titles h2:nth-child(2){
+    margin-left: 22%;
+}
+
+.cart-titles h2:nth-child(3) {
     position: absolute;
     left: 54%;
 }
@@ -272,6 +317,24 @@ body {
 .cart-titles h2:last-child{
     position: absolute;
     left: 70%;
+}
+
+.cart-total {
+  margin-left: 78%;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.cart-total-title {
+  font-weight: bold;
+  font-size: 1.5em;
+  color: black;
+  margin-right: 20px;
+}
+
+.cart-total-price {
+  color: #333;
+  font-size: 1.1em;
 }
 
 

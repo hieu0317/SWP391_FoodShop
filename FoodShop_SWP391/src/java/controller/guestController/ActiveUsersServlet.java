@@ -7,7 +7,6 @@ package controller.guestController;
 import dal.AccountDBContext;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -82,7 +81,7 @@ public class ActiveUsersServlet extends HttpServlet {
             uDao.checkSignup(email, pass, name, phoneNumber, address);
             response.sendRedirect("login");
         } else {
-            request.setAttribute("mess", "Your verification code is wrong!");
+            request.setAttribute("error", "Your verification code is wrong!");
             request.getRequestDispatcher("views/guest/registerCodeMail.jsp").forward(request, response);
         }
     }
