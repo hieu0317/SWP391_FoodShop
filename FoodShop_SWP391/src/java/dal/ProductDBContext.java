@@ -76,7 +76,7 @@ public class ProductDBContext extends DBContext<Product> {
             stm.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(ProductDBContext.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        }
     }
     
     public void addProductImg(String part) {
@@ -93,7 +93,7 @@ public class ProductDBContext extends DBContext<Product> {
             Logger.getLogger(CategoryDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void addProduct(int categoryID, String name, String detail, int price) {
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -146,7 +146,40 @@ public class ProductDBContext extends DBContext<Product> {
 
     @Override
     public Product get(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            String sql = "select p.productID, p.productName,c.categoryID,c.categoryName,"
+                    + " p.price, p.status, img.imageID, img.url, details from product p \n"
+                    + "inner join productImage img\n"
+                    + "on p.productID = img.productID\n"
+                    + "inner join category c\n"
+                    + "on c.categoryID = p.categoryID where p.productID = ?";
+            stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                Product p = new Product();
+                p.setProductID(rs.getInt("productID"));
+                p.setProductName(rs.getString("productName"));
+                p.setPrice(rs.getInt("price"));
+                p.setStatus(rs.getBoolean("status"));
+                ProductImage pImg = new ProductImage();
+                pImg.setImageID(rs.getInt("imageID"));
+                pImg.setUrl(rs.getString("url"));
+                Category c = new Category();
+                c.setCategoryID(rs.getInt("categoryID"));
+                c.setCategoryName(rs.getString("categoryName"));
+                p.setCategory(c);
+                p.setProductImage(pImg);
+                p.setDetails(rs.getNString("details"));
+                return (p);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     @Override
@@ -182,7 +215,7 @@ public class ProductDBContext extends DBContext<Product> {
 
         } catch (SQLException ex) {
             Logger.getLogger(ProductDBContext.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        }
         return products;
     }
 

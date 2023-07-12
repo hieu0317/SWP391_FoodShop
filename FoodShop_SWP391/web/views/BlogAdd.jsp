@@ -1,10 +1,4 @@
-<%-- 
-    Document   : BlogAdd
-    Created on : Jun 4, 2023, 3:50:09 AM
-    Author     : toden
---%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -27,11 +21,11 @@
                 </div>
                 <div class="md-form">
                     <label for="form7">Detail</label>
-                    <textarea id="content" required name="detail" id="form7" class="md-textarea form-control" rows="3"></textarea>
+                    <textarea  required name="detail" id="detail" class="md-textarea form-control" rows="3"></textarea>
 
                 </div>
-                    <br>
-                
+                <br>
+
                 <div class="form-outline">
                     <label for="formFileMultiple" class="form-label">Images</label>
                     <input required name="images" class="form-control" type="file" id="formFileMultiple" />
@@ -40,10 +34,10 @@
                 <br>
                 <button type="submit" class="btn btn-primary">Upload</button>
             </form>
-
         </div>
         <%@include file="../component/footer.jsp" %>
-        
-
+        <script>
+           CKEDITOR.replace( 'detail' );
+        </script>
     </body>
 </html>

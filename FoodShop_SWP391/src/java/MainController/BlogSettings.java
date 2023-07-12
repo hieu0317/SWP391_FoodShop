@@ -15,8 +15,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
+import java.util.AbstractList;
+import java.util.ArrayList;
 import java.util.List;
 import models.Account;
+import models.Blog;
 
 /**
  *
@@ -70,11 +73,27 @@ public class BlogSettings extends HttpServlet {
         //processRequest(request, response);
         HttpSession session = request.getSession();
         BlogDAO blogdao = new BlogDAO();
+        String search = request.getParameter("search");
         if (request.getParameter("del") != null) {
             int id = Integer.parseInt(request.getParameter("id"));
             blogdao.delBlogById(id);
         }
-        session.setAttribute("blogs", blogdao.all());
+        List<Blog> blogs = blogdao.all();
+        if(search!=null&&search.trim()!=""){
+                List<Blog> Searchblogs = new ArrayList();
+                for(Blog b : blogs){
+                    if(b.getBlogTitle().contains(search)) Searchblogs.add(b);
+                }
+                blogs = Searchblogs;
+            }
+        if(request.getParameter("orderby")!=null){
+            String orderby = request.getParameter("orderby");
+            blogs = blogdao.orderBy(request.getParameter("orderby"));
+            request.setAttribute("orderby", request.getParameter("orderby"));
+            
+        }
+        request.setAttribute("search", search);
+        session.setAttribute("blogs", blogs);
         request.getRequestDispatcher("views/BlogSettings.jsp").forward(request, response);
     }
 
@@ -107,7 +126,7 @@ public class BlogSettings extends HttpServlet {
                 blogdao.addBlogImg(fileName);
             }
         }
-        //
+        
         session.setAttribute("blogs", blogdao.all());
         request.getRequestDispatcher("views/BlogSettings.jsp").forward(request, response);
     }

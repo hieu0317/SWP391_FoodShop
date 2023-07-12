@@ -65,12 +65,13 @@ protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws S
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
         HttpSession ses = req.getSession();
         CategoryDBContext cDb = new CategoryDBContext();
         ArrayList<Category> categories = cDb.all();
         ses.setAttribute("categories", categories);
         req.setAttribute("categories", categories);
-        
+        session.setAttribute("categories", categories);
         ProductDBContext pDb = new ProductDBContext();
         ArrayList<Product> recProduct = pDb.getRecProduct();
         req.setAttribute("recProduct", recProduct);
