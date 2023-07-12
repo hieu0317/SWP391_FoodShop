@@ -22,8 +22,8 @@ public abstract class DBContext<T> {
 
      public DBContext() {
         try {
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=FoodShop_SWP391";
-            String username = "sa";
+            String url = "jdbc:sqlserver://MSI:1433;databaseName=FoodShop_SWP391";
+            String username = "hieuvm";
             String password = "123";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             connection = DriverManager.getConnection(url, username, password);
