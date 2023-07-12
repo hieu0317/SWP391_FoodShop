@@ -28,7 +28,8 @@
 
 <!-- CKeditor -->
 <script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
-
+<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/home.css">
 <style>
     body {
@@ -107,8 +108,7 @@
   .sidebar-button.open {
     left: 0;
   }
-<link rel="stylesheet" href="css/bootstrap.css">
-<link rel="stylesheet" href="css/bootstrap.min.css">
+
 
 .sidebar {
   z-index: 1;
